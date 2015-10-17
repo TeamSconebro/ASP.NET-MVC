@@ -24,20 +24,41 @@ namespace PhotoContest.Models
             this.notifications=new HashSet<Notification>();
             this.contestPictures=new HashSet<ContestPicture>();
         }
-        [MinLength(4)]
+
+        [MinLength(2)]
         [MaxLength(20)]
         public string FirstName { get; set; }
 
-        [MinLength(4)]
+        [MinLength(2)]
         [MaxLength(20)]
         public string LastName { get; set; }
 
         public string Base64Data { get; set; }
 
-        public virtual ICollection<Contest> Contests { get; set; }
-        //public virtual ICollection<Vote> Votes { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
-        public virtual ICollection<ContestPicture> ContestPictures { get; set; }
+        public virtual ICollection<Contest> Contests
+        {
+            get { return this.contests; }
+            set { this.contests = value; }
+        }
+
+        public virtual ICollection<Vote> Votes
+        {
+            get { return this.votes; }
+            set { this.votes = value; }
+        }
+
+        public virtual ICollection<Notification> Notifications
+        {
+            get { return this.notifications; }
+            set { this.notifications = value; }
+        }
+
+        public virtual ICollection<ContestPicture> ContestPictures
+        {
+            get { return this.contestPictures; }
+            set { this.contestPictures = value; }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

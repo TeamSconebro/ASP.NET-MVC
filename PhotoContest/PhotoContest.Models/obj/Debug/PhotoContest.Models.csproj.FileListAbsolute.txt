@@ -26,3 +26,6 @@ D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Model
 D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.csprojResolveAssemblyReference.cache
 D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.dll
 D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.pdb
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.csprojResolveAssemblyReference.cache
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.pdb

@@ -9,19 +9,24 @@ namespace PhotoContest.Models
 {
    public  class Vote
     {
-       
+       public Vote()
+       {
+           this.VotedOn = DateTime.Now;
+       }
 
        [Key]
        public int Id { get; set; }
 
-       public DateTime VotedOn { get { return DateTime.Now; } }
+       public DateTime VotedOn { get; set; }
       
-
        [Required]
        public string UserId { get; set; }
+
        public virtual User User { get; set; }
+
        [Required]
        public int PictureId { get; set; }
+
        public virtual ContestPicture Picture { get; set; }
     }
 }
