@@ -14,7 +14,7 @@ namespace PhotoContest.Models
        public int Id { get; set; }
 
        [Required]
-       public string Content { get; set; }
+       public string NotificationContent { get; set; }
 
        [Required]
        public SqlNotificationType Type { get; set; }
