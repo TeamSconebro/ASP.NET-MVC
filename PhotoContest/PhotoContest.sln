@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoContest.Data", "PhotoContest.Data\PhotoContest.Data.csproj", "{A58432BE-5DEF-4490-BFBF-79F95541E5BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{C37375FC-E21E-4242-A1E4-B8AF52E4B15F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{20ACD6DD-7F26-4EAF-A544-C6E7700AFE85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA75F041-F801-4693-A718-F15223E29E95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoContest.Models", "PhotoContest.Models\PhotoContest.Models.csproj", "{91BE9F52-D4A7-4EBF-9354-EAEC899FC750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoContest.Web", "PhotoContest.Web\PhotoContest.Web.csproj", "{8B7B97FA-74E5-40B5-A2D9-D8180EB61294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoContest.Web.Tests", "PhotoContest.Web.Tests\PhotoContest.Web.Tests.csproj", "{7BDB4ABD-43B9-4A54-8C8F-D6195C6ACB5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A58432BE-5DEF-4490-BFBF-79F95541E5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58432BE-5DEF-4490-BFBF-79F95541E5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58432BE-5DEF-4490-BFBF-79F95541E5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58432BE-5DEF-4490-BFBF-79F95541E5BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BE9F52-D4A7-4EBF-9354-EAEC899FC750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BE9F52-D4A7-4EBF-9354-EAEC899FC750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BE9F52-D4A7-4EBF-9354-EAEC899FC750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BE9F52-D4A7-4EBF-9354-EAEC899FC750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B7B97FA-74E5-40B5-A2D9-D8180EB61294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B7B97FA-74E5-40B5-A2D9-D8180EB61294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B7B97FA-74E5-40B5-A2D9-D8180EB61294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B7B97FA-74E5-40B5-A2D9-D8180EB61294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDB4ABD-43B9-4A54-8C8F-D6195C6ACB5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDB4ABD-43B9-4A54-8C8F-D6195C6ACB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDB4ABD-43B9-4A54-8C8F-D6195C6ACB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDB4ABD-43B9-4A54-8C8F-D6195C6ACB5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A58432BE-5DEF-4490-BFBF-79F95541E5BB} = {C37375FC-E21E-4242-A1E4-B8AF52E4B15F}
+		{91BE9F52-D4A7-4EBF-9354-EAEC899FC750} = {C37375FC-E21E-4242-A1E4-B8AF52E4B15F}
+		{8B7B97FA-74E5-40B5-A2D9-D8180EB61294} = {20ACD6DD-7F26-4EAF-A544-C6E7700AFE85}
+		{7BDB4ABD-43B9-4A54-8C8F-D6195C6ACB5E} = {BA75F041-F801-4693-A718-F15223E29E95}
+	EndGlobalSection
+EndGlobal
