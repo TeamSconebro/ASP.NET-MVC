@@ -29,3 +29,14 @@ D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Model
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.csprojResolveAssemblyReference.cache
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.dll
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\obj\Debug\PhotoContest.Models.pdb
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\PhotoContest.Models.dll.config
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\PhotoContest.Models.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\PhotoContest.Models.pdb
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\EntityFramework.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\EntityFramework.xml
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
