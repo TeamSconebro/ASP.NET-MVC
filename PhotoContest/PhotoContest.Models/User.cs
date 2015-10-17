@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PhotoContest.Models
 {
-    public class User:IdentityUser
+    public class User: IdentityUser
     {
         public string FirstName { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
