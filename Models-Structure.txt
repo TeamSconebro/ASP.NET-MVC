@@ -1,0 +1,63 @@
+Users
+	- Id
+	- Username
+	- Email
+	- FirstName -> Optional
+	- LastName -> Optional
+	- ProfileImage -> Optional
+	- virtual Contests
+	- virtual Votes
+	- virtual Notifications
+	
+Notification
+	- Id
+	- Content
+	- Type -> Enums 1. Winning notification 2. Invite to contest
+	- UserId
+	- virtual User User
+	
+Votes
+	- Id
+	- VoteDate
+	- UserId -> Required
+	- virtual User User
+	- PictureId
+	- virtual Picture Picture
+	
+Contests
+	- Id
+	- Title -> Required
+	- Description -> Required
+	- OwnerId
+	- virtual User Owner
+	- RewardStrategy -> Enums -> Required
+	- VotingStrategy -> Enums -> Required
+	- ParticipationStrategy -> Enums -> Required
+	- DeadlineStrategy -> Enums -> Required
+	- PrizeValues -> Required (String)
+	- virtual Pictures Pictures
+	- virtual Contestors
+	- PrizeCount
+	- IsClosed
+			
+	
+ContestPictures
+	- Id
+	- Title -> Required
+	- Base64Data -> Required
+	- ImageUrl -> Optional
+	- OwnerId
+	- virtual User Owner
+	- VotesCount
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
