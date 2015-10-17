@@ -83,3 +83,7 @@ D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Web.T
 D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Web.Tests\obj\Debug\PhotoContest.Web.Tests.csprojResolveAssemblyReference.cache
 D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Web.Tests\obj\Debug\PhotoContest.Web.Tests.dll
 D:\ASP.NET-MVC\ASP.NET-MVC\ASP.NET-MVC.git\trunk\PhotoContest\PhotoContest.Web.Tests\obj\Debug\PhotoContest.Web.Tests.pdb
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web.Tests\bin\Debug\PhotoContest.Data.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web.Tests\bin\Debug\PhotoContest.Models.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web.Tests\bin\Debug\PhotoContest.Data.pdb
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web.Tests\bin\Debug\PhotoContest.Models.pdb
