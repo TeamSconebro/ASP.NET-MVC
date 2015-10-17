@@ -25,15 +25,21 @@ namespace PhotoContest.Models
             this.contestPictures=new HashSet<ContestPicture>();
         }
 
-        [MinLength(2)]
-        [MaxLength(20)]
+        //[Required]
+        //[MinLength(4)]
+        //[MaxLength(20)]
+        //[RegularExpression(@"([0-9a-zA-Z\\_\\-]+)")]
+        public string UserName { get; set; }
+
+        //[MinLength(2)]
+        //[MaxLength(20)]
         public string FirstName { get; set; }
 
-        [MinLength(2)]
-        [MaxLength(20)]
+        //[MinLength(2)]
+        //[MaxLength(20)]
         public string LastName { get; set; }
 
-        public string Base64Data { get; set; }
+        //public string Base64Data { get; set; }
 
         public virtual ICollection<Contest> Contests
         {

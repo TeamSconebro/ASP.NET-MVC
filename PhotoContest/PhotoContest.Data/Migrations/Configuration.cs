@@ -10,6 +10,7 @@ namespace PhotoContest.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(PhotoContest.Data.PhotoContestContext context)

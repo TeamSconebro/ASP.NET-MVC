@@ -15,9 +15,9 @@ namespace PhotoContest.Data
         public PhotoContestContext()
             : base("name=PhotoContestContext")
         {
-            //var migrationStrategy = new MigrateDatabaseToLatestVersion<PhotoContestContext, Configuration>();
-            //Database.SetInitializer(migrationStrategy);
+
         }
+
         public static PhotoContestContext Create()
         {
             return new PhotoContestContext();
@@ -26,6 +26,35 @@ namespace PhotoContest.Data
         {
             
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Contests)
+                .WithMany(c => c.Contestors)
+                .Map(m =>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("ContestId");
+                    m.ToTable("UserContests");
+                });
+
+            //modelBuilder.Entity<User>()
+            //    .HasMany(u => u.Contests)
+            //    .WithRequired(c => c.Owner)
+            //    .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Contest>()
+            //    .HasRequired(c => c.Owner)
+            //    .WithMany()
+            //    .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Contest>()
+            //    .HasMany(c => c.Contestors)
+            //    .WithMany()
+            //    .Map(m =>
+            //    {
+            //        m.MapLeftKey("")
+            //    });
+
 
             base.OnModelCreating(modelBuilder);
         }
