@@ -6,18 +6,32 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using PhotoContest.Data;
+using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Web.Models;
 
 namespace PhotoContest.Web.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IPhotoContestData data) : base(data)
         {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ManageController() : this(new PhotoContestData(new PhotoContestContext()))
+        {
+
+        }
+
+        private ManageController(PhotoContestData userManager) : base(userManager)
+        {
+
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

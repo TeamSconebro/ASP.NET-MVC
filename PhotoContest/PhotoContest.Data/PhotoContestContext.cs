@@ -16,15 +16,16 @@ namespace PhotoContest.Data
             : base("name=PhotoContestContext")
         {
 
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoContestContext, PhotoContest.Data.Migrations.Configuration>());
         }
 
         public static PhotoContestContext Create()
         {
             return new PhotoContestContext();
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             modelBuilder.Entity<User>()
@@ -37,23 +38,10 @@ namespace PhotoContest.Data
                     m.ToTable("UserContests");
                 });
 
-            //modelBuilder.Entity<User>()
-            //    .HasMany(u => u.Contests)
-            //    .WithRequired(c => c.Owner)
-            //    .WillCascadeOnDelete(false);
-
-            //modelBuilder.Entity<Contest>()
-            //    .HasRequired(c => c.Owner)
-            //    .WithMany()
-            //    .WillCascadeOnDelete(false);
-
-            //modelBuilder.Entity<Contest>()
-            //    .HasMany(c => c.Contestors)
-            //    .WithMany()
-            //    .Map(m =>
-            //    {
-            //        m.MapLeftKey("")
-            //    });
+            modelBuilder.Entity<Contest>()
+                .HasRequired(c => c.Owner)
+                .WithMany()
+                .WillCascadeOnDelete(false);
 
 
             base.OnModelCreating(modelBuilder);

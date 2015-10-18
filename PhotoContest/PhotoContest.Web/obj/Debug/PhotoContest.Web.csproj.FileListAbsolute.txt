@@ -175,3 +175,8 @@ D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Microsoft.O
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\obj\Debug\PhotoContest.Web.csprojResolveAssemblyReference.cache
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\obj\Debug\PhotoContest.Web.dll
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\obj\Debug\PhotoContest.Web.pdb
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Ado.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.AspNet.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Core.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.EF6.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Mvc5.dll

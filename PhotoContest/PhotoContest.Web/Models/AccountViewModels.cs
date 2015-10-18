@@ -49,9 +49,15 @@ namespace PhotoContest.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        //[RegularExpression(@"([a-zA-Z\\_\\-]+)")]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        //[Required]
+        //[Display(Name = "Email")]
+        //[EmailAddress]
+        //public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +70,12 @@ namespace PhotoContest.Web.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        //[RegularExpression(@"([a-zA-Z\\_\\-]+)")]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -80,27 +92,24 @@ namespace PhotoContest.Web.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        //[Required]
-        //[StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
-        //[RegularExpression(@"([a-zA-Z\\_\\-]+)")]
-        [Display(Name = "Username")]
-        public string UserName { get; set; }
 
         //[StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
-        //[RegularExpression(@"([a-zA-Z]+)")]
-        //[DataType(DataType.Text)]
+        [MaxLength(20)]
+        [RegularExpression(@"([a-zA-Z]*)")]
+        [DataType(DataType.Text)]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
         //[StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
-        //[RegularExpression(@"([a-zA-Z]+)")]
-        //[DataType(DataType.Text)]
+        [MaxLength(20)]
+        [RegularExpression(@"([a-zA-Z]*)")]
+        [DataType(DataType.Text)]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        //[DataType(DataType.Upload)]
-        //[Display(Name = "Upload profile image")]
-        //public string Base64Data { get; set; }
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload profile image")]
+        public string Base64Data { get; set; }
     }
 
     public class ResetPasswordViewModel

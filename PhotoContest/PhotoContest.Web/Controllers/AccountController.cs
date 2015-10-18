@@ -8,25 +8,33 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using PhotoContest.Data;
+using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Models;
 using PhotoContest.Web.Models;
 
 namespace PhotoContest.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IPhotoContestData data) : base(data)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        public AccountController() : this(new PhotoContestData(new PhotoContestContext()))
+        {
+
+        }
+
+        private AccountController(PhotoContestData userManager) : base(userManager)
+        {
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -76,7 +84,7 @@ namespace PhotoContest.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -152,7 +160,7 @@ namespace PhotoContest.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, /*Base64Data = model.Base64Data*/ };
+                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Base64Data = model.Base64Data };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
