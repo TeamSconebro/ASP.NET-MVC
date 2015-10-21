@@ -180,3 +180,8 @@ D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Asp
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Core.dll
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.EF6.dll
 D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Mvc5.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Ado.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.AspNet.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Core.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.EF6.dll
+E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Mvc5.dll

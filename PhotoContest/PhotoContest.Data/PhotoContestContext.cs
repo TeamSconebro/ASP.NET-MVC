@@ -14,7 +14,8 @@ namespace PhotoContest.Data
             : base("name=PhotoContestContext")
         {
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoContestContext,Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoContestContext, Configuration>());
+            
         }
 
         public static PhotoContestContext Create()

@@ -19,6 +19,6 @@ namespace PhotoContest.Web.Controllers
 
         }
 
-        protected IPhotoContestData Data { get; }
+        protected IPhotoContestData Data { get; set; }
     }
 }
