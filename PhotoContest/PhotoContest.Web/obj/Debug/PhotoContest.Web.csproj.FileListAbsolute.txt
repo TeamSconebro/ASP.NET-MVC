@@ -185,3 +185,5 @@ E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.AspNet.dll
 E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Core.dll
 E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.EF6.dll
 E:\MVC\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\Glimpse.Mvc5.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\AutoMapper.dll
+D:\ASP.NET-MVC\Project\ASP.NET-MVC\PhotoContest\PhotoContest.Web\bin\AutoMapper.xml
