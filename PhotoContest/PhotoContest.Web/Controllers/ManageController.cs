@@ -1,17 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using PhotoContest.Data;
-using PhotoContest.Data.UnitsOfWork;
-using PhotoContest.Web.Models;
-
-namespace PhotoContest.Web.Controllers
+﻿namespace PhotoContest.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Data;
+    using Data.UnitsOfWork;
+    using Models;
     [Authorize]
     public class ManageController : BaseController
     {

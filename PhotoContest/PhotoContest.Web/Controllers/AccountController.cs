@@ -1,20 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using PhotoContest.Data;
-using PhotoContest.Data.UnitsOfWork;
-using PhotoContest.Models;
-using PhotoContest.Web.Models;
-
-namespace PhotoContest.Web.Controllers
+﻿namespace PhotoContest.Web.Controllers
 {
+
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Data;
+    using Data.UnitsOfWork;
+    using PhotoContest.Models;
+    using Models;
+
     [Authorize]
     public class AccountController : BaseController
     {
@@ -160,7 +158,7 @@ namespace PhotoContest.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Base64Data = model.Base64Data };
+                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, ImageBase64Data =  model.Base64Data };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

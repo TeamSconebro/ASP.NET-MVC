@@ -39,7 +39,8 @@ namespace PhotoContest.Models
         [MaxLength(20)]
         public string LastName { get; set; }
 
-        public string Base64Data { get; set; }
+        public string ImageBase64Data { get; set; }
+        public string ImageUrl { get; set; }
 
         public virtual ICollection<Contest> Contests
         {
