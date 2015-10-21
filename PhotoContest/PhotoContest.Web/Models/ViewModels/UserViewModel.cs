@@ -17,6 +17,7 @@ namespace PhotoContest.Web.Models.ViewModels
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        public int Coints { get; set; }
 
         public IEnumerable<ContestViewModel> ContestViewModels { get; set; }
 

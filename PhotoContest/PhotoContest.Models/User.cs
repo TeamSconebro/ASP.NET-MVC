@@ -41,6 +41,7 @@ namespace PhotoContest.Models
 
         public string ImageBase64Data { get; set; }
         public string ImageUrl { get; set; }
+        public int Coints { get; set; }
 
         public virtual ICollection<Contest> Contests
         {
