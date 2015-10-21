@@ -5,9 +5,7 @@ using PhotoContest.Models;
 
 namespace PhotoContest.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class PhotoContestContext : IdentityDbContext<User>
     {
@@ -16,7 +14,7 @@ namespace PhotoContest.Data
             : base("name=PhotoContestContext")
         {
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoContestContext, PhotoContest.Data.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoContestContext,Configuration>());
         }
 
         public static PhotoContestContext Create()
