@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using PhotoContest.Data.Repositories;
 using PhotoContest.Models;
 
@@ -13,6 +15,7 @@ namespace PhotoContest.Data.UnitsOfWork
     {
         private DbContext context;
         private IDictionary<Type, object> repositories;
+        private IUserStore<User> userStore;
 
         public PhotoContestData(DbContext context)
         {
@@ -43,6 +46,19 @@ namespace PhotoContest.Data.UnitsOfWork
         public IRepository<Notification> Notifications
         {
             get { return this.GetRepository<Notification>(); }
+        }
+
+        public IUserStore<User> UserStore
+        {
+            get
+            {
+                if (this.userStore == null)
+                {
+                    this.userStore = new UserStore<User>(this.context);
+                }
+
+                return this.userStore;
+            }
         }
 
         public int SaveChanges()

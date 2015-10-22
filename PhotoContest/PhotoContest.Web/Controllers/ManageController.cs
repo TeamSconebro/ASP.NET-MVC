@@ -10,33 +10,34 @@
     using Data;
     using Data.UnitsOfWork;
     using Models;
+
     [Authorize]
     public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IPhotoContestData data) : base(data)
+        public ManageController(IPhotoContestData data, ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(data)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ManageController() : this(new PhotoContestData(new PhotoContestContext()))
-        {
+        //public ManageController() : this(new PhotoContestData(new PhotoContestContext()))
+        //{
 
-        }
+        //}
 
-        private ManageController(PhotoContestData userManager) : base(userManager)
-        {
+        //private ManageController(PhotoContestData userManager) : base(userManager)
+        //{
 
-        }
+        //}
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        //public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
 
         public ApplicationSignInManager SignInManager
         {

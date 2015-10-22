@@ -19,7 +19,7 @@
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IPhotoContestData data) : base(data)
+        public AccountController(IPhotoContestData data, ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(data)
         {
             UserManager = userManager;
             SignInManager = signInManager;

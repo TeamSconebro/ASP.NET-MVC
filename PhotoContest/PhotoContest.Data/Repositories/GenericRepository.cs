@@ -10,49 +10,67 @@ namespace PhotoContest.Data.Repositories
     public class GenericRepository<T> : IRepository<T>
         where T : class 
     {
-        protected DbContext context;
-        protected DbSet<T> set;
+        private DbContext dbContext;
+        private IDbSet<T> entitySet;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(DbContext dbContext)
         {
-            this.context = context;
-            this.set = context.Set<T>();
+            this.dbContext = dbContext;
+            this.entitySet = dbContext.Set<T>();
+        }
+
+        public IDbSet<T> EntitySet
+        {
+            get { return this.entitySet; }
         }
 
         public IQueryable<T> All()
         {
-            return this.set.AsQueryable();
+            return this.entitySet;
         }
 
         public T Find(object id)
         {
-            return this.set.Find(id);
+            return this.entitySet.Find(id);
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
-            this.ChangeState(entity, EntityState.Added);
+            return this.ChangeState(entity, EntityState.Added);
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
-            this.ChangeState(entity, EntityState.Modified);
+            return this.ChangeState(entity, EntityState.Modified);
         }
 
-        public void Delete(T entity)
+        public void Remove(T entity)
         {
             this.ChangeState(entity, EntityState.Deleted);
         }
 
-        private void ChangeState(T entity, EntityState state)
+        public T Remove(object id)
         {
-            var entry = this.context.Entry(entity);
+            var entity = this.Find(id);
+            this.Remove(entity);
+            return entity;
+        }
+
+        public void SaveChanges()
+        {
+            this.dbContext.SaveChanges();
+        }
+
+        private T ChangeState(T entity, EntityState state)
+        {
+            var entry = this.dbContext.Entry(entity);
             if (entry.State == EntityState.Detached)
             {
-                this.set.Attach(entity);
+                this.entitySet.Attach(entity);
             }
 
             entry.State = state;
+            return entity;
         }
     }
 }

@@ -12,10 +12,14 @@ namespace PhotoContest.Data.Repositories
 
         T Find(object id);
 
-        void Add(T entity);
+        T Add(T entity);
 
-        void Update(T entity);
+        T Update(T entity);
 
-        void Delete(T entity);
+        T Remove(object id);
+
+        void Remove(T entity);
+
+        void SaveChanges();
     }
 }
