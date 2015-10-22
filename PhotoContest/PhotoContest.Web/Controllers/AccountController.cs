@@ -163,6 +163,7 @@
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "User");
+                    user.Coints = 1000;
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
