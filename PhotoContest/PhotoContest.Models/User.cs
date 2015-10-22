@@ -23,6 +23,7 @@ namespace PhotoContest.Models
             this.contests=new HashSet<Contest>();
             this.notifications=new HashSet<Notification>();
             this.contestPictures=new HashSet<ContestPicture>();
+            this.Coints = 1000;
         }
 
         //[Required]
