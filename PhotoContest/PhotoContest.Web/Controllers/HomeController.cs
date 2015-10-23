@@ -10,11 +10,6 @@
 
         }
 
-        public HomeController() : this(new PhotoContestData(new PhotoContestContext()))
-        {
-
-        }
-
 
         public ActionResult Index()
         {

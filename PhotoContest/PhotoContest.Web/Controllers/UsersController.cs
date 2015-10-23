@@ -21,78 +21,45 @@ namespace PhotoContest.Web.Controllers
 
         }
 
-        public UsersController() : this(new PhotoContestData(new PhotoContestContext()))
+        public ActionResult Index()
         {
-
+            // TODO: Return empty view, which body contains partial views for listing active and inctive contests
+            return this.View();
         }
 
         // GET: Users
-        public ActionResult Profile()
+        public ActionResult AccountProfile()
         {
-            var currentUserId = this.User.Identity.GetUserId();
+            // TODO: Return account profile view, which keep all profile details
+            //var currentUserId = this.User.Identity.GetUserId();
 
-            var currentUser = this.Data.Users.Find(currentUserId);
-            if (currentUser == null)
-            {
-                //return this.RedirectToAction("")
+            //var currentUser = this.Data.Users.Find(currentUserId);
+            //if (currentUser == null)
+            //{
+            //    //return this.RedirectToAction("")
 
-            }
+            //}
 
 
-            return View(this.Data.Users.All());
+            //return View(this.Data.Users.All());
+
+            return this.View();
         }
-
-        // GET: Users/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = this.Data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,ImageBase64Data,ImageUrl,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                this.Data.Users.Add(user);
-                this.Data.SaveChanges();
-                return RedirectToAction("Profile");
-            }
-
-            return View(user);
-        }
-
+        
         // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = this.Data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            // TODO: Load view for edditing profile details
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //User user = this.Data.Users.Find(id);
+            //if (user == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(/*user*/);
         }
 
         // POST: Users/Edit/5
@@ -102,6 +69,8 @@ namespace PhotoContest.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,ImageBase64Data,ImageUrl,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
         {
+            // TODO: Edit profile details. On success redirects to action "Index". On error - reload the "Edit" page
+
             if (ModelState.IsValid)
             {
                 //this.Data.Entry(user).State = EntityState.Modified;
@@ -109,41 +78,6 @@ namespace PhotoContest.Web.Controllers
                 //return RedirectToAction("Index");
             }
             return View(user);
-        }
-
-        // GET: Users/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = this.Data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            User user = this.Data.Users.Find(id);
-            //this.Data.Users.Remove(user);
-            this.Data.SaveChanges();
-            return RedirectToAction("Profile");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                //this.Data.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
