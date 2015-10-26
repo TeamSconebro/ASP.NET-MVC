@@ -14,16 +14,18 @@ namespace PhotoContest.Web.Models.ViewModels
 
         public string Description { get; set; }
 
-        public User Owner { get; set; }
+        public string OwnerName { get; set; }
 
-        public VotingStrategy VotingStrategy { get; set; } 
+        public string VotingStrategy { get; set; } 
 
-        public RewardStrategy RewardStrategy { get; set; } 
+        public string RewardStrategy { get; set; } 
 
-        public ParticipationStrategy ParticipationStrategy { get; set; } 
+        public string ParticipationStrategy { get; set; } 
 
-        public DeadlineStrategy DeadlineStrategy { get; set; }
+        public string DeadlineStrategy { get; set; }
+
         public int? NumberOfParticipants { get; set; }
+
         public DateTime Deadline { get; set; }
 
         public string PrizeValues { get; set; }

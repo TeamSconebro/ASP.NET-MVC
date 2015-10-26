@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PhotoContest.Models;
+using PhotoContest.Models.Enumerations;
 
 namespace PhotoContest.Data.Migrations
 {
@@ -20,13 +21,18 @@ namespace PhotoContest.Data.Migrations
 
         protected override void Seed(PhotoContest.Data.PhotoContestContext context)
         {
-            if (context.Users.Any())
+            if (!context.Users.Any())
             {
                 // Seed initial data only if the database is empty
-                return;
+                //return;
+                var users = this.SeedApplicationUsers(context);
             }
 
-            var users = this.SeedApplicationUsers(context);
+            if (context.Users.Any() && !context.Contests.Any())
+            {
+                this.SeedContests(context);
+            }
+
         }
 
         private IList<User> SeedApplicationUsers(
@@ -97,6 +103,96 @@ namespace PhotoContest.Data.Migrations
 
             return users;
         }
+
+        // Seed contests
+        private void SeedContests(PhotoContestContext context)
+        {
+            var contests = new List<Contest>()
+            {
+                new Contest()
+                {
+                    Title = "Summer vacation",
+                    Description = "Cool pics from summer ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.No
+                },
+                new Contest()
+                {
+                    Title = "Where were you last weekend?",
+                    Description = "Photographs from weekend ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(15),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.No
+                },
+                new Contest()
+                {
+                    Title = "Chrismas atmosphere",
+                    Description = "Let's look what you have ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(50),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.No
+                },
+                new Contest()
+                {
+                    Title = "Pets",
+                    Description = "Lovely pets pics ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(10),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.No
+                },
+                new Contest()
+                {
+                    Title = "Technical contest",
+                    Description = "Share pics of you most valuable gadget ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.No
+                },
+            };
+
+            foreach (var contest in contests)
+            {
+                context.Contests.Add(contest);
+            }
+
+            context.SaveChanges();
+        } 
     
     }
 }

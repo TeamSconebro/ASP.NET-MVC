@@ -4,5 +4,37 @@
 }
 
 <div class="row">
-    @Html.DisplayFor(x => x)
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                @item.Title
+            </div>
+            <div class="col-md-3">
+                @item.Description
+            </div>
+            <div class="col-md-3">
+                @item.OwnerName
+            </div>
+            <div class="col-md-3">
+                @item.IsClosed
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @item.DeadlineStrategy
+            </div>
+            <div class="col-md-3">
+                @item.VotingStrategy
+            </div>
+            <div class="col-md-3">
+                @item.RewardStrategy
+            </div>
+            <div class="col-md-3">
+                @item.ParticipationStrategy
+            </div>
+        </div>
+        <hr/>
+       
+    }
 </div>
