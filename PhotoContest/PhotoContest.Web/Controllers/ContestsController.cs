@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Models;
+using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.Controllers
 {
@@ -17,8 +19,12 @@ namespace PhotoContest.Web.Controllers
         public ActionResult AllActiveContests()
         {
             // TODO: Return view model with all active contests, order by date of creation (descending). That view is rendered on Home page - Visitors, Home page - Logged users, Home page - Administrators.
-
-            return this.View();
+            var activeContests = this.Data.Contests
+                .All()
+                .OrderByDescending(c => c.Deadline)
+                .Project()
+                .To<ContestViewModel>();
+            return this.View(activeContests);
         }
 
         public ActionResult AllInactiveContests()
