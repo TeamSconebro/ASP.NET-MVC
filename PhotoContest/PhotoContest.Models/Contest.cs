@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using PhotoContest.Models.Enumerations;
 
@@ -13,6 +14,8 @@ namespace PhotoContest.Models
        {
            this.contestPictures = new HashSet<ContestPicture>();
             this.contestors = new HashSet<User>();
+           this.NumberOfParticipants = 0;
+           this.Deadline=new DateTime(2000, 3, 1);
        }
             
        [Key]
@@ -40,6 +43,8 @@ namespace PhotoContest.Models
 
        [Required]
        public DeadlineStrategy DeadlineStrategy { get; set; }
+       public DateTime Deadline { get; set; }
+       public int NumberOfParticipants { get; set; }
 
        [Required]
        public string PrizeValues { get; set; }
@@ -52,6 +57,7 @@ namespace PhotoContest.Models
        //public virtual User Contestor { get; set; }
 
        public IsClosed IsClosed { get; set; }
+       
 
 
         public virtual ICollection<ContestPicture> ContestPictures
