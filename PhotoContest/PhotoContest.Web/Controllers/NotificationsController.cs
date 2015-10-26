@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PhotoContest.Data.UnitsOfWork;
+using PhotoContest.Web.Models.BindingModel;
+using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.Controllers
 {
@@ -19,10 +21,10 @@ namespace PhotoContest.Web.Controllers
             // TODO: Return view model with all user notifications. Details to show: notification content, type and date.
             // TODO: Add "DateRecieved" property in Notification entity class.
 
-            return View();
+            return View(new List<NotificationViewModel>());
         }
 
-        public ActionResult CreateNotification()
+        public ActionResult CreateNotification(NotificationBindingModel model)
         {
             // TODO: Recieve binding model and create new notification in database.
 

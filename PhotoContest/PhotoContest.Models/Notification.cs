@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PhotoContest.Models.Enumerations;
 
 namespace PhotoContest.Models
 {
@@ -17,7 +18,7 @@ namespace PhotoContest.Models
        public string NotificationContent { get; set; }
 
        [Required]
-       public SqlNotificationType Type { get; set; }
+       public NotificationType Type { get; set; }
 
        [Required]
        public string UserId { get; set; }

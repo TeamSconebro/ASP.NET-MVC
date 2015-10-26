@@ -1,6 +1,6 @@
 ﻿namespace PhotoContest.Models.Enumerations
 {
-    public enum Type
+    public enum NotificationType
     {
         Winning=1,
         InvitedToContest=2,
