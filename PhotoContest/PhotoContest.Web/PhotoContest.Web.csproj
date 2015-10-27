@@ -288,7 +288,9 @@
     <Content Include="Views\Users\AccountProfile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
-    <Content Include="Views\Contests\AllActiveContests.cshtml" />
+    <Content Include="Views\Contests\Active.cshtml" />
+    <Content Include="Views\Contests\Inactive.cshtml" />
+    <Content Include="Views\Contests\AllContests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

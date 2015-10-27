@@ -7,6 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Models;
+using PhotoContest.Models.Enumerations;
 using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.Controllers
@@ -16,32 +17,38 @@ namespace PhotoContest.Web.Controllers
         public ContestsController(IPhotoContestData data) : base(data)
         {
         }
-
+        [ActionName("Active")]
         public ActionResult AllActiveContests()
         {
-            // TODO: Return view model with all active contests, order by date of creation (descending). That view is rendered on Home page - Visitors, Home page - Logged users, Home page - Administrators.
             var activeContests = this.Data.Contests
                 .All()
-                .OrderByDescending(c => c.Deadline);
+                .Where(c=>c.IsClosed==IsClosed.No)
+                .OrderByDescending(c => c.CreatedOn);
             //.Project()
             //.To<ContestViewModel>();
             var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(activeContests);
             return this.View(contestModels);
         }
-
+        [ActionName("Inactive")]
         public ActionResult AllInactiveContests()
         {
-            // TODO: Return view model with all inactive contests, order by date of creation (descending). That view is rendered on Home page - Visitors, Home page - Logged users, Home page - Administrators.
-
-            return this.View();
+            var inactiveContests = this.Data.Contests
+               .All()
+               .Where(c => c.IsClosed == IsClosed.Yes)
+               .OrderByDescending(c => c.CreatedOn);
+            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(inactiveContests);
+            return this.View(contestModels);
+            
         }
 
         // List all active/inactive contests with more details (after pressing "See more" button)
         public ActionResult AllContests()
         {
-            // TODO: Return view model with all active/inactive contests, order by date of creation (descending). That view is rendered on Contests page in Visitors, Logged users and Administrators accounts.
-
-            return this.View();
+            var AllContests = this.Data.Contests
+              .All()
+              .OrderByDescending(c => c.CreatedOn);
+            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(AllContests);
+            return this.View(contestModels);
         }
 
         public ActionResult ContestDetails()

@@ -126,6 +126,112 @@ namespace PhotoContest.Data.Migrations
                 },
                 new Contest()
                 {
+                    Title = "Summer vacation",
+                    Description = "Cool pics from summer ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+                new Contest()
+                {
+                    Title = "Summer vacation 2",
+                    Description = "Cool pics from summer 2 ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+                new Contest()
+                {
+                    Title = "Summer vacation 3",
+                    Description = "Cool pics from summer 3...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+                new Contest()
+                {
+                    Title = "Summer vacation 4",
+                    Description = "Cool pics from summer ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+                new Contest()
+                {
+                    Title = "Summer vacation 5",
+                    Description = "Cool pics from summer ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+                new Contest()
+                {
+                    Title = "Summer vacation 6",
+                    Description = "Cool pics from summer ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    VotingStrategy = VotingStrategy.Closed,
+                    RewardStrategy = RewardStrategy.TopNPrizes,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+                new Contest()
+                {
+                    Title = "Summer vacation 7",
+                    Description = "Cool pics from summer 7 ...",
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    VotingStrategy = VotingStrategy.Open,
+                    RewardStrategy = RewardStrategy.SingleWinner,
+                    ParticipationStrategy = ParticipationStrategy.Open,
+                    DeadlineStrategy = DeadlineStrategy.ByTime,
+                    Deadline = DateTime.Now.AddDays(20),
+                    NumberOfParticipants = 0,
+                    PrizeValues = "100",
+                    PrizeCount = 1,
+                    IsClosed = IsClosed.Yes
+                },
+
+                new Contest()
+                {
                     Title = "Where were you last weekend?",
                     Description = "Photographs from weekend ...",
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),

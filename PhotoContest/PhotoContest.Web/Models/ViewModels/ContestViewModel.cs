@@ -23,6 +23,7 @@ namespace PhotoContest.Web.Models.ViewModels
         public string ParticipationStrategy { get; set; } 
 
         public string DeadlineStrategy { get; set; }
+        public string CreatedOn { get; set; }
 
         public int? NumberOfParticipants { get; set; }
 
