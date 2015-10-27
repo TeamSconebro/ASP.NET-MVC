@@ -14,8 +14,7 @@ namespace PhotoContest.Models
        {
            this.contestPictures = new HashSet<ContestPicture>();
             this.contestors = new HashSet<User>();
-           this.NumberOfParticipants = 0;
-           this.Deadline=new DateTime(2000, 3, 1);
+           this.CreatedOn = DateTime.Now;
        }
             
        [Key]
@@ -43,7 +42,8 @@ namespace PhotoContest.Models
 
        [Required]
        public DeadlineStrategy DeadlineStrategy { get; set; }
-       public DateTime Deadline { get; set; }
+       public DateTime CreatedOn { get; set; }
+       public DateTime? Deadline { get; set; }
        public int NumberOfParticipants { get; set; }
 
        [Required]
