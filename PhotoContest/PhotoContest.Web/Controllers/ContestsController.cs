@@ -51,9 +51,9 @@ namespace PhotoContest.Web.Controllers
             return this.View(contestModels);
         }
         [HttpGet]
-        public ActionResult ContestDetails(long id=98567457552123554548553312)
+        public ActionResult ContestDetails(long id=98567457552123554)
         {
-            if (id == 98567457552123554548553312)
+            if (id == 98567457552123554)
             {
                 id = this.Data.Contests.All().OrderByDescending(c => c.CreatedOn).Select(c=>c.Id).FirstOrDefault();
             }
