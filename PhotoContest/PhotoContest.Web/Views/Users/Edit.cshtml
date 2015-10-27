@@ -1,4 +1,4 @@
-﻿@model PhotoContest.Models.User
+﻿@*@model PhotoContest.Models.User
 
 @{
     ViewBag.Title = "Edit";
@@ -159,4 +159,23 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}*@
+@model PhotoContest.Web.Models.ViewModels.UserEditProfileViewModel
+@using (Html.BeginForm("Edit", "Users"))
+{
+    @Html.AntiForgeryToken()
+    <label>Firstname: </label>
+    @Html.EditorFor(model => model.FirstName)
+    <br/>
+    <label>LastName: </label>
+    @Html.EditorFor(model => model.LastName)
+    <br/>
+    <label>Email: </label>
+    @Html.EditorFor(model => model.Email)
+    <br/>
+    <label>Phone Number: </label>
+    @Html.EditorFor(model => model.PhoneNumber)
+    <br/>
+
+    <input type="submit" value="Save" />
 }
