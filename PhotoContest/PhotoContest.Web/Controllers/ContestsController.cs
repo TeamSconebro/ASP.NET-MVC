@@ -44,18 +44,24 @@ namespace PhotoContest.Web.Controllers
         // List all active/inactive contests with more details (after pressing "See more" button)
         public ActionResult AllContests()
         {
-            var AllContests = this.Data.Contests
+            var allContests = this.Data.Contests
               .All()
               .OrderByDescending(c => c.CreatedOn);
-            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(AllContests);
+            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(allContests);
             return this.View(contestModels);
         }
-
-        public ActionResult ContestDetails()
+        [HttpGet]
+        public ActionResult ContestDetails(long id=98567457552123554548553312)
         {
+            if (id == 98567457552123554548553312)
+            {
+                id = this.Data.Contests.All().OrderByDescending(c => c.CreatedOn).Select(c=>c.Id).FirstOrDefault();
+            }
+            var contestDetails = this.Data.Contests.Find(id);
+            var contestModels = Mapper.Map<Contest,ContestViewModel>(contestDetails);
             //TODO: Return view model with all detals for one particular contest. That view is rendered on Contest Details page in Visitors, Logged users and Administrators accounts.
 
-            return this.View();
+            return this.View(contestModels);
         }
 
         public ActionResult CreateContest()
