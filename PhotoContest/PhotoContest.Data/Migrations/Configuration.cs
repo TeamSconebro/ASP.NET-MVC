@@ -33,6 +33,11 @@ namespace PhotoContest.Data.Migrations
                 this.SeedContests(context);
             }
 
+            if (context.Users.Any() && context.Contests.Any() && !context.ContestPictures.Any())
+            {
+                this.SeedContestPictures(context);
+            }
+
         }
 
         private IList<User> SeedApplicationUsers(
@@ -298,7 +303,109 @@ namespace PhotoContest.Data.Migrations
             }
 
             context.SaveChanges();
-        } 
-    
+        }
+
+        private void SeedContestPictures(PhotoContestContext context)
+        {
+            var contestPictures = new List<ContestPicture>()
+            {
+                new ContestPicture()
+                {
+                    Title = "Title 1",
+                    Base64Data = "http://i.telegraph.co.uk/multimedia/archive/03235/potd-husky_3235255k.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 2",
+                    Base64Data = "http://7-themes.com/data_images/out/24/6850590-baby-fox-pictures.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 3",
+                    Base64Data = "http://www.snappypixels.com/wp-content/uploads/2013/08/bunch-of-random-funny-pictures-6.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 4",
+                    Base64Data = "http://coolwildlife.com/wp-content/uploads/galleries/post-345/Wolf%20Pictures%20034.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 5",
+                    Base64Data = "http://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2013/01/24/12/v2-cute-cat-picture.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 6",
+                    Base64Data = "http://www.planwallpaper.com/static/images/cool_picture.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 7",
+                    Base64Data = "http://7-themes.com/data_images/out/73/7020359-best-autumn-pictures.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 8",
+                    Base64Data = "https://s-media-cache-ak0.pinimg.com/236x/4f/2d/a0/4f2da0f1e6e3ee767214407c6a5aee04.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 9",
+                    Base64Data = "http://www.airshows.co.uk/week-in-pictures/2013/may/images/week-in-pictures-08.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 10",
+                    Base64Data = "https://pbs.twimg.com/profile_images/425946167050911744/x62a9eBz_400x400.jpeg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 11",
+                    Base64Data = "http://ichef.bbci.co.uk/news/976/media/images/83351000/jpg/_83351965_explorer273lincolnshirewoldssouthpicturebynicholassilkstone.jpg",
+                    VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+            };
+
+            foreach (var contestPicture in contestPictures)
+            {
+                context.ContestPictures.Add(contestPicture);
+            }
+
+            context.SaveChanges();
+        }
+
     }
 }
