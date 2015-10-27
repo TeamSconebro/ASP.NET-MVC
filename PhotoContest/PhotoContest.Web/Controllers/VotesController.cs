@@ -26,9 +26,17 @@ namespace PhotoContest.Web.Controllers
         // POST: Store vote in database
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Vote(VoteBindingModel model)
+        public ActionResult Vote(int id)
         {
-            // TODO: Recieve binding model and increment votes for one particular picture.
+            // TODO: Recieve picure id and increment votes for one particular picture.
+            var currentPicture = this.Data.ContestPictures.Find(id);
+            if (currentPicture == null)
+            {
+                return HttpNotFound();
+            }
+
+            currentPicture.VotesCount++;
+            this.Data.SaveChanges();
 
             return RedirectToAction("ContestDetails", "Contests");
         }

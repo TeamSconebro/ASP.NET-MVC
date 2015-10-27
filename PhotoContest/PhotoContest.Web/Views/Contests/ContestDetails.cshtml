@@ -13,7 +13,6 @@
 @Html.BeginForm("UploadImage", "PicturesController", FormMethod.Post, FormMethod.Post, new {enctype = "multipart/form-data"})*@
 @Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())
 
-
 <div class="row">
 
     <div class="row">
@@ -44,5 +43,14 @@
             @Model.ParticipationStrategy
         </div>
     </div>
-    <hr />
+    <hr/>
 </div>
+
+@*@Html.Partial("Vote")*@
+
+@*@Html.ActionLink("Vote", "IncreaseVote", "Votes", new { id = Model.Id})*@
+
+@using (Html.BeginForm("Vote", "Votes", new {contestId = Model.Id}))
+{
+    <input type="submit" class="btn btn-primary" value="Vote +"/>
+}

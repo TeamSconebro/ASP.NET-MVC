@@ -20,6 +20,17 @@ namespace PhotoContest.Web.App_Start
                 ForMember(model => model.RewardStrategy, config => config.MapFrom(contest => contest.RewardStrategy)).
                 ForMember(model => model.VotingStrategy, config => config.MapFrom(contest => contest.VotingStrategy));
 
+            Mapper.CreateMap<Contest, ContestFullViewModel>()
+                .ForMember(model => model.OwnerName, config => config.MapFrom(contest => contest.Owner.UserName)).
+                ForMember(model => model.DeadlineStrategy, config => config.MapFrom(contest => contest.DeadlineStrategy)).
+                ForMember(model => model.ParticipationStrategy, config => config.MapFrom(contest => contest.ParticipationStrategy)).
+                ForMember(model => model.RewardStrategy, config => config.MapFrom(contest => contest.RewardStrategy)).
+                ForMember(model => model.VotingStrategy, config => config.MapFrom(contest => contest.VotingStrategy))
+                .ForMember(model => model.ContestPictures, config => config.MapFrom(contest => contest.ContestPictures));
+
+            Mapper.CreateMap<ContestPicture, ListPictureViewModel>()
+                .ForMember(model => model.OwnerUserName, config => config.MapFrom(a => a.Owner.UserName));
+
             //Mapper.CreateMap<Post, PostConciseViewModel>()
             //    .ForMember(model => model.Author, config => config.MapFrom(post => post.Author.UserName));
             //Mapper.CreateMap<Post, PostFullViewModel>()

@@ -73,6 +73,7 @@ namespace PhotoContest.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                //this.Data.Users.Update(user);
                 //this.Data.Entry(user).State = EntityState.Modified;
                // db.SaveChanges();
                 //return RedirectToAction("Index");

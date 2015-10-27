@@ -18,6 +18,22 @@ namespace PhotoContest.Web.Controllers
         public ContestsController(IPhotoContestData data) : base(data)
         {
         }
+
+
+        public ActionResult GetContest(int id)
+        {
+            var currentContest = this.Data.Contests.Find(id);
+            if (currentContest == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            var contestModel = Mapper.Map<Contest, ContestFullViewModel>(currentContest);
+
+            return this.View(contestModel);
+        }
+
+
         [ActionName("Active")]
         public ActionResult AllActiveContests()
         {

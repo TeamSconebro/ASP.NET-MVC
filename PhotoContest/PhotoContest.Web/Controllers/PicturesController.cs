@@ -16,7 +16,7 @@ namespace PhotoContest.Web.Controllers
         }
 
         // GET: Pictures
-        public ActionResult AllPictures()
+        public ActionResult AllContestPictures()
         {
             //TODO: Return view model with all pictures in one particular contest. Model should contain picture title, content (image) and author. That model should be rendered on the Contest details page.
 
