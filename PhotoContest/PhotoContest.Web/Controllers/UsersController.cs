@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using PhotoContest.Data;
 using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Models;
+using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.Controllers
 {
@@ -45,7 +46,7 @@ namespace PhotoContest.Web.Controllers
 
             return this.View();
         }
-        
+
         // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
@@ -59,7 +60,7 @@ namespace PhotoContest.Web.Controllers
             //{
             //    return HttpNotFound();
             //}
-            return View(/*user*/);
+            return View( /*user*/);
         }
 
         // POST: Users/Edit/5
@@ -67,18 +68,30 @@ namespace PhotoContest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,ImageBase64Data,ImageUrl,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
-        {
-            // TODO: Edit profile details. On success redirects to action "Index". On error - reload the "Edit" page
 
+        public ActionResult Edit(UserEditProfileViewModel userprofile)
+        {
             if (ModelState.IsValid)
             {
-                //this.Data.Users.Update(user);
-                //this.Data.Entry(user).State = EntityState.Modified;
-               // db.SaveChanges();
-                //return RedirectToAction("Index");
+                var username = User.Identity.Name;
+
+                // Fetch the userprofile
+                var user = this.Data.Users.All().FirstOrDefault(u => u.UserName.Equals(username));
+
+                // Construct the viewmodel
+
+                user.FirstName = userprofile.FirstName;
+                user.LastName = userprofile.LastName;
+                user.Email = userprofile.Email;
+                user.PhoneNumber = userprofile.PhoneNumber;
+
+
+                // this.Data.Entry(user).State = EntityState.Modified;
+                this.Data.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
-            return View(user);
+
+            return View(userprofile);
         }
     }
 }
