@@ -8,6 +8,7 @@ using AutoMapper.QueryableExtensions;
 using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Models;
 using PhotoContest.Models.Enumerations;
+using PhotoContest.Web.Models.BindingModel;
 using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.Controllers
@@ -83,6 +84,20 @@ namespace PhotoContest.Web.Controllers
             // TODO: Delete contest by id.
 
             return this.View();
+        }
+
+        /**********************************************/
+
+        public ActionResult CreateImageBindingModel(ImageBindingModelUserInput partialModel, int id)
+        {
+            //int contestId = RouteData.Values["id"];
+
+            var imageBindingModel = new ImageBindingModel()
+            {
+                
+            };
+
+            return RedirectToAction("UploadImage", "Pictures", imageBindingModel);
         }
     }
 }

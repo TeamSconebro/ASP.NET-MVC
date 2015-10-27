@@ -23,6 +23,13 @@ namespace PhotoContest.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult UploadForm()
+        {
+            return this.PartialView("UploadForm");
+        }
+
+        [HttpPost]
         public ActionResult UploadImage(ImageBindingModel model)
         {
             var ownerId = this.User.Identity.GetUserId();

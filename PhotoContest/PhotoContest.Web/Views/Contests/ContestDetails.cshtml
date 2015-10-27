@@ -1,7 +1,18 @@
-﻿@model  PhotoContest.Web.Models.ViewModels.ContestViewModel
+﻿@using PhotoContest.Web.Models.BindingModel
+@model  PhotoContest.Web.Models.ViewModels.ContestViewModel
 @{
     ViewBag.Title = "Contest Details";
 }
+
+@*<form method="POST" action="~/Pictures" enctype="multipart/form-data">
+    <input type="text" name="title"/>
+    <input type="file" name="image"/>
+    <input type="submit" value="Upload"/>
+</form>
+
+@Html.BeginForm("UploadImage", "PicturesController", FormMethod.Post, FormMethod.Post, new {enctype = "multipart/form-data"})*@
+@Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())
+
 
 <div class="row">
 

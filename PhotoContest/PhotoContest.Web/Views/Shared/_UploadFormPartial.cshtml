@@ -1,0 +1,17 @@
+﻿@model PhotoContest.Web.Models.BindingModel.ImageBindingModelUserInput
+
+@*<form method="POST" action="~/Pictures" enctype="multipart/form-data">
+    <input type="text" name="title" />
+    <input type="file" name="image" />
+    <input type="submit" value="Upload" />
+</form>*@
+
+@using (@Html.BeginForm("CreateImageBindingModel", "Contests", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.ValidationSummary(true);
+    <input type="text" name="title" />
+    <input type="file" name="image" />
+    <input type="submit" value="Upload" />
+
+}

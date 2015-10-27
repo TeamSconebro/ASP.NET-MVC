@@ -6,15 +6,12 @@ using System.Web;
 
 namespace PhotoContest.Web.Models.BindingModel
 {
-    public class ImageBindingModel
+    public class ImageBindingModelUserInput
     {
         [Required]
         public string Title { get; set; }
 
         [Required]
         public string Base64Data { get; set; }
-
-        [Required]
-        public int ContestId { get; set; }
     }
 }

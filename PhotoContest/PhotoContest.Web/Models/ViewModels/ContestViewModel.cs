@@ -10,6 +10,8 @@ namespace PhotoContest.Web.Models.ViewModels
 {
     public class ContestViewModel
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }
