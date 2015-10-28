@@ -3,6 +3,8 @@
     ViewBag.Title = "Contests";
 }
 
+@Model
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -34,7 +36,7 @@
                 @item.ParticipationStrategy
             </div>
         </div>
-        <hr/>
-       
+        <hr />
+
     }
 </div>

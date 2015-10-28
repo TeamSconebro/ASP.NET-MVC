@@ -127,7 +127,8 @@ namespace PhotoContest.Data.Migrations
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.No
+                    IsClosed = IsClosed.No,
+                    CreatedOn = DateTime.Now
                 },
                 new Contest()
                 {
@@ -138,11 +139,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.SingleWinner,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-1),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-12)
                 },
                 new Contest()
                 {
@@ -153,11 +155,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.SingleWinner,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-3),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-17)
                 },
                 new Contest()
                 {
@@ -168,11 +171,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.SingleWinner,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-5),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-25)
                 },
                 new Contest()
                 {
@@ -183,11 +187,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.SingleWinner,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-2),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-15)
                 },
                 new Contest()
                 {
@@ -198,11 +203,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.SingleWinner,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-8),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-18)
                 },
                 new Contest()
                 {
@@ -213,11 +219,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.TopNPrizes,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-1),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-50)
                 },
                 new Contest()
                 {
@@ -228,11 +235,12 @@ namespace PhotoContest.Data.Migrations
                     RewardStrategy = RewardStrategy.SingleWinner,
                     ParticipationStrategy = ParticipationStrategy.Open,
                     DeadlineStrategy = DeadlineStrategy.ByTime,
-                    Deadline = DateTime.Now.AddDays(20),
+                    Deadline = DateTime.Now.AddDays(-5),
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.Yes
+                    IsClosed = IsClosed.Yes,
+                    CreatedOn = DateTime.Now.AddDays(-30)
                 },
 
                 new Contest()
@@ -248,7 +256,8 @@ namespace PhotoContest.Data.Migrations
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.No
+                    IsClosed = IsClosed.No,
+                    CreatedOn = DateTime.Now
                 },
                 new Contest()
                 {
@@ -263,7 +272,8 @@ namespace PhotoContest.Data.Migrations
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.No
+                    IsClosed = IsClosed.No,
+                    CreatedOn = DateTime.Now
                 },
                 new Contest()
                 {
@@ -278,7 +288,8 @@ namespace PhotoContest.Data.Migrations
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.No
+                    IsClosed = IsClosed.No,
+                    CreatedOn = DateTime.Now
                 },
                 new Contest()
                 {
@@ -293,7 +304,8 @@ namespace PhotoContest.Data.Migrations
                     NumberOfParticipants = 0,
                     PrizeValues = "100",
                     PrizeCount = 1,
-                    IsClosed = IsClosed.No
+                    IsClosed = IsClosed.No,
+                    CreatedOn = DateTime.Now
                 },
             };
 

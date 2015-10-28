@@ -5,7 +5,7 @@ using PhotoContest.Models.Enumerations;
 
 namespace PhotoContest.Models
 {
-   public  class Contest
+   public class Contest
    {
         private ICollection<ContestPicture> contestPictures;
        private ICollection<User> contestors; 

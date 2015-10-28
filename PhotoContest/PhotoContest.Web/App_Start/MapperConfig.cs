@@ -12,6 +12,8 @@ namespace PhotoContest.Web.App_Start
     {
         public static void ConfigureMappings()
         {
+            Mapper.CreateMap<Contest, ContestViewModelHomePage>();
+
             Mapper.CreateMap<Contest, ContestViewModel>();
             Mapper.CreateMap<Contest, ContestViewModel>().
                 ForMember(model => model.OwnerName, config => config.MapFrom(contest => contest.Owner.UserName)).

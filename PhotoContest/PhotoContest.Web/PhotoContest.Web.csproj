@@ -224,6 +224,7 @@
     <Compile Include="Models\ViewModels\ContestFullViewModel.cs" />
     <Compile Include="Models\ViewModels\ContestPictureViewModel.cs" />
     <Compile Include="Models\ViewModels\ContestViewModel.cs" />
+    <Compile Include="Models\ViewModels\ContestViewModelHomePage.cs" />
     <Compile Include="Models\ViewModels\NotificationViewModel.cs" />
     <Compile Include="Models\ViewModels\ListPictureViewModel.cs" />
     <Compile Include="Models\ViewModels\UserProfileEditViewModel.cs" />
@@ -294,13 +295,14 @@
     <Content Include="Views\Users\AccountProfile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
-    <Content Include="Views\Contests\Active.cshtml" />
+    <Content Include="Views\Shared\_ActiveContestsPartial.cshtml" />
     <Content Include="Views\Contests\Inactive.cshtml" />
     <Content Include="Views\Contests\AllContests.cshtml" />
     <Content Include="Views\Contests\ContestDetails.cshtml" />
     <Content Include="Views\Shared\_UploadFormPartial.cshtml" />
     <Content Include="Views\Shared\Vote.cshtml" />
     <Content Include="Views\Pictures\AllContestPictures.cshtml" />
+    <Content Include="Views\Contests\Active.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
