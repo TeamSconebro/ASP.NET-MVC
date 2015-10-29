@@ -32,36 +32,7 @@ namespace PhotoContest.Web.Controllers
 
             return this.View(contestModel);
         }
-
-        public ActionResult ActiveContestsHomePage()
-        {
-            var activeContests = this.Data.Contests
-                .All()
-                .Where(c => c.IsClosed == IsClosed.No)
-                .OrderByDescending(c => c.CreatedOn);
-
-            //if (activeContests == null)
-            //{
-            //    return this.HttpNotFound();
-            //}
-
-            //var activeContestsModel = new List<ContestViewModelHomePage>();
-            //foreach (var activeContest in activeContests)
-            //{
-            //    activeContestsModel.Add(new ContestViewModelHomePage()
-            //    {
-            //        Id = activeContest.Id,
-            //        Title = activeContest.Title,
-            //        CreatedOn = activeContest.CreatedOn
-            //    });
-            //}
-
-            var model = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(activeContests);
-
-            return this.PartialView("_ActiveContestsPartial", model);
-        }
-
-
+        
         [ActionName("Active")]
         public ActionResult AllActiveContests()
         {

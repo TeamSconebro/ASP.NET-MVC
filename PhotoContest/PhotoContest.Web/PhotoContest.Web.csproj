@@ -296,7 +296,6 @@
     <Content Include="Views\Users\Profile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
-    <Content Include="Views\Shared\_ActiveContestsPartial.cshtml" />
     <Content Include="Views\Contests\Inactive.cshtml" />
     <Content Include="Views\Contests\AllContests.cshtml" />
     <Content Include="Views\Contests\ContestDetails.cshtml" />

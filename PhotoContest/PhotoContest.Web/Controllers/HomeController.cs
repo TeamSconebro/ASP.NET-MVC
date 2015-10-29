@@ -37,17 +37,5 @@ namespace PhotoContest.Web.Controllers
 
             return View(compositeViewModel);
         }
-
-        //public ActionResult ActiveContests()
-        //{
-        //    var activeContests = this.Data.Contests
-        //        .All()
-        //        .Where(c => c.IsClosed == IsClosed.No)
-        //        .OrderByDescending(c => c.CreatedOn);
-
-        //    var model = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(activeContests);
-
-        //    return this.PartialView("_ActiveContestsPartial", model);
-        //}
     }
 }

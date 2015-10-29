@@ -45,11 +45,6 @@ namespace PhotoContest.Web.Controllers
             
 
             return View(user);
-<<<<<<< HEAD
-
-            //return this.View();
-=======
->>>>>>> origin/master
         }
 
         // GET: Users/Edit/username
