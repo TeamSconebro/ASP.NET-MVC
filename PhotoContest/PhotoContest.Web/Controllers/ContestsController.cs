@@ -41,8 +41,6 @@ namespace PhotoContest.Web.Controllers
                 .All()
                 .Where(c=>c.IsClosed==IsClosed.No)
                 .OrderByDescending(c => c.CreatedOn);
-            //.Project()
-            //.To<ContestViewModel>();
             var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(activeContests);
             return this.View(contestModels);
         }

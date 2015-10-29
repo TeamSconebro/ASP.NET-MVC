@@ -19,11 +19,11 @@ namespace PhotoContest.Web.Models.ViewModels
         public string LastName { get; set; }
         public int Coints { get; set; }
 
-        public IEnumerable<ContestViewModel> ContestViewModels { get; set; }
+        public IOrderedQueryable<Contest> ContestViewModels { get; set; }
 
-        public IEnumerable<ContestPictureViewModel> ContestPictureViewModels { get; set; }
+        public IQueryable<ContestPicture> ContestPictureViewModels { get; set; }
 
-        public IEnumerable<NotificationViewModel> NotificationViewModels { get; set; }
+        public ICollection<Notification> NotificationViewModels { get; set; }
 
     }
 }
