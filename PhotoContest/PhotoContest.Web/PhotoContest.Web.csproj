@@ -225,6 +225,7 @@
     <Compile Include="Models\ViewModels\ContestFullViewModel.cs" />
     <Compile Include="Models\ViewModels\ContestPictureViewModel.cs" />
     <Compile Include="Models\ViewModels\ContestViewModel.cs" />
+    <Compile Include="Models\ViewModels\ContestViewModelActiveInactivePage.cs" />
     <Compile Include="Models\ViewModels\ContestViewModelHomePage.cs" />
     <Compile Include="Models\ViewModels\NotificationViewModel.cs" />
     <Compile Include="Models\ViewModels\ListPictureViewModel.cs" />

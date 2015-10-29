@@ -64,7 +64,7 @@
         foreach (var picture in @Model.ContestPictureViewModels)
         {
             <label>Contest Name</label>
-    @Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests",
+            @Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests",
                     new { id = @picture.Contest.Id },
                       new { style = "color:#000", data_id = picture.Id, id = picture.Id })
             <br />

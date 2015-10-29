@@ -67,6 +67,7 @@ namespace PhotoContest.Web.Controllers
             var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(allContests);
             return this.View(contestModels);
         }
+
         [HttpGet]
         public ActionResult ContestDetails(long id=98567457552123554)
         {

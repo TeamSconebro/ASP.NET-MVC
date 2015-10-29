@@ -20,7 +20,8 @@
                 <div class="panel-body">
                     <div>
                         <div>
-                            <a href="#">@activeContest.Title</a>
+                            @Html.ActionLink(@activeContest.Title, "ContestDetails", "Contests",
+                    new { id = @activeContest.Id }, null)
                         </div>
                         <div>
                             <span>@activeContest.CreatedOn</span>
@@ -28,7 +29,7 @@
                     </div>
                 </div>
             }
-            <a href="" class="btn btn-primary">See more</a>
+            <a href="@Url.Action("Active", "Contests")" class="btn btn-primary">See more</a>
         </div>
     </div>
     <div class="col-md-6">
@@ -41,7 +42,9 @@
                 <div class="panel-body">
                     <div>
                         <div>
-                            <a href="#">@inactiveContest.Title</a>
+                            @Html.ActionLink(@inactiveContest.Title, "ContestDetails", "Contests",
+                    new { id = @inactiveContest.Id }, null)
+                            @*<a href="@Url.Action("ContestDetails", "Contests", )">@inactiveContest.Title</a>*@
                         </div>
                         <div>
                             <span>@inactiveContest.CreatedOn</span>
@@ -49,7 +52,7 @@
                     </div>
                 </div>
             }
-            <a href="" class="btn btn-primary">See more</a>
+            <a href="@Url.Action("Inactive", "Contests")" class="btn btn-primary">See more</a>
         </div>
     </div>
 </div>
