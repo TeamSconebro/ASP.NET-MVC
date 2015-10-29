@@ -38,30 +38,27 @@ namespace PhotoContest.Web.Controllers
             var activeContests = this.Data.Contests
                 .All()
                 .Where(c => c.IsClosed == IsClosed.No)
-                .OrderByDescending(c => c.CreatedOn)
-                .ToList();
+                .OrderByDescending(c => c.CreatedOn);
 
-            if (activeContests == null)
-            {
-                return this.HttpNotFound();
-            }
+            //if (activeContests == null)
+            //{
+            //    return this.HttpNotFound();
+            //}
 
-            //var activeContestsModel = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModelHomePage>>(activeContests);
+            //var activeContestsModel = new List<ContestViewModelHomePage>();
+            //foreach (var activeContest in activeContests)
+            //{
+            //    activeContestsModel.Add(new ContestViewModelHomePage()
+            //    {
+            //        Id = activeContest.Id,
+            //        Title = activeContest.Title,
+            //        CreatedOn = activeContest.CreatedOn
+            //    });
+            //}
 
-            var activeContestsModel = new List<ContestViewModelHomePage>();
-            foreach (var activeContest in activeContests)
-            {
-                activeContestsModel.Add(new ContestViewModelHomePage()
-                {
-                    Id = activeContest.Id,
-                    Title = activeContest.Title,
-                    CreatedOn = activeContest.CreatedOn
-                });
-            }
+            var model = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(activeContests);
 
-            //var model = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(activeContests);
-
-            return this.PartialView("_ActiveContestsPartial", activeContestsModel);
+            return this.PartialView("_ActiveContestsPartial", model);
         }
 
 
