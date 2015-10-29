@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using PhotoContest.Data.UnitsOfWork;
-using PhotoContest.Models;
-using PhotoContest.Models.Enumerations;
-using PhotoContest.Web.Models.BindingModel;
-using PhotoContest.Web.Models.ViewModels;
+﻿
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PhotoContest.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+    using AutoMapper;
+    using Data.UnitsOfWork;
+    using PhotoContest.Models;
+    using PhotoContest.Models.Enumerations;
+    using Models.BindingModel;
+    using Models.ViewModels;
     public class ContestsController : BaseController
     {
         public ContestsController(IPhotoContestData data) : base(data)
@@ -110,11 +110,31 @@ namespace PhotoContest.Web.Controllers
             return this.View(contestModels);
         }
 
-        public ActionResult CreateContest()
+        public ActionResult CreateContest(CreateContestBindingModel newContest)
         {
-            // TODO: Recieve binding model and create new contest in database.
+           
+            if (ModelState.IsValid)
+            {
+                var currentUserId = User.Identity.GetUserId();
+                var contest=new Contest{Title = newContest.Title,
+                    Description = newContest.Description,
+                    CreatedOn = newContest.CreatedOn,
+                    OwnerId =currentUserId,
+                    ParticipationStrategy = newContest.ParticipationStrategy,
+                    NumberOfParticipants = newContest.NumberOfParticipants,
+                    DeadlineStrategy = newContest.DeadlineStrategy,
+                    Deadline = newContest.Deadline,
+                    PrizeCount = newContest.PrizeCount,
+                    PrizeValues = newContest.PrizeValues,
+                    RewardStrategy = newContest.RewardStrategy,
+                    VotingStrategy = newContest.VotingStrategy};
+                this.Data.Contests.Add(contest);
+                this.Data.Contests.SaveChanges();
+                return RedirectToAction("ContestDetails", "Contests");
+            }
+            
 
-            return this.View();
+            return this.View(newContest);
         }
 
         public ActionResult EditContest()

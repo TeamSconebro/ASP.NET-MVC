@@ -1,0 +1,73 @@
+﻿@model PhotoContest.Web.Models.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+<div class="row">
+    @Html.ActionLink("Edit Profile", "Edit")
+    <br/>
+    <label>Username</label>
+    @Model.UserName
+    <br/>
+    <label>First name</label>
+    @Model.FirstName
+    <br/>
+    <label>Last name</label>
+    @Model.LastName
+    <br/>
+    <label>Email</label>
+    @Model.Email
+    <br/>
+    <label>Coints</label>
+    @Model.Coints
+    <br/>
+    @if (@Model.ContestViewModels.Any())
+    {
+        <label>Contests</label>
+        foreach (var item in @Model.ContestViewModels)
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    @item.Title
+                </div>
+                <div class="col-md-3">
+                    @item.Description
+                </div>
+                <div class="col-md-3">
+                    @item.IsClosed
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @item.DeadlineStrategy
+                </div>
+                <div class="col-md-3">
+                    @item.VotingStrategy
+                </div>
+                <div class="col-md-3">
+                    @item.RewardStrategy
+                </div>
+                <div class="col-md-3">
+                    @item.ParticipationStrategy
+                </div>
+            </div>
+            <hr/>
+            <br/>
+        }
+        <br/>
+    }
+
+    @if (@Model.ContestPictureViewModels.Any())
+    {
+        <label>Pictures</label>
+        foreach (var picture in @Model.ContestPictureViewModels)
+        {
+            <label>Contest Name</label>
+            @picture.Contest.Title
+            <label>Picture Title</label>
+            @picture.Title
+            @picture.Base64Data
+            <br/>
+        }
+    }
+
+</div>

@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Helpers\ImageToBase64.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BindingModel\CreateContestBindingModel.cs" />
     <Compile Include="Models\BindingModel\ImageBindingModel.cs" />
     <Compile Include="Models\BindingModel\ImageBindingModelUserInput.cs" />
     <Compile Include="Models\BindingModel\NotificationBindingModel.cs" />
@@ -292,7 +293,7 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\AccountProfile.cshtml" />
+    <Content Include="Views\Users\Profile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\Shared\_ActiveContestsPartial.cshtml" />
@@ -303,6 +304,7 @@
     <Content Include="Views\Shared\Vote.cshtml" />
     <Content Include="Views\Pictures\AllContestPictures.cshtml" />
     <Content Include="Views\Contests\Active.cshtml" />
+    <Content Include="Views\Contests\CreateContest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

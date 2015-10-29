@@ -1,0 +1,83 @@
+﻿@model PhotoContest.Web.Models.BindingModel.CreateContestBindingModel
+@{
+    ViewBag.Title = "CreateContest";
+}
+
+<h2>CreateContest</h2>
+@using (Html.BeginForm("CreateContest", "Contests", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new contest.</h4>
+    <hr/>
+   // @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Description, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ParticipationStrategy, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.ParticipationStrategy, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RewardStrategy, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.RewardStrategy, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.VotingStrategy, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.VotingStrategy, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PrizeCount, new { @class = "col-md-2 control-label"  })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PrizeCount, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PrizeValues, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PrizeValues, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DeadlineStrategy, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.DeadlineStrategy, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Deadline, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Deadline, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumberOfParticipants, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.NumberOfParticipants, new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Create new Contest" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
