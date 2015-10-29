@@ -11,6 +11,8 @@ namespace PhotoContest.Web.Models.ViewModels
 
         public string ImageBase64Data { get; set; }
 
+        public string OwnerId { get; set; }
+
         public string OwnerUserName { get; set; }
     }
 }

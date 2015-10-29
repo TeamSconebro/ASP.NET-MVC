@@ -36,10 +36,6 @@ namespace PhotoContest.Web.App_Start
             Mapper.CreateMap<ContestPicture, ListPictureViewModel>()
                 .ForMember(model => model.OwnerUserName, config => config.MapFrom(a => a.Owner.UserName));
 
-            //Mapper.CreateMap<Post, PostConciseViewModel>()
-            //    .ForMember(model => model.Author, config => config.MapFrom(post => post.Author.UserName));
-            //Mapper.CreateMap<Post, PostFullViewModel>()
-            //    .ForMember(model => model.Author, config => config.MapFrom(post => post.Author.UserName));
         }
     }
 }

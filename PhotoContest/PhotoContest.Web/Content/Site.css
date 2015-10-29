@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.contest-image {
+    width: 200px;
+    height: 200px;
+}
+
+.image-container, .image-title, .image {
+    text-align: center;
+}
+
+.image-container {
+    border-bottom: 1px solid gold
+}

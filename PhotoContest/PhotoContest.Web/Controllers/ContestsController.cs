@@ -77,10 +77,10 @@ namespace PhotoContest.Web.Controllers
                 id = this.Data.Contests.All().OrderByDescending(c => c.CreatedOn).Select(c=>c.Id).FirstOrDefault();
             }
             var contestDetails = this.Data.Contests.Find(id);
-            var contestModels = Mapper.Map<Contest,ContestViewModel>(contestDetails);
+            var contestModel = Mapper.Map<Contest,ContestFullViewModel>(contestDetails);
             //TODO: Return view model with all detals for one particular contest. That view is rendered on Contest Details page in Visitors, Logged users and Administrators accounts.
 
-            return this.View(contestModels);
+            return this.View(contestModel);
         }
 
         public ActionResult CreateContest(CreateContestBindingModel newContest)
