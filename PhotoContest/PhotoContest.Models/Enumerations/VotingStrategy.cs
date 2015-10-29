@@ -8,7 +8,7 @@ namespace PhotoContest.Models.Enumerations
 {
     public enum VotingStrategy
     {
-        Open=1,
-        Closed=2
+        Open=0,
+        Closed=1
     }
 }

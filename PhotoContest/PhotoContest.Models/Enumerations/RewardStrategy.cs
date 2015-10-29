@@ -8,7 +8,7 @@ namespace PhotoContest.Models.Enumerations
 {
     public enum RewardStrategy
     {
-        SingleWinner=1,
-        TopNPrizes=2
+        SingleWinner=0,
+        TopNPrizes=1
     }
 }

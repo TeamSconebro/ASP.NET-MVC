@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using PhotoContest.Data;
-using PhotoContest.Data.UnitsOfWork;
-using PhotoContest.Models;
-using PhotoContest.Web.Models.ViewModels;
+﻿
 
 namespace PhotoContest.Web.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using Microsoft.Ajax.Utilities;
+    using Microsoft.AspNet.Identity;
+    using Data.UnitsOfWork;
+    using Models.ViewModels;
     [Authorize]
     public class UsersController : BaseController
     {
@@ -31,6 +23,7 @@ namespace PhotoContest.Web.Controllers
         }
 
         // GET: Users
+        [ActionName("Profile")]
         public ActionResult AccountProfile(UserViewModel user)
         {
             // TODO: Return account profile view, which keep all profile details
@@ -48,13 +41,10 @@ namespace PhotoContest.Web.Controllers
             user.LastName = currentUser.LastName;
             user.UserName = currentUser.UserName;
             user.ContestViewModels = this.Data.Contests.All().Where(c => c.OwnerId == currentUserId).OrderByDescending(c => c.CreatedOn);
-
             user.ContestPictureViewModels = this.Data.ContestPictures.All().Where(c => c.OwnerId == currentUserId);
             
 
             return View(user);
-
-            return this.View();
         }
 
         // GET: Users/Edit/username
