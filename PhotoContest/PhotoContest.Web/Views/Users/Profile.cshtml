@@ -4,22 +4,22 @@
 }
 <div class="row">
     @Html.ActionLink("Edit Profile", "Edit")
-    <br/>
+    <br />
     <label>Username</label>
     @Model.UserName
-    <br/>
+    <br />
     <label>First name</label>
     @Model.FirstName
-    <br/>
+    <br />
     <label>Last name</label>
     @Model.LastName
-    <br/>
+    <br />
     <label>Email</label>
     @Model.Email
-    <br/>
+    <br />
     <label>Coints</label>
     @Model.Coints
-    <br/>
+    <br />
     @if (@Model.ContestViewModels.Any())
     {
         <label>Contests</label>
@@ -27,7 +27,9 @@
         {
             <div class="row">
                 <div class="col-md-3">
-                    @Html.ActionLink(@item.Title, "ContestDetails", "Contests", null, new { style = "color:#000" })
+                    @Html.ActionLink(@item.Title, "ContestDetails", "Contests",
+                    new { id = @item.Id },
+                    new { style="color:#000",data_id = item.Id, id = item.Id })
                 </div>
                 <div class="col-md-3">
                     @item.Description
@@ -50,25 +52,25 @@
                     @item.ParticipationStrategy
                 </div>
             </div>
-            <hr/>
-            <br/>
+            <hr />
+            <br />
         }
-        <br/>
+        <br />
     }
 
     @if (@Model.ContestPictureViewModels.Any())
     {
-        <label> My Pictures: </label><br/>
+        <label> My Pictures: </label><br />
         foreach (var picture in @Model.ContestPictureViewModels)
         {
             <label>Contest Name</label>
-        @Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests", null, new { style = "color:#000" })                                                                 
-        <br/>
+            @Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests", null, new { style = "color:#000" })
+            <br />
             <label>Picture Title</label>
             @picture.Title
-        <br/>
-    <img src="@picture.Base64Data" alt="myPictures" width="250" height="220" />
-            <br/>
+            <br />
+            <img src="@picture.Base64Data" alt="myPictures" width="250" height="220" />
+            <br />
         }
     }
 
