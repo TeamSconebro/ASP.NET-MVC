@@ -36,11 +36,11 @@ namespace PhotoContest.Web.Controllers
         [ActionName("Active")]
         public ActionResult AllActiveContests()
         {
-            var activeContests = this.Data.Contests
-                .All()
-                .Where(c=>c.IsClosed==IsClosed.No)
+            var activeContests = this.Data.Contests.All()
+                .Where(c=>c.IsClosed == IsClosed.No)
                 .OrderByDescending(c => c.CreatedOn);
-            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(activeContests);
+
+            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModelActiveInactivePage>>(activeContests);
 
             return this.View(contestModels);
         }
@@ -49,11 +49,12 @@ namespace PhotoContest.Web.Controllers
         [ActionName("Inactive")]
         public ActionResult AllInactiveContests()
         {
-            var inactiveContests = this.Data.Contests
-               .All()
+            var inactiveContests = this.Data.Contests.All()
                .Where(c => c.IsClosed == IsClosed.Yes)
                .OrderByDescending(c => c.CreatedOn);
-            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>(inactiveContests);
+
+            var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModelActiveInactivePage>>(inactiveContests);
+
             return this.View(contestModels);
             
         }
