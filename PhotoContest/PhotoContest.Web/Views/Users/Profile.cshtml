@@ -27,7 +27,7 @@
         {
             <div class="row">
                 <div class="col-md-3">
-                    @item.Title
+                    @Html.ActionLink(@item.Title, "ContestDetails", "Contests", null, new { style = "color:#000" })
                 </div>
                 <div class="col-md-3">
                     @item.Description
@@ -58,14 +58,16 @@
 
     @if (@Model.ContestPictureViewModels.Any())
     {
-        <label>Pictures</label>
+        <label> My Pictures: </label><br/>
         foreach (var picture in @Model.ContestPictureViewModels)
         {
             <label>Contest Name</label>
-            @picture.Contest.Title
+        @Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests", null, new { style = "color:#000" })                                                                 
+        <br/>
             <label>Picture Title</label>
             @picture.Title
-            @picture.Base64Data
+        <br/>
+    <img src="@picture.Base64Data" alt="myPictures" width="250" height="220" />
             <br/>
         }
     }
