@@ -1,14 +1,14 @@
 ﻿@model PhotoContest.Web.Models.BindingModel.CreateContestBindingModel
 @{
-    ViewBag.Title = "CreateContest";
+    ViewBag.Title = "Create contest";
 }
 
-<h2>CreateContest</h2>
+<h3>Create new contest:</h3>
+<hr />
+
 @using (Html.BeginForm("CreateContest", "Contests", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new contest.</h4>
-    <hr/>
    // @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new {@class = "col-md-2 control-label"})

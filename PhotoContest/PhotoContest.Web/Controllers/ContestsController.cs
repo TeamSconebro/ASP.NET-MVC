@@ -83,13 +83,25 @@ namespace PhotoContest.Web.Controllers
             return this.View(contestModel);
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult CreateContest()
+        {
+            
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateContest(CreateContestBindingModel newContest)
         {
            
             if (ModelState.IsValid)
             {
                 var currentUserId = User.Identity.GetUserId();
-                var contest=new Contest{Title = newContest.Title,
+                var contest = new Contest()
+                {
+                    Title = newContest.Title,
                     Description = newContest.Description,
                     CreatedOn = newContest.CreatedOn,
                     OwnerId =currentUserId,
@@ -100,10 +112,15 @@ namespace PhotoContest.Web.Controllers
                     PrizeCount = newContest.PrizeCount,
                     PrizeValues = newContest.PrizeValues,
                     RewardStrategy = newContest.RewardStrategy,
-                    VotingStrategy = newContest.VotingStrategy};
+                    VotingStrategy = newContest.VotingStrategy
+                };
+
                 this.Data.Contests.Add(contest);
                 this.Data.Contests.SaveChanges();
-                return RedirectToAction("ContestDetails", "Contests");
+
+                this.TempData["message-create-contest-success"] = "You successfully created new contest!";
+
+                return RedirectToAction("ContestDetails", "Contests", new {id = contest.Id});
             }
             
 

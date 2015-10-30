@@ -19,17 +19,20 @@
             {
                 <div class="panel-body">
                     <div>
-                        <div>
+                        <div class="active contest-title">
                             @Html.ActionLink(@activeContest.Title, "ContestDetails", "Contests",
-                    new { id = @activeContest.Id }, null)
+                                new {id = @activeContest.Id}, null)
                         </div>
                         <div>
-                            <span>@activeContest.CreatedOn</span>
+                            <span class="contest-create-on">@Html.DisplayFor(model => activeContest.CreatedOn)</span>
                         </div>
                     </div>
                 </div>
+                <hr />
             }
-            <a href="@Url.Action("Active", "Contests")" class="btn btn-primary">See more</a>
+            <div class="row see-more-btn">
+                <a href="@Url.Action("Active", "Contests")" class="btn btn-primary">See more</a>
+            </div>
         </div>
     </div>
     <div class="col-md-6">
@@ -41,18 +44,21 @@
             {
                 <div class="panel-body">
                     <div>
-                        <div>
+                        <div class="inactive contest-title">
                             @Html.ActionLink(@inactiveContest.Title, "ContestDetails", "Contests",
-                    new { id = @inactiveContest.Id }, null)
+                                new {id = @inactiveContest.Id}, null)
                             @*<a href="@Url.Action("ContestDetails", "Contests", )">@inactiveContest.Title</a>*@
                         </div>
                         <div>
-                            <span>@inactiveContest.CreatedOn</span>
+                            <span class="contest-create-on">@Html.DisplayFor(model => inactiveContest.CreatedOn)</span>
                         </div>
                     </div>
                 </div>
+                <hr />
             }
-            <a href="@Url.Action("Inactive", "Contests")" class="btn btn-primary">See more</a>
+            <div class="row see-more-btn">
+                <a href="@Url.Action("Inactive", "Contests")" class="btn btn-primary see-more">See more</a>
+            </div>
         </div>
     </div>
 </div>

@@ -62,10 +62,50 @@ footer p {
     text-align: center;
 }
 
+/*.jumbotron {
+    background-image: url("~/Content/images/logo/filmstrip.png")
+}*/
+
 .jumbotron h1 {
     text-align: center;
 }
 
 ul.nav.navbar-nav {
     margin-left: 50px;
+}
+
+h3.panel-title {
+    font-size: 26px;
+}
+
+.active.contest-title a {
+    font-size: 22px;
+    color: green;
+}
+
+.inactive.contest-title a {
+    font-size: 22px;
+    color: grey;
+}
+
+.contest-title a:hover {
+    text-decoration: none;
+}
+
+.contest-create-on {
+    display: block;
+    text-align: right;
+}
+
+.row.see-more-btn {
+    text-align: center;
+}
+
+.btn.btn-primary.see-more {
+    /*display: inline-block;
+    text-align: center;*/
+}
+
+.create-contest-success {
+    color: lightgreen
 }

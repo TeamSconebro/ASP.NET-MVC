@@ -6,6 +6,11 @@
     ViewBag.Title = "Contest details";
 }
 
+@if (TempData["message-create-contest-success"] != null)
+{
+    <h3 class="create-contest-success">@TempData["message-create-contest-success"]</h3>
+}
+
 @*<form method="POST" action="~/Pictures" enctype="multipart/form-data">
     <input type="text" name="title"/>
     <input type="file" name="image"/>
@@ -78,7 +83,9 @@
     </div>
     <div class="col-md-8">
         <div class="panel panel-default">
-            <div class="panel-heading">Images</div>
+            <div class="panel-heading">
+                <h3 class="panel-title">Gallery</h3>
+            </div>
             <div class="panel-body">
                 <div class="row">
                     @if (!@Model.ContestPictures.Any())

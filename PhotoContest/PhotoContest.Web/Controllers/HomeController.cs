@@ -21,13 +21,15 @@ namespace PhotoContest.Web.Controllers
         {
             var activeContests = this.Data.Contests.All()
                 .Where(c => c.IsClosed == IsClosed.No)
-                .OrderByDescending(c => c.CreatedOn);
+                .OrderByDescending(c => c.CreatedOn)
+                .Take(5);
 
             var activeContestsModel = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(activeContests);
 
             var inactiveContests = this.Data.Contests.All()
                 .Where(c => c.IsClosed == IsClosed.Yes)
-                .OrderByDescending(c => c.CreatedOn);
+                .OrderByDescending(c => c.CreatedOn)
+                .Take(5);
 
             var inactiveContestsModel = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(inactiveContests);
 
