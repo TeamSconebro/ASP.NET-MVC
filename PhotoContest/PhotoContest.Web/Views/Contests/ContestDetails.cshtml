@@ -110,6 +110,10 @@
                                             {
                                                 <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" />
                                             }
+                                            else
+                                            {
+                                                <img class="contest-image" src="@picture.ImageBase64Data" alt="contest-picture" />
+                                            }
                                         </div>
                                         <div class="row">
                                             @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
@@ -148,10 +152,10 @@
 
 @*@Html.ActionLink("Vote", "IncreaseVote", "Votes", new { id = Model.Id})*@
 
-@using (Html.BeginForm("Vote", "Votes", new {contestId = Model.Id}))
+@*@using (Html.BeginForm("Vote", "Votes", new {contestId = Model.Id}))
 {
     <input type="submit" class="btn btn-primary" value="Vote +"/>
-}
+}*@
 
 
 @section scripts
@@ -167,10 +171,12 @@
                     id: targetPictureId
                 },
                     function (result) {
-                        if (result) {
+                        if (result === "") {
                             $("#vote-success").html("You successfully give your vote!");
+                            //$("#vote-success").html(result);
                         } else {
-                            $("#vote-error").html("You cannot vote in that contest!");
+                            //$("#vote-error").html("You cannot vote in that contest!");
+                            $("#vote-error").html(result);
                         }
                     });
 

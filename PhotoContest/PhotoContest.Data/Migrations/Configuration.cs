@@ -23,8 +23,6 @@ namespace PhotoContest.Data.Migrations
         {
             if (!context.Users.Any())
             {
-                // Seed initial data only if the database is empty
-                //return;
                 var users = this.SeedApplicationUsers(context);
             }
 
@@ -40,8 +38,8 @@ namespace PhotoContest.Data.Migrations
 
         }
 
-        private IList<User> SeedApplicationUsers(
-            PhotoContestContext context)
+        // Seed users
+        private IList<User> SeedApplicationUsers(PhotoContestContext context)
         {
             var usernames = new string[] { "joro", "tanya", "bobi" };
 
@@ -317,6 +315,7 @@ namespace PhotoContest.Data.Migrations
             context.SaveChanges();
         }
 
+        // Seed contest pictures
         private void SeedContestPictures(PhotoContestContext context)
         {
             var contestPictures = new List<ContestPicture>()
@@ -325,7 +324,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 1",
                     Base64Data = "http://i.telegraph.co.uk/multimedia/archive/03235/potd-husky_3235255k.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -333,7 +332,31 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 2",
                     Base64Data = "http://7-themes.com/data_images/out/24/6850590-baby-fox-pictures.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 22",
+                    Base64Data = "http://petrecognition.com/wp-content/uploads/2013/08/PetProtection.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 222",
+                    Base64Data = "http://livebooklet.com/userFiles/a/2/2/8/7/9/9/EIQaubIqq1dPk8jfrfNRM0/jealLvMz.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 82",
+                    Base64Data = "http://www.personal.psu.edu/afr3/blogs/siowfa13/Tigers-animals-20238015-2493-1983.jpg",
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
                 },
@@ -341,7 +364,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 3",
                     Base64Data = "http://www.snappypixels.com/wp-content/uploads/2013/08/bunch-of-random-funny-pictures-6.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
                 },
@@ -349,7 +372,23 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 4",
                     Base64Data = "http://coolwildlife.com/wp-content/uploads/galleries/post-345/Wolf%20Pictures%20034.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 444",
+                    Base64Data = "http://cdn-media-2.lifehack.org/wp-content/files/2014/12/xmass-tree.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 784",
+                    Base64Data = "http://www.2ch.com/sites/www.2ch.com/files/field/image/201412/colorful-christmas-tree.jpg",
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
                 },
@@ -357,7 +396,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 5",
                     Base64Data = "http://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2013/01/24/12/v2-cute-cat-picture.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -365,7 +404,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 6",
                     Base64Data = "http://www.planwallpaper.com/static/images/cool_picture.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -373,7 +412,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 7",
                     Base64Data = "http://7-themes.com/data_images/out/73/7020359-best-autumn-pictures.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -381,7 +420,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 8",
                     Base64Data = "https://s-media-cache-ak0.pinimg.com/236x/4f/2d/a0/4f2da0f1e6e3ee767214407c6a5aee04.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -389,7 +428,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 9",
                     Base64Data = "http://www.airshows.co.uk/week-in-pictures/2013/may/images/week-in-pictures-08.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -397,7 +436,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 10",
                     Base64Data = "https://pbs.twimg.com/profile_images/425946167050911744/x62a9eBz_400x400.jpeg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
@@ -405,7 +444,7 @@ namespace PhotoContest.Data.Migrations
                 {
                     Title = "Title 11",
                     Base64Data = "http://ichef.bbci.co.uk/news/976/media/images/83351000/jpg/_83351965_explorer273lincolnshirewoldssouthpicturebynicholassilkstone.jpg",
-                    VotesCount = 0,
+                    //VotesCount = 0,
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },

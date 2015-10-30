@@ -35,7 +35,7 @@ namespace PhotoContest.Web.Controllers
                 return HttpNotFound();
             }
 
-            currentPicture.VotesCount++;
+            //currentPicture.VotesCount++;
             this.Data.SaveChanges();
 
             return RedirectToAction("ContestDetails", "Contests");

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PhotoContest.Data.UnitsOfWork;
+using PhotoContest.Models;
+using PhotoContest.Models.Enumerations;
 using PhotoContest.Web.Models.BindingModel;
 
 namespace PhotoContest.Web.Controllers
@@ -42,23 +44,59 @@ namespace PhotoContest.Web.Controllers
             return this.View();
         }
 
+        //[Authorize]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult Vote(int id)
         {
             var picture = this.Data.ContestPictures.Find(id);
+            var resultMessage = "";
             if (picture == null)
             {
-                //return this.HttpNotFound();
-                return this.Json(false, JsonRequestBehavior.AllowGet);
+                resultMessage = "No such picture in contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
-            // TODO: Check if current user is logged, is author of the contests and is he votted yet.
+            // TODO: Check if current user is logged, is author of the contests, if he can vote and is he votted yet.
 
-            picture.VotesCount++;
+            // Check whether user is author of the contest
+            var userId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(userId);
+            var userContests = user.Contests.ToList();
+            var currentContest = picture.Contest;
+            if (userContests.Contains(currentContest))
+            {
+                resultMessage = "You cannot vote in your contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check whether user can vote
+            var currentContestContestors = currentContest.Contestors.ToList();
+            if (currentContest.VotingStrategy == VotingStrategy.Closed 
+                /*&& !currentContestContestors.Contains(user)*/)
+            {
+                // TODO: Find way to check when VotingStrategy is "Closed" whether user is invited to participate in contest!!!
+
+                resultMessage = "You are not allowed to vote for pictute in this contest";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check whether user has votted for this contest before
+            //if ()
+            //{
+                
+            //}
+
+            var newVote = new Vote()
+            {
+                VotedOn = DateTime.Now,
+                User = user,
+                Picture = picture
+            };
+            picture.Votes.Add(newVote);
             this.Data.SaveChanges();
-
-            //return this.Json(new { success = "Success" }, JsonRequestBehavior.AllowGet);
-            //return this.Content("SUCCESS");
-            return this.Json(true, JsonRequestBehavior.AllowGet);
+            
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 
     }
