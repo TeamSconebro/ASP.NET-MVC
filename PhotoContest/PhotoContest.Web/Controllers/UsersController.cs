@@ -84,5 +84,12 @@ namespace PhotoContest.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Notifications()
+        {
+
+            return this.View();
+        }
+
+       
     }
 }

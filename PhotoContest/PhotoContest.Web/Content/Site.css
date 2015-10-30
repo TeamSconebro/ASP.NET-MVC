@@ -109,3 +109,7 @@ h3.panel-title {
 .create-contest-success {
     color: lightgreen
 }
+
+.nav.navbar-nav.nav-pills {
+    margin-left: 0;
+}
