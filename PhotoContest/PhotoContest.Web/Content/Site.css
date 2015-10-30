@@ -1,4 +1,9 @@
-﻿body {
+﻿@font-face {
+    font-family: 'LogoFont'; 
+    src: url('fonts/DESTROY_.ttf'); 
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -34,4 +39,33 @@ textarea {
 
 .image-container {
     border-bottom: 1px solid gold
+}
+
+#site-logo {
+    width: 50px;
+    height: 50px;
+}
+
+#site-name {
+    color: darkolivegreen;
+    font-size: 26px;
+    /*font-weight: bold;*/
+    font-family: 'LogoFont';
+}
+
+a#site-name:hover {
+    text-decoration: none;
+    color: white;
+}
+
+footer p {
+    text-align: center;
+}
+
+.jumbotron h1 {
+    text-align: center;
+}
+
+ul.nav.navbar-nav {
+    margin-left: 50px;
 }

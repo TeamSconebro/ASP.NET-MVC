@@ -62,7 +62,7 @@
                 <div class="row"><strong>Count of prizes</strong></div>
                 <div class="row">@Model.PrizeCount</div>
                 <hr/>
-                <div class="row"><strong>Closed</strong></div>
+                <div class="row"><strong>Opened</strong></div>
                 <div class="row">
                     @if (@Model.IsClosed == IsClosed.Yes.ToString())
                     {
@@ -81,22 +81,30 @@
             <div class="panel-heading">Images</div>
             <div class="panel-body">
                 <div class="row">
-                    @foreach (var picture in @Model.ContestPictures)
+                    @if (!@Model.ContestPictures.Any())
                     {
-                        <div class="col-md-6 image-container">
-                            <div class="row image-title"><strong>@picture.Title</strong>
+                        <h4>This contest has no photos</h4>
+                    }
+                    else
+                    {
+                        foreach (var picture in @Model.ContestPictures)
+                        {
+                            <div class="col-md-6 image-container">
+                                <div class="row image-title">
+                                    <strong>@picture.Title</strong>
+                                </div>
+                                <div class="row image">
+                                    @if (@picture.ImageBase64Data == null)
+                                    {
+                                        <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" />
+                                    }
+                                </div>
+                                <div class="row">
+                                    @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
+                                    new { id = @picture.OwnerId }, null)
+                                </div>
                             </div>
-                            <div class="row image">
-                                @if (@picture.ImageBase64Data == null)
-                                {
-                                    <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture"/>
-                                }
-                            </div>
-                            <div class="row">
-                                @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
-                                    new {id = @picture.OwnerId}, null)
-                            </div>
-                        </div>
+                        }
                     }
                 </div>
                 

@@ -237,12 +237,24 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\logo\045157-green-grunge-clipart-icon-sports-hobbies-film-roll.png" />
+    <Content Include="Content\images\logo\filmstrip %281%29.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\Broken-Detroit.ttf" />
+    <Content Include="Content\fonts\killerants.ttf" />
+    <Content Include="Content\fonts\Bronx Bystreets 1.4 c PERSONAL USE ONLY.ttf" />
+    <Content Include="Content\fonts\DESTROY_.ttf" />
+    <Content Include="Content\fonts\CRUSHED c PERSONAL USE ONLY.ttf" />
+    <Content Include="Content\fonts\Google-spies.ttf" />
+    <Content Include="Content\fonts\MOTOR - PERSONAL USE ONLY.ttf" />
+    <Content Include="Content\fonts\Charcoal.otf" />
+    <Content Include="Content\fonts\Twisted Stallions - Personal use Only -.ttf" />
+    <Content Include="Content\fonts\Tarantino- PERSONAL USE ONLY.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
