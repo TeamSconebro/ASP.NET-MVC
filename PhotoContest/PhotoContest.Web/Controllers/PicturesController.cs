@@ -38,10 +38,27 @@ namespace PhotoContest.Web.Controllers
             {
                 return HttpNotFound();
             }
-
-
-
+            
             return this.View();
+        }
+
+        public ActionResult Vote(int id)
+        {
+            var picture = this.Data.ContestPictures.Find(id);
+            if (picture == null)
+            {
+                //return this.HttpNotFound();
+                return this.Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+            // TODO: Check if current user is logged, is author of the contests and is he votted yet.
+
+            picture.VotesCount++;
+            this.Data.SaveChanges();
+
+            //return this.Json(new { success = "Success" }, JsonRequestBehavior.AllowGet);
+            //return this.Content("SUCCESS");
+            return this.Json(true, JsonRequestBehavior.AllowGet);
         }
 
     }

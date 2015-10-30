@@ -113,3 +113,19 @@ h3.panel-title {
 .nav.navbar-nav.nav-pills {
     margin-left: 0;
 }
+
+.row.vote-button-container {
+    margin-top: 100px;
+}
+
+#vote-error {
+    font-size: 22px;
+    text-align: center;
+    color: red;
+}
+
+#vote-success {
+    font-size: 22px;
+    text-align: center;
+    color: green;
+}

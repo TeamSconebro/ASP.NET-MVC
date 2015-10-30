@@ -21,6 +21,9 @@
 
 @Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())
 
+<div id="vote-success"></div>
+<div id="vote-error"></div>
+
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-info">
@@ -97,18 +100,39 @@
                         foreach (var picture in @Model.ContestPictures)
                         {
                             <div class="col-md-6 image-container">
-                                <div class="row image-title">
-                                    <strong>@picture.Title</strong>
-                                </div>
-                                <div class="row image">
-                                    @if (@picture.ImageBase64Data == null)
-                                    {
-                                        <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" />
-                                    }
-                                </div>
                                 <div class="row">
-                                    @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
-                                    new { id = @picture.OwnerId }, null)
+                                    <div class="col-md-9">
+                                        <div class="row image-title">
+                                            <strong>@picture.Title</strong>
+                                        </div>
+                                        <div class="row image">
+                                            @if (@picture.ImageBase64Data == null)
+                                            {
+                                                <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" />
+                                            }
+                                        </div>
+                                        <div class="row">
+                                            @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
+                                            new { id = @picture.OwnerId }, null)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            <div class="row vote-button-container">
+                                                @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post,
+              null))
+                                                {
+                                                    @Html.ValidationSummary(true)
+                                                    <fieldset>
+                                                        <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id"/>
+                                                    </fieldset>
+                                                }
+                                                @*@Html.ActionLink("Vote +", "Vote", "Pictures",
+                                                    new {id = @picture.Id}, new {@class = "btn btn-primary vote-button"})*@
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -127,4 +151,48 @@
 @using (Html.BeginForm("Vote", "Votes", new {contestId = Model.Id}))
 {
     <input type="submit" class="btn btn-primary" value="Vote +"/>
+}
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".vote-button").click(function () {
+                var targetPictureId = parseInt($(this).attr("id"));
+                //alert(5);
+                //alert(targetPictureId);
+
+                $.getJSON("/Pictures/Vote", {
+                    id: targetPictureId
+                },
+                    function (result) {
+                        if (result) {
+                            $("#vote-success").html("You successfully give your vote!");
+                        } else {
+                            $("#vote-error").html("You cannot vote in that contest!");
+                        }
+                    });
+
+
+                //$.ajax({
+                //    url: "/Pictures/Vote",
+                //    method: "POST",
+                //    data: { id: targetPictureId },
+                //    contentType: 'application/json; charset=utf-8',
+                //    //cache: false,
+                //    success: function (data) {
+                //        $("#vote-success").html("You successfully give your vote!");
+                //        //alert(data);
+                //        //$("#result" + targetId).append(data);
+                //        //alert(data);
+                //    },
+                //    error: function (error) {
+                //        $("#vote-error").html("You cannot vote in that contest!");
+                //    }
+                //});
+
+            });
+        });
+    </script>
 }
