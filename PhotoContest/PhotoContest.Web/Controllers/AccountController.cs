@@ -474,6 +474,7 @@
 
             public override void ExecuteResult(ControllerContext context)
             {
+                context.RequestContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {
