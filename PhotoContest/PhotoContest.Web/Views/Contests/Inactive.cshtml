@@ -23,36 +23,22 @@
     @foreach (var item in Model)
     {
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 active contest-title">
                 @Html.ActionLink(@item.Title, "ContestDetails", "Contests",
                     new { id = @item.Id }, null)
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 description">
                 @item.Description
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 author">
                 @Html.ActionLink(@item.OwnerUsername, "Profile", "Users",
                     new { id = @item.OwnerId }, null)
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 create-on">
                 @item.CreatedOn
             </div>
         </div>
-        @*<div class="row">
-            <div class="col-md-3">
-                @item.DeadlineStrategy
-            </div>
-            <div class="col-md-3">
-                @item.VotingStrategy
-            </div>
-            <div class="col-md-3">
-                @item.RewardStrategy
-            </div>
-            <div class="col-md-3">
-                @item.ParticipationStrategy
-            </div>
-        </div>*@
         <hr/>
     }
-    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back</a>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
 </div>

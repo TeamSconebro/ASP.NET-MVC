@@ -62,10 +62,6 @@ footer p {
     text-align: center;
 }
 
-/*.jumbotron {
-    background-image: url("~/Content/images/logo/filmstrip.png")
-}*/
-
 .jumbotron h1 {
     text-align: center;
 }
@@ -88,22 +84,30 @@ h3.panel-title {
     color: grey;
 }
 
+.description, .author {
+    font-size: 20px;
+}
+
+.author a:hover {
+    text-decoration: none
+}
+
 .contest-title a:hover {
     text-decoration: none;
+}
+
+.create-on {
+    font-size: 16px;
 }
 
 .contest-create-on {
     display: block;
     text-align: right;
+    font-size: 16px;
 }
 
 .row.see-more-btn {
     text-align: center;
-}
-
-.btn.btn-primary.see-more {
-    /*display: inline-block;
-    text-align: center;*/
 }
 
 .create-contest-success {
@@ -128,4 +132,14 @@ h3.panel-title {
     font-size: 22px;
     text-align: center;
     color: green;
+}
+
+.item-title {
+    font-size: 18px;
+    color: darkolivegreen;
+}
+
+.contest-info {
+    font-size: 18px;
+    text-align: right;
 }
