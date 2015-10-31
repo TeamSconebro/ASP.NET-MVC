@@ -145,11 +145,11 @@
                                         <div class="row image">
                                             @if (@picture.Base64Data == null)
                                             {
-                                                <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture"/>
+                                                <img class="fancybox contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" title="@picture.Title"/>
                                             }
                                             else
                                             {
-                                                <img class="contest-image" src="@picture.Base64Data" alt="contest-picture"/>
+                                                <img class="fancybox contest-image" src="@picture.Base64Data" alt="contest-picture" title="@picture.Title"/>
                                             }
                                         </div>
                                         <div class="row">
