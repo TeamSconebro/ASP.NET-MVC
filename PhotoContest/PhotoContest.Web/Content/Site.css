@@ -173,6 +173,6 @@ a.fancybox:hover img {
     transform: scale(1.03,1.03);
 }
 
-div#fancybox-title {
-    margin: 0;
+div#fancybox-title.fancybox-title-inside {
+    margin: 0 !Important;
 }
