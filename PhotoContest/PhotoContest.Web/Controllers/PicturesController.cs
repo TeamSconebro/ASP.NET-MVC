@@ -64,9 +64,16 @@ namespace PhotoContest.Web.Controllers
             var user = this.Data.Users.Find(userId);
             var userContests = user.Contests.ToList();
             var currentContest = picture.Contest;
-            if (userContests.Contains(currentContest))
+            if (currentContest.OwnerId == userId/*userContests.Contains(currentContest)*/)
             {
                 resultMessage = "You cannot vote in your contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check whether user is uploaded picture he wants to vote for
+            if (picture.OwnerId == userId)
+            {
+                resultMessage = "You cannot vote for picture uploaded by you!";
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
@@ -82,10 +89,12 @@ namespace PhotoContest.Web.Controllers
             }
 
             // Check whether user has votted for this contest before
-            //if ()
-            //{
-                
-            //}
+            var pictureVotesVoterIds = picture.Votes.Select(v => v.UserId).ToList();
+            if (pictureVotesVoterIds.Contains(userId))
+            {
+                resultMessage = "You are not allowed to vote more than once for pictute";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
 
             var newVote = new Vote()
             {

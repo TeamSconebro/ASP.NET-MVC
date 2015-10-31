@@ -218,7 +218,7 @@
                             //$("#vote-error").html("You cannot vote in that contest!");
                             $("#vote-error").html(result);
                         }
-                    });
+                });
 
 
                 //$.ajax({
@@ -238,7 +238,16 @@
                 //    }
                 //});
 
+                setTimeout(function () {
+                    $("#vote-error").fadeOut('slow');
+                }, 5000);
+
+                setTimeout(function () {
+                    $("#vote-success").fadeOut('slow');
+                }, 5000);
+
             });
+            
         });
     </script>
 }
