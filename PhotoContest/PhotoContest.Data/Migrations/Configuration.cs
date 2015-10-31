@@ -130,7 +130,7 @@ namespace PhotoContest.Data.Migrations
                 },
                 new Contest()
                 {
-                    Title = "Summer vacation",
+                    Title = "Summer vacation CLOSED",
                     Description = "Cool pics from summer ...",
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     VotingStrategy = VotingStrategy.Open,
@@ -576,6 +576,23 @@ namespace PhotoContest.Data.Migrations
                     Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Where were you last weekend?")
                 },
+                new ContestPicture()
+                {
+                    Title = "Title 257",
+                    Base64Data = "http://previews.123rf.com/images/smithytomy/smithytomy1309/smithytomy130900014/21943168-Summer-vacation-greeting-card-Vector-illustration-Stock-Vector-beach.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation CLOSED")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 391",
+                    Base64Data = "http://static.travel.usnews.com/images/articles/656/MAIN.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation CLOSED")
+                },
+                
             };
 
             foreach (var contestPicture in contestPictures)
