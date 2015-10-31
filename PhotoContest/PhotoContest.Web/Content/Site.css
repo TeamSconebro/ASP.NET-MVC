@@ -143,3 +143,7 @@ h3.panel-title {
     font-size: 18px;
     text-align: right;
 }
+
+.theme {
+    overflow: auto;
+}

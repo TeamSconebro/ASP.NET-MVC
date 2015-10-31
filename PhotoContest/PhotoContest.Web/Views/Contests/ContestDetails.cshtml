@@ -1,4 +1,5 @@
-﻿@using AutoMapper
+﻿@using System.Globalization
+@using AutoMapper
 @using PhotoContest.Models.Enumerations
 @using PhotoContest.Web.Models.BindingModel
 @model  PhotoContest.Web.Models.ViewModels.ContestFullViewModel
@@ -37,7 +38,7 @@
                 <hr/>
                 <div class="row item-title"><strong>Theme</strong>
                 </div>
-                <div class="row contest-info">@Model.Description</div>
+                <div class="row contest-info theme">@Model.Description</div>
                 <hr/>
                 <div class="row item-title"><strong>Created by</strong>
                 </div>
@@ -56,9 +57,16 @@
                 <hr/>
                 <div class="row item-title"><strong>Reward</strong>
                 </div>
-                <div class="row contest-info">@Model.RewardStrategy</div>
+                @if (@Model.RewardStrategy == RewardStrategy.SingleWinner.ToString())
+                {
+                    <div class="row contest-info">One prize</div>
+                }
+                else
+                {
+                    <div class="row contest-info">Multiple prizes</div>
+                }
                 <hr/>
-                <div class="row item-title"><strong>Open fo participation</strong>
+                <div class="row item-title"><strong>Type of participation</strong>
                 </div>
                 @if (@Model.ParticipationStrategy == ParticipationStrategy.Open.ToString())
                 {
@@ -69,9 +77,16 @@
                     <div class="row contest-info">Invited members only</div>
                 }
                 <hr/>
-                <div class="row item-title"><strong>Deadline</strong>
+                <div class="row item-title"><strong>Deadline type</strong>
                 </div>
-                <div class="row contest-info">@Model.DeadlineStrategy</div>
+                @if (@Model.DeadlineStrategy == DeadlineStrategy.ByTime.ToString())
+                {
+                    <div class="row contest-info">By time</div>
+                }
+                else
+                {
+                    <div class="row contest-info">By number of participants</div>
+                }
                 <hr/>
                 <div class="row item-title"><strong>Created on</strong>
                 </div>
@@ -79,7 +94,7 @@
                 <hr/>
                 <div class="row item-title"><strong>Open until</strong>
                 </div>
-                <div class="row contest-info create-on">@Model.Deadline</div>
+                <div class="row contest-info create-on">@Html.DisplayFor(model => Model.Deadline)</div>
                 <hr />
                 <div class="row item-title"><strong>Partisipants</strong>
                 </div>
@@ -93,7 +108,7 @@
                 </div>
                 <div class="row contest-info">@Model.PrizeCount</div>
                 <hr/>
-                <div class="row item-title"><strong>Opened</strong>
+                <div class="row item-title"><strong>Active</strong>
                 </div>
                 @if (@Model.IsClosed == IsClosed.No.ToString())
                 {
