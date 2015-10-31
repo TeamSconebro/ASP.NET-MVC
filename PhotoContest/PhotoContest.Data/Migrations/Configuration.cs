@@ -341,7 +341,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 22",
                     Base64Data = "http://petrecognition.com/wp-content/uploads/2013/08/PetProtection.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
                 },
                 new ContestPicture()
@@ -349,7 +349,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 222",
                     Base64Data = "http://livebooklet.com/userFiles/a/2/2/8/7/9/9/EIQaubIqq1dPk8jfrfNRM0/jealLvMz.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Pets")
                 },
                 new ContestPicture()
@@ -373,7 +373,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 4",
                     Base64Data = "http://coolwildlife.com/wp-content/uploads/galleries/post-345/Wolf%20Pictures%20034.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
                 },
                 new ContestPicture()
@@ -389,7 +389,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 784",
                     Base64Data = "http://www.2ch.com/sites/www.2ch.com/files/field/image/201412/colorful-christmas-tree.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Chrismas atmosphere")
                 },
                 new ContestPicture()
@@ -405,7 +405,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 6",
                     Base64Data = "http://www.planwallpaper.com/static/images/cool_picture.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
                 new ContestPicture()
@@ -421,7 +421,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 8",
                     Base64Data = "https://s-media-cache-ak0.pinimg.com/236x/4f/2d/a0/4f2da0f1e6e3ee767214407c6a5aee04.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
                 new ContestPicture()
@@ -429,7 +429,7 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 9",
                     Base64Data = "http://www.airshows.co.uk/week-in-pictures/2013/may/images/week-in-pictures-08.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
                 },
                 new ContestPicture()
@@ -445,8 +445,136 @@ namespace PhotoContest.Data.Migrations
                     Title = "Title 11",
                     Base64Data = "http://ichef.bbci.co.uk/news/976/media/images/83351000/jpg/_83351965_explorer273lincolnshirewoldssouthpicturebynicholassilkstone.jpg",
                     //VotesCount = 0,
-                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
                     Contest = context.Contests.FirstOrDefault(c => c.Title == "Technical contest")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title summer",
+                    Base64Data = "http://www.bbb.org/blog/wp-content/uploads/2011/05/summer2.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 123",
+                    Base64Data = "http://www.alfaplam.rs/upload/News/Image/2015_06/frame_01.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 159",
+                    Base64Data = "https://d1ciw9phtlkz3p.cloudfront.net/trip-ideas/Summer/Header-Image-Small.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 2")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 147",
+                    Base64Data = "http://thenewblack.gr/wp-content/uploads/2015/07/tips-for-inexpensive-summer-vacation.png",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 2")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 159",
+                    Base64Data = "http://activerain.com/image_store/uploads/agents/hatteam/files/summer-vacation.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 3")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 147",
+                    Base64Data = "https://mayrsom.files.wordpress.com/2015/06/summer-vacation-beach-734.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 3")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 155",
+                    Base64Data = "http://www.ritzgroup.org/wp-content/uploads/2014/06/Hawaii-For-Summer-Vacation-1728x1080.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 4")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 146",
+                    Base64Data = "http://mcselect.ru/wp-content/uploads/2013/07/v22-1024x768.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 4")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 151",
+                    Base64Data = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS0y-0PxKXY8Ist5mA0OoP0TYr2_1Qz4TZk-0WodwFE4RLETPIK",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "joro"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 5")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 149",
+                    Base64Data = "https://s-media-cache-ak0.pinimg.com/736x/00/79/75/0079756323cb0afe749bc04fb6846055.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 5")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 168",
+                    Base64Data = "http://media-cdn.tripadvisor.com/media/photo-o/07/25/a4/3e/sonora-resort.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 6")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 73",
+                    Base64Data = "http://www.bestourism.com/img/items/big/725/Maui-in-Hawaii_Road-to-Hana_2867.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 6")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 168",
+                    Base64Data = "http://cf.ltkcdn.net/travel/images/std/187173-425x283-Waimea-Bay-Oahu-Hawaii.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 7")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 73",
+                    Base64Data = "http://images.freehdw.com/800/nature-landscapes_widewallpaper_summer-vacation_4572.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Summer vacation 7")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 412",
+                    Base64Data = "http://files.cityweekend.com.cn/storage/article/images/sliders/weekend_0_0.png",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "tanya"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Where were you last weekend?")
+                },
+                new ContestPicture()
+                {
+                    Title = "Title 737",
+                    Base64Data = "http://lifengrguardiannewscom.c.presscdn.com/wp-content/uploads/2015/08/weekend-lifemag.jpg",
+                    //VotesCount = 0,
+                    Owner = context.Users.FirstOrDefault(u => u.UserName == "bobi"),
+                    Contest = context.Contests.FirstOrDefault(c => c.Title == "Where were you last weekend?")
                 },
             };
 
