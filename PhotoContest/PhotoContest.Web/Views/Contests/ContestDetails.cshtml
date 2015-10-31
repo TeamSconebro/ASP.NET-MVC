@@ -31,46 +31,60 @@
                 <h3 class="panel-title">Details</h3>
             </div>
             <div class="panel-body">
-                <div class="row"><strong>Title</strong></div>
+                <div class="row"><strong>Title</strong>
+                </div>
                 <div class="row">@Model.Title</div>
                 <hr/>
-                <div class="row"><strong>Theme</strong></div>
+                <div class="row"><strong>Theme</strong>
+                </div>
                 <div class="row">@Model.Description</div>
                 <hr/>
-                <div class="row"><strong>Author</strong></div>
+                <div class="row"><strong>Author</strong>
+                </div>
                 <div class="row">@Model.OwnerName</div>
                 <hr/>
-                <div class="row"><strong>Voting</strong></div>
+                <div class="row"><strong>Voting</strong>
+                </div>
                 <div class="row">@Model.VotingStrategy</div>
                 <hr/>
-                <div class="row"><strong>Reward</strong></div>
+                <div class="row"><strong>Reward</strong>
+                </div>
                 <div class="row">@Model.RewardStrategy</div>
                 <hr/>
-                <div class="row"><strong>Participation</strong></div>
+                <div class="row"><strong>Participation</strong>
+                </div>
                 <div class="row">@Model.ParticipationStrategy</div>
                 <hr/>
-                <div class="row"><strong>Deadline</strong></div>
+                <div class="row"><strong>Deadline</strong>
+                </div>
                 <div class="row">@Model.DeadlineStrategy</div>
                 <hr/>
-                <div class="row"><strong>Created on</strong></div>
+                <div class="row"><strong>Created on</strong>
+                </div>
                 <div class="row">@Model.CreatedOn</div>
                 <hr/>
-                <div class="row"><strong>Partisipants</strong></div>
+                <div class="row"><strong>Partisipants</strong>
+                </div>
                 <div class="row">@Model.NumberOfParticipants</div>
                 <hr/>
-                <div class="row"><strong>Open until</strong></div>
+                <div class="row"><strong>Open until</strong>
+                </div>
                 <div class="row">@Model.Deadline</div>
                 <hr/>
-                <div class="row"><strong>Author</strong></div>
+                <div class="row"><strong>Author</strong>
+                </div>
                 <div class="row">@Model.OwnerName</div>
                 <hr/>
-                <div class="row"><strong>Prizes</strong></div>
+                <div class="row"><strong>Prizes</strong>
+                </div>
                 <div class="row">@Model.PrizeValues</div>
                 <hr/>
-                <div class="row"><strong>Count of prizes</strong></div>
+                <div class="row"><strong>Count of prizes</strong>
+                </div>
                 <div class="row">@Model.PrizeCount</div>
                 <hr/>
-                <div class="row"><strong>Opened</strong></div>
+                <div class="row"><strong>Opened</strong>
+                </div>
                 <div class="row">
                     @if (@Model.IsClosed == IsClosed.Yes.ToString())
                     {
@@ -106,26 +120,26 @@
                                             <strong>@picture.Title</strong>
                                         </div>
                                         <div class="row image">
-                                            @if (@picture.ImageBase64Data == null)
+                                            @if (@picture.Base64Data == null)
                                             {
-                                                <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" />
+                                                <img class="contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture"/>
                                             }
                                             else
                                             {
-                                                <img class="contest-image" src="@picture.ImageBase64Data" alt="contest-picture" />
+                                                <img class="contest-image" src="@picture.Base64Data" alt="contest-picture"/>
                                             }
                                         </div>
                                         <div class="row">
                                             @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
-                                            new { id = @picture.OwnerId }, null)
+                                                new {id = @picture.OwnerId}, null)
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        @if (Request.IsAuthenticated)
+                                        @if (Request.IsAuthenticated && @Model.IsClosed == IsClosed.No.ToString())
                                         {
                                             <div class="row vote-button-container">
                                                 @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post,
-              null))
+                                                    null))
                                                 {
                                                     @Html.ValidationSummary(true)
                                                     <fieldset>
@@ -142,11 +156,14 @@
                         }
                     }
                 </div>
-                
+
             </div>
         </div>
     </div>
 </div>
+<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back</a>
+
+
 
 @*@Html.Partial("Vote")*@
 
