@@ -31,7 +31,9 @@ namespace PhotoContest.Web.Controllers
             return this.PartialView("UploadForm");
         }
 
+        [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UploadImage(ImageBindingModel model)
         {
             var ownerId = this.User.Identity.GetUserId();
@@ -44,7 +46,7 @@ namespace PhotoContest.Web.Controllers
             return this.View();
         }
 
-        //[Authorize]
+        [Authorize]
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult Vote(int id)
@@ -70,7 +72,7 @@ namespace PhotoContest.Web.Controllers
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
-            // Check whether user is uploaded picture he wants to vote for
+            // Check whether user has uploaded picture he wants to vote for
             if (picture.OwnerId == userId)
             {
                 resultMessage = "You cannot vote for picture uploaded by you!";

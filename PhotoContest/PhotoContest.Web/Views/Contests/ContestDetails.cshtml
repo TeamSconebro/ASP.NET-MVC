@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using AutoMapper
+@using Microsoft.AspNet.Identity
 @using PhotoContest.Models.Enumerations
 @using PhotoContest.Web.Models.BindingModel
 @model  PhotoContest.Web.Models.ViewModels.ContestFullViewModel
@@ -20,7 +21,9 @@
 
 @Html.BeginForm("UploadImage", "PicturesController", FormMethod.Post, FormMethod.Post, new {enctype = "multipart/form-data"})*@
 
-@Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())
+@*@Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())*@
+
+<br />
 
 <div id="vote-success"></div>
 <div id="vote-error"></div>
@@ -186,6 +189,43 @@
 </div>
 <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
 
+@if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName())
+{
+    <div id="participate-button-container">
+        <a href="" id="participate-button" class="btn btn-primary">Participate</a>
+    </div>
+    <div id="upload-form-container">
+        @using (Html.BeginForm("UploadImage", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Upload image to contest "@Model.Title":</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
+                <label for="title" class="col-md-2 control-label">Title</label>
+                <div class="col-md-10">
+                    @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
+                    <input type="text" name="title" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="file" id="Photo" name="upload" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Upload" />
+                </div>
+            </div>
+        }
+
+
+    </div>
+}
+
+
 
 
 @*@Html.Partial("Vote")*@
@@ -202,15 +242,15 @@
 {
     <script>
         $(document).ready(function() {
-            $(".vote-button").click(function () {
+            $(".vote-button").click(function() {
                 var targetPictureId = parseInt($(this).attr("id"));
                 //alert(5);
                 //alert(targetPictureId);
 
                 $.getJSON("/Pictures/Vote", {
-                    id: targetPictureId
-                },
-                    function (result) {
+                        id: targetPictureId
+                    },
+                    function(result) {
                         if (result === "") {
                             $("#vote-success").html("You successfully give your vote!");
                             //$("#vote-success").html(result);
@@ -218,7 +258,7 @@
                             //$("#vote-error").html("You cannot vote in that contest!");
                             $("#vote-error").html(result);
                         }
-                });
+                    });
 
 
                 //$.ajax({
@@ -238,16 +278,24 @@
                 //    }
                 //});
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#vote-error").fadeOut('slow');
-                }, 5000);
+                }, 3000);
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#vote-success").fadeOut('slow');
-                }, 5000);
+                }, 3000);
 
             });
-            
+
+
+            $("#upload-form-container").css({"display":"none"});
+
+            $("#participate-button").click(function() {
+                //alert(5);
+                $("#upload-form-container").css({ "display": "block" });
+            });
         });
+
     </script>
 }
