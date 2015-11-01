@@ -18,6 +18,7 @@ namespace PhotoContest.Web.Models.ViewModels
 
         public string LastName { get; set; }
         public int Coints { get; set; }
+        public string PhoneNumber { get; set; }
 
         public IOrderedQueryable<Contest> ContestViewModels { get; set; }
 

@@ -40,6 +40,7 @@ namespace PhotoContest.Web.Controllers
             user.FirstName = currentUser.FirstName;
             user.LastName = currentUser.LastName;
             user.UserName = currentUser.UserName;
+            user.PhoneNumber = currentUser.PhoneNumber;
             user.ContestViewModels = this.Data.Contests.All().Where(c => c.OwnerId == currentUserId).OrderByDescending(c => c.CreatedOn);
             user.ContestPictureViewModels = this.Data.ContestPictures.All().Where(c => c.OwnerId == currentUserId);
             
@@ -81,7 +82,7 @@ namespace PhotoContest.Web.Controllers
                 user.PhoneNumber = userprofile.PhoneNumber.IsNullOrWhiteSpace() ? user.PhoneNumber : userprofile.PhoneNumber;
             }
             this.Data.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Profile", "Users");
         }
 
         public ActionResult Notifications()
