@@ -12,7 +12,7 @@
     @using (Html.BeginForm("CreateContest", "Contests", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
     {
         @Html.AntiForgeryToken()
-        // @Html.ValidationSummary("", new { @class = "text-danger" })
+         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-lg-3">
@@ -71,7 +71,7 @@
                         @Html.LabelFor(m => m.RewardStrategy, "Multiple Winners", new {@class = "col-md-5 "})
                     </div>
                     <div class="row">
-                        @Html.TextBoxFor(m => m.PrizeCount, new {@id = "number-of-winners", @style = "display:none", @type = "number"})
+                        @Html.TextBoxFor(m => m.PrizeCount, new {@id = "number-of-winners", @style = "display:none", @type = "number",@Value=1})
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                         @Html.LabelFor(m => m.DeadlineStrategy, "Deadline", new {@class = "col-md-5 "})
                     </div>
                     <div class="row">
-                       @Html.TextBoxFor(m => m.Deadline, new { @id = "deadline", @type = "date" })
+                       @Html.TextBoxFor(m => m.Deadline, new { @id = "deadline", @type = "date",@Value = @DateTime.Now.ToShortDateString() })
                         
                     </div>
                     <div class="row">
@@ -128,7 +128,7 @@
                         @Html.LabelFor(m => m.DeadlineStrategy, "Number of participants", new { @class = "col-md-5 " })
                     </div>
                     <div class="row">
-                        @Html.TextBoxFor(m => m.NumberOfParticipants, new {@id = "participants", @style = "display:none", @type = "number"})
+                        @Html.TextBoxFor(m => m.NumberOfParticipants, new {@id = "participants", @style = "display:none", @type = "number",@Value=0})
                     </div>
                 </div>
             </div>

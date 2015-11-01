@@ -58,15 +58,15 @@
                     <div class="row contest-info">Invited members only</div>
                 }
                 <hr/>
-                <div class="row item-title"><strong>Reward</strong>
+                <div class="row item-title"><strong>Reward Strategy</strong>
                 </div>
                 @if (@Model.RewardStrategy == RewardStrategy.SingleWinner.ToString())
                 {
-                    <div class="row contest-info">One prize</div>
+                    <div class="row contest-info">Single Winner</div>
                 }
                 else
                 {
-                    <div class="row contest-info">Multiple prizes</div>
+                    <div class="row contest-info">Multiple winners</div>
                 }
                 <hr/>
                 <div class="row item-title"><strong>Type of participation</strong>
@@ -80,7 +80,7 @@
                     <div class="row contest-info">Invited members only</div>
                 }
                 <hr/>
-                <div class="row item-title"><strong>Deadline type</strong>
+                <div class="row item-title"><strong>Deadline strategy</strong>
                 </div>
                 @if (@Model.DeadlineStrategy == DeadlineStrategy.ByTime.ToString())
                 {
@@ -95,19 +95,29 @@
                 </div>
                 <div class="row contest-info create-on">@Html.DisplayFor(model => Model.CreatedOn)</div>
                 <hr/>
-                <div class="row item-title"><strong>Open until</strong>
-                </div>
-                <div class="row contest-info create-on">@Html.DisplayFor(model => Model.Deadline)</div>
-                <hr />
-                <div class="row item-title"><strong>Partisipants</strong>
-                </div>
-                <div class="row contest-info">@Model.NumberOfParticipants</div>
-                <hr/>
-                <div class="row item-title"><strong>Prizes</strong>
+                @if (Model.DeadlineStrategy == "ByTime")
+                {
+                    <div class="row item-title">
+                        <strong>Open until</strong>
+                    </div>
+                    <div class="row contest-info create-on">@Html.DisplayFor(model => Model.Deadline)</div>
+                    <hr/>
+                }
+                else
+                {
+                    <div class="row item-title">
+                        <strong>Max Number of Participants</strong>
+                    </div>
+                    <div class="row contest-info">@Model.NumberOfParticipants</div>
+                    <hr />
+                }
+                
+               
+                <div class="row item-title"><strong>Coints</strong>
                 </div>
                 <div class="row contest-info">@Model.PrizeValues</div>
                 <hr/>
-                <div class="row item-title"><strong>Count of prizes</strong>
+                <div class="row item-title"><strong>Number of prizes</strong>
                 </div>
                 <div class="row contest-info">@Model.PrizeCount</div>
                 <hr/>

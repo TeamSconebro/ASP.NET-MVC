@@ -17,14 +17,16 @@ namespace PhotoContest.Web.Models.BindingModel
        public CreateContestBindingModel()
        {
            this.CreatedOn = DateTime.Now;
+           this.NumberOfParticipants = 0;
+           this.PrizeCount = 1;
        }
         [Key]
         public int Id { get; set; }
 
-        
+        [Required]
         public string Title { get; set; }
 
-        
+        [Required]
         public string Description { get; set; }
 
         [Required]
@@ -42,7 +44,7 @@ namespace PhotoContest.Web.Models.BindingModel
         public DateTime? Deadline { get; set; }
         public int NumberOfParticipants { get; set; }
         [Required]
-        public string PrizeValues { get; set; }
+        public int PrizeValues { get; set; }
 
         [Required]
         public int PrizeCount { get; set; }

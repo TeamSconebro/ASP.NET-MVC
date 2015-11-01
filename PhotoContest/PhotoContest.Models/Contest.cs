@@ -15,6 +15,8 @@ namespace PhotoContest.Models
            this.contestPictures = new HashSet<ContestPicture>();
             this.contestors = new HashSet<User>();
            this.CreatedOn = DateTime.Now;
+           this.PrizeCount = 1;
+           this.NumberOfParticipants = 0;
        }
             
        [Key]
@@ -47,7 +49,7 @@ namespace PhotoContest.Models
        public int NumberOfParticipants { get; set; }
 
        [Required]
-       public string PrizeValues { get; set; }
+       public int PrizeValues { get; set; }
 
        [Required]
        public int PrizeCount { get; set; }

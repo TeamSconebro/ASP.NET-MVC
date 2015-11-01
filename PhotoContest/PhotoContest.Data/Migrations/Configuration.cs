@@ -123,7 +123,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(20),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.No,
                     CreatedOn = DateTime.Now
@@ -139,7 +139,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-1),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-12)
@@ -155,7 +155,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-3),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-17)
@@ -171,7 +171,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-5),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-25)
@@ -187,7 +187,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-2),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-15)
@@ -203,7 +203,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-8),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-18)
@@ -219,7 +219,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-1),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-50)
@@ -235,7 +235,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(-5),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.Yes,
                     CreatedOn = DateTime.Now.AddDays(-30)
@@ -252,7 +252,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(15),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.No,
                     CreatedOn = DateTime.Now
@@ -268,7 +268,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(50),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.No,
                     CreatedOn = DateTime.Now
@@ -284,7 +284,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(10),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.No,
                     CreatedOn = DateTime.Now
@@ -300,7 +300,7 @@ namespace PhotoContest.Data.Migrations
                     DeadlineStrategy = DeadlineStrategy.ByTime,
                     Deadline = DateTime.Now.AddDays(20),
                     NumberOfParticipants = 0,
-                    PrizeValues = "100",
+                    PrizeValues = 100,
                     PrizeCount = 1,
                     IsClosed = IsClosed.No,
                     CreatedOn = DateTime.Now

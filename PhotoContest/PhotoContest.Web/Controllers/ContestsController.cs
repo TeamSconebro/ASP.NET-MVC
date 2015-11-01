@@ -110,7 +110,7 @@ namespace PhotoContest.Web.Controllers
                     DeadlineStrategy = newContest.DeadlineStrategy,
                     Deadline = newContest.Deadline,
                     PrizeCount = newContest.PrizeCount,
-                    PrizeValues = newContest.PrizeValues,
+                    PrizeValues = newContest.PrizeValues*2,
                     RewardStrategy = newContest.RewardStrategy,
                     VotingStrategy = newContest.VotingStrategy
                 };
