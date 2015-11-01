@@ -2,82 +2,160 @@
 @{
     ViewBag.Title = "Create contest";
 }
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Create new contest:</h3>
+        <hr/>
+    
 
-<h3>Create new contest:</h3>
-<hr />
 
-@using (Html.BeginForm("CreateContest", "Contests", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-{
-    @Html.AntiForgeryToken()
-   // @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Title, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+    @using (Html.BeginForm("CreateContest", "Contests", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        // @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Title:</strong>
+                </div>
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Description:</strong>
+                </div>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(m => m.Description, new {@class = "form-control"})
+                        </div>
+                    </div>
+                </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Participation Strategy:</strong>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        @Html.LabelFor(m => m.ParticipationStrategy, "Closed", new {@class = "col-md-5"})
+                        @Html.RadioButtonFor(m => m.ParticipationStrategy, 0, new {@checked = "checked", @id = "participation-strategy-closed"})
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.ParticipationStrategy, "Open", new {@class = "col-md-5 "})
+                        @Html.RadioButtonFor(m => m.ParticipationStrategy, 1, new {@checked = "checked", @id = "participation-strategy-open"})
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Description, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Description, new {@class = "form-control"})
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Reward Strategy:</strong>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        @Html.RadioButtonFor(m => m.RewardStrategy, 0, new {@checked = "checked", @onclick = "hide('number-of-winners')", @id = "reward-strategy-single"})
+                        @Html.LabelFor(m => m.RewardStrategy, "Single Winner", new {@class = "col-md-5 "})
+                    </div>
+                    <div class="row">
+                        @Html.RadioButtonFor(m => m.RewardStrategy, 1, new {@onclick = "show('number-of-winners')", @id = "reward-strategy-multiple"})
+                        @Html.LabelFor(m => m.RewardStrategy, "Multiple Winners", new {@class = "col-md-5 "})
+                    </div>
+                    <div class="row">
+                        @Html.TextBoxFor(m => m.PrizeCount, new {@id = "number-of-winners", @style = "display:none", @type = "number"})
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ParticipationStrategy, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(m => m.ParticipationStrategy, new {@class = "form-control"})
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Voting Strategy:</strong>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        @Html.LabelFor(m => m.VotingStrategy, "Closed", new {@class = "col-md-5"})
+                        @Html.RadioButtonFor(m => m.VotingStrategy, 1, new {@checked = "checked", @id = "voting-strategy-closed"})
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(m => m.VotingStrategy, "Open", new {@class = "col-md-5 "})
+                        @Html.RadioButtonFor(m => m.VotingStrategy, 0, new {@checked = "checked", @id = "voting-strategy-open"})
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.RewardStrategy, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(m => m.RewardStrategy, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.VotingStrategy, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(m => m.VotingStrategy, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PrizeCount, new { @class = "col-md-2 control-label"  })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PrizeCount, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PrizeValues, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PrizeValues, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.DeadlineStrategy, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(m => m.DeadlineStrategy, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Deadline, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Deadline, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.NumberOfParticipants, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.NumberOfParticipants, new {@class = "form-control"})
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-lg-3">
+                <strong>Prize:</strong>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.PrizeValues, new { @class = "form-control" })
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create new Contest" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Deadline Strategy:</strong>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        @Html.RadioButtonFor(m => m.DeadlineStrategy, 0, new { @checked = "checked", @onclick = "hide('participants'); show('deadline')", @id = "deadline-strategy-deadline" })
+                        @Html.LabelFor(m => m.DeadlineStrategy, "Deadline", new {@class = "col-md-5 "})
+                    </div>
+                    <div class="row">
+                       @Html.TextBoxFor(m => m.Deadline, new { @id = "deadline", @type = "date" })
+                        
+                    </div>
+                    <div class="row">
+                        @Html.RadioButtonFor(m => m.DeadlineStrategy, 1, new { @onclick = "show('participants'); hide('deadline')", @id = "deadline-strategy-participants" })
+                        @Html.LabelFor(m => m.DeadlineStrategy, "Number of participants", new { @class = "col-md-5 " })
+                    </div>
+                    <div class="row">
+                        @Html.TextBoxFor(m => m.NumberOfParticipants, new {@id = "participants", @style = "display:none", @type = "number"})
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-}
+        
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Create new Contest"/>
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            function hide(obj) {
+                var el = document.getElementById(obj);
+                el.style.display = 'none';
+
+            }
+
+            function show(obj) {
+                var el = document.getElementById(obj);
+                el.style.display = '';
+            }
+        </script>
+    }
+</div>
+</div>

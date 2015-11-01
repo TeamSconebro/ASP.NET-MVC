@@ -1,6 +1,8 @@
 ﻿
 
 using System.ComponentModel;
+using System.Linq.Expressions;
+using Microsoft.Ajax.Utilities;
 
 namespace PhotoContest.Web.Models.BindingModel
 {
@@ -24,6 +26,7 @@ namespace PhotoContest.Web.Models.BindingModel
 
         
         public string Description { get; set; }
+
         [Required]
         public VotingStrategy VotingStrategy { get; set; }
 
