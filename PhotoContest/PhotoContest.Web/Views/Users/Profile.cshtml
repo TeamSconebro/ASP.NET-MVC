@@ -1,79 +1,190 @@
-﻿@model PhotoContest.Web.Models.ViewModels.UserViewModel
+﻿@using System.Data
+@using System.Linq
+@model PhotoContest.Web.Models.ViewModels.UserViewModel
 @{
     ViewBag.Title = "Profile";
 }
-<div class="row">
-    @Html.ActionLink("Edit Profile", "Edit")
-    <br />
-    <label>Username</label>
-    @Model.UserName
-    <br />
-    <label>First name</label>
-    @Model.FirstName
-    <br />
-    <label>Last name</label>
-    @Model.LastName
-    <br />
-    <label>Email</label>
-    @Model.Email
-    <br />
-    <label>Coints</label>
-    @Model.Coints
-    <br />
-    @if (@Model.ContestViewModels.Any())
-    {
-        <label>Contests</label>
-        foreach (var item in @Model.ContestViewModels)
-        {
-            <div class="row">
-                <div class="col-md-3">
-                    @Html.ActionLink(@item.Title, "ContestDetails", "Contests",
-                    new { id = @item.Id },
-                    new { style="color:#000",data_id = item.Id, id = item.Id })
-                </div>
-                <div class="col-md-3">
-                    @item.Description
-                </div>
-                <div class="col-md-3">
-                    @item.IsClosed
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    @item.DeadlineStrategy
-                </div>
-                <div class="col-md-3">
-                    @item.VotingStrategy
-                </div>
-                <div class="col-md-3">
-                    @item.RewardStrategy
-                </div>
-                <div class="col-md-3">
-                    @item.ParticipationStrategy
-                </div>
-            </div>
-            <hr />
-            <br />
-        }
-        <br />
-    }
 
-    @if (@Model.ContestPictureViewModels.Any())
-    {
-        <label> My Pictures: </label><br />
-        foreach (var picture in @Model.ContestPictureViewModels)
-        {
-            <label>Contest Name</label>
-            @Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests",
-                    new { id = @picture.Contest.Id },
-                      new { style = "color:#000", data_id = picture.Id, id = picture.Id })
-            <br />
-            <label>Picture Title</label>
-            @picture.Title
-            <br />
-            <img src="@picture.Base64Data" alt="myPictures" width="250" height="220" />
-            <br />
-        }
-    }
 
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-md-5">
+            <input type="button" value="Edit Profile" onclick="location.href='@Url.Action("Edit", "Users")'" />
+        </div>
+    </div>
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Username:</strong>
+                </div>
+                <div class="col-md-5">
+                    @Model.UserName
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>First Name:</strong>
+                </div>
+                <div class="col-md-5">
+                    @Model.FirstName
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Last Name:</strong>
+                </div>
+                <div class="col-md-5">
+                    @Model.LastName
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Email:</strong>
+                </div>
+                <div class="col-md-5">
+                    @Model.Email
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <strong>Coints:</strong>
+                </div>
+                <div class="col-md-5">
+                    @Model.Coints
+                </div>
+            </div>
+        </div>
+        @if (@Model.ContestViewModels.Any())
+        { <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <strong>MY CONTESTS</strong>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+            foreach (var item in @Model.ContestViewModels)
+            {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-lg-4">
+                        <strong>Title:</strong>@Html.ActionLink(@item.Title, "ContestDetails", "Contests",
+                                                   new {id = @item.Id},
+                                                   new {style = "color:#000", data_id = item.Id, id = item.Id})
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Description:</strong>@item.Description
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Active:</strong>@item.IsClosed
+                    </div>
+                    @if (item.DeadlineStrategy == 0)
+                    {
+                        <div class="col-md-4">
+                            <strong>Deadline :</strong>@item.Deadline
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4">
+                            <strong>Max participants :</strong>@item.NumberOfParticipants
+                        </div>
+                    }
+
+                    <div class="col-md-4">
+                        <strong>Voting strategy:</strong>@item.VotingStrategy
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Reward strategy:</strong>@item.VotingStrategy
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Participation strategy :</strong>@item.ParticipationStrategy
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Created On:</strong>@item.CreatedOn
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-lg-3">
+                        <strong>Contests:</strong>
+                    </div>
+                    <div class="col-md-5">
+                        You have no contests created!
+                    </div>
+                </div>
+            </div>
+    }
+        @if (@Model.ContestPictureViewModels.Any())
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <strong>MY PICTURES</strong>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+            foreach (var picture in @Model.ContestPictureViewModels)
+            {<div class="panel panel-default">
+             <div class="panel-body">
+                 <div class="col-md-4">
+                     <strong>Contest Title:</strong>@Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests",
+                                                        new {id = @picture.Contest.Id},
+                                                        new {style = "color:#000", data_id = picture.Id, id = picture.Id})
+                 </div>
+                 <div class="col-md-4">
+                     <strong>Picture Title:</strong>@picture.Title
+                 </div>
+                 <div class="col-md-4">
+                    <img src="@picture.Base64Data" alt="myPictures" width="250" height="220"/>
+                 </div>
+             </div>
+        </div>
+                    }
+                    }
+                    else
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-lg-3">
+                                <strong>My Pictures:</strong>
+                            </div>
+                            <div class="col-md-5">
+                                You have no pictures uploaded!
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
