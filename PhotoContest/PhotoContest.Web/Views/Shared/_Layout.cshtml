@@ -28,13 +28,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Create New Contest", "CreateContest", "Contests")</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>
                             <ul class="nav navbar-nav nav-pills">
-                                @*<li class="active"><a href="~/Users/Index">Recent tweets <span class="badge">0</span></a></li>*@
                                 <li><a href="~/Users/Notifications">Notifications <span class="badge">0</span></a></li>
                             </ul>
                         </li>

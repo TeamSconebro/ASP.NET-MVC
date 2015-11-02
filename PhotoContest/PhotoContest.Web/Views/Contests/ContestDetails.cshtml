@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using System.Linq
 @using AutoMapper
 @using Microsoft.AspNet.Identity
 @using PhotoContest.Models.Enumerations
@@ -84,7 +85,7 @@
                 </div>
                 @if (@Model.DeadlineStrategy == DeadlineStrategy.ByTime.ToString())
                 {
-                    <div class="row contest-info">By time</div>
+                    <div class="row contest-info">By deadline</div>
                 }
                 else
                 {
@@ -117,10 +118,18 @@
                 </div>
                 <div class="row contest-info">@Model.PrizeValues</div>
                 <hr/>
-                <div class="row item-title"><strong>Number of prizes</strong>
-                </div>
-                <div class="row contest-info">@Model.PrizeCount</div>
-                <hr/>
+                @if (Model.RewardStrategy == "SingleWinner")
+                {
+                }
+                else
+                {
+                    <div class="row item-title">
+                        <strong>Number of prizes</strong>
+                    </div>
+                    <div class="row contest-info">@Model.PrizeCount</div>
+                    <hr />
+                }
+               
                 <div class="row item-title"><strong>Active</strong>
                 </div>
                 @if (@Model.IsClosed == IsClosed.No.ToString())
