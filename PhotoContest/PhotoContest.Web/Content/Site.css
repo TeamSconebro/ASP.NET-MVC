@@ -176,3 +176,7 @@ a.fancybox:hover img {
 div#fancybox-title.fancybox-title-inside {
     margin: 0 !Important;
 }
+
+#upload-form-container {
+    /*display: none;*/
+}

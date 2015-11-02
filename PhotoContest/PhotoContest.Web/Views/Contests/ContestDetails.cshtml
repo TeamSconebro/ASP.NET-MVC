@@ -225,17 +225,18 @@
                 <label for="title" class="col-md-2 control-label">Title</label>
                 <div class="col-md-10">
                     @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
-                    <input type="text" name="title" class="form-control"/>
+                    <input type="text" name="title" id="title" class="form-control"/>
                 </div>
             </div>
             <div class="form-group">
+                <label for="url" class="col-md-2 control-label">Url</label>
                 <div class="col-md-10">
-                    <input type="file" id="Photo" name="upload" />
+                    <input type="url" id="Photo" name="url" id="url" class="form-control"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Upload" />
+                    <input type="submit" class="btn btn-default" value="Upload" id="upload"/>
                 </div>
             </div>
         }
@@ -308,12 +309,33 @@
             });
 
 
-            $("#upload-form-container").css({"display":"none"});
+            //$("#upload-form-container").css({"visibility":"hidden"});
 
             $("#participate-button").click(function() {
                 //alert(5);
-                $("#upload-form-container").css({ "display": "block" });
+                $("#upload-form-container").css({"display":"block" });
             });
+
+            $().click(function() {
+                var title = $("#title").val();
+                alert(title);
+
+                    $.getJSON(
+                        "/Pictures/UploadImage",
+                        {
+                            title: title
+                            id: @Model.Id
+                
+                        },
+                        function (result) {
+                            if (result === "") {
+                                $("#vote-success").html("You successfully give your vote!");
+                                //$("#vote-success").html(result);
+                            } else {
+                                //$("#vote-error").html("You cannot vote in that contest!");
+                                $("#vote-error").html(result);
+                            }
+                        });
         });
 
     </script>
