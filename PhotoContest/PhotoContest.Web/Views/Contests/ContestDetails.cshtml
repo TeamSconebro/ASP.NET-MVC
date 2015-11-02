@@ -5,6 +5,7 @@
 @using PhotoContest.Models.Enumerations
 @using PhotoContest.Web.Models.BindingModel
 @model  PhotoContest.Web.Models.ViewModels.ContestFullViewModel
+
 @{
     ViewBag.Title = "Contest details";
 }
@@ -14,399 +15,454 @@
     <h3 class="create-contest-success">@TempData["message-create-contest-success"]</h3>
 }
 
-@*<form method="POST" action="~/Pictures" enctype="multipart/form-data">
-    <input type="text" name="title"/>
-    <input type="file" name="image"/>
-    <input type="submit" value="Upload"/>
-</form>
+    @*<form method="POST" action="~/Pictures" enctype="multipart/form-data">
+            <input type="text" name="title"/>
+            <input type="file" name="image"/>
+            <input type="submit" value="Upload"/>
+        </form>
 
-@Html.BeginForm("UploadImage", "PicturesController", FormMethod.Post, FormMethod.Post, new {enctype = "multipart/form-data"})*@
+        @Html.BeginForm("UploadImage", "PicturesController", FormMethod.Post, FormMethod.Post, new {enctype = "multipart/form-data"})*@
 
-@*@Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())*@
+    @*@Html.Partial("_UploadFormPartial", new ImageBindingModelUserInput())*@
 
-<br />
+    <br />
 
-<div id="vote-success"></div>
-<div id="vote-error"></div>
+    <div id="vote-success"></div>
+    <div id="vote-error"></div>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Details</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row item-title"><strong>Title</strong>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Details</h3>
                 </div>
-                <div class="row contest-info">@Model.Title</div>
-                <hr/>
-                <div class="row item-title"><strong>Theme</strong>
-                </div>
-                <div class="row contest-info theme">@Model.Description</div>
-                <hr/>
-                <div class="row item-title"><strong>Created by</strong>
-                </div>
-                <div class="row contest-info">@Model.OwnerName</div>
-                <hr/>
-                <div class="row item-title"><strong>Voting</strong>
-                </div>
-                @if (@Model.VotingStrategy == VotingStrategy.Open.ToString())
-                {
-                    <div class="row contest-info">Free voting</div>
-                }
-                else
-                {
-                    <div class="row contest-info">Invited members only</div>
-                }
-                <hr/>
-                <div class="row item-title"><strong>Reward Strategy</strong>
-                </div>
-                @if (@Model.RewardStrategy == RewardStrategy.SingleWinner.ToString())
-                {
-                    <div class="row contest-info">Single Winner</div>
-                }
-                else
-                {
-                    <div class="row contest-info">Multiple winners</div>
-                }
-                <hr/>
-                <div class="row item-title"><strong>Type of participation</strong>
-                </div>
-                @if (@Model.ParticipationStrategy == ParticipationStrategy.Open.ToString())
-                {
-                    <div class="row contest-info">Free access</div>
-                }
-                else
-                {
-                    <div class="row contest-info">Invited members only</div>
-                }
-                <hr/>
-                <div class="row item-title"><strong>Deadline strategy</strong>
-                </div>
-                @if (@Model.DeadlineStrategy == DeadlineStrategy.ByTime.ToString())
-                {
-                    <div class="row contest-info">By deadline</div>
-                }
-                else
-                {
-                    <div class="row contest-info">By number of participants</div>
-                }
-                <hr/>
-                <div class="row item-title"><strong>Created on</strong>
-                </div>
-                <div class="row contest-info create-on">@Html.DisplayFor(model => Model.CreatedOn)</div>
-                <hr/>
-                @if (Model.DeadlineStrategy == "ByTime")
-                {
+                <div class="panel-body">
                     <div class="row item-title">
-                        <strong>Open until</strong>
+                        <strong>Title</strong>
                     </div>
-                    <div class="row contest-info create-on">@Html.DisplayFor(model => Model.Deadline)</div>
-                    <hr/>
-                }
-                else
-                {
-                    <div class="row item-title">
-                        <strong>Max Number of Participants</strong>
-                    </div>
-                    <div class="row contest-info">@Model.NumberOfParticipants</div>
+                    <div class="row contest-info">@Model.Title</div>
                     <hr />
-                }
-                
-               
-                <div class="row item-title"><strong>Coints</strong>
-                </div>
-                <div class="row contest-info">@Model.PrizeValues</div>
-                <hr/>
-                @if (Model.RewardStrategy == "SingleWinner")
-                {
-                }
-                else
-                {
                     <div class="row item-title">
-                        <strong>Number of prizes</strong>
+                        <strong>Theme</strong>
                     </div>
-                    <div class="row contest-info">@Model.PrizeCount</div>
+                    <div class="row contest-info theme">@Model.Description</div>
                     <hr />
-                }
-               
-                <div class="row item-title"><strong>Active</strong>
-                </div>
-                @if (@Model.IsClosed == IsClosed.No.ToString())
-                {
-                    <div class="row contest-info">Yes</div>
-                }
-                else
-                {
-                    <div class="row contest-info">No</div>
-                }
-
-                @if (@Model.ParticipationStrategy == ParticipationStrategy.Closed.ToString())
-                {
-                    <div class="row contest-info invite-button">
-                        <input type="button" id="invite" class="btn btn-primary" value="Invite Participants"/>
+                    <div class="row item-title">
+                        <strong>Created by</strong>
                     </div>
-                    <div class="row" id="searchBox" style="display: none">
-                        <br />
-                        Username:<input type="text" name="text" id="text"/><input type="button" class="btn btn-primary" id="addButton" value="Add to contest"/>
-                        <div id="autocomplete"></div>
+                    <div class="row contest-info">@Model.OwnerName</div>
+                    <hr />
+                    <div class="row item-title">
+                        <strong>Voting</strong>
                     </div>
-                }
-                
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Gallery</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    @if (!@Model.ContestPictures.Any())
+                    @if (@Model.VotingStrategy == VotingStrategy.Open.ToString())
                     {
-                        <h4>This contest has no photos</h4>
+                        <div class="row contest-info">Free voting</div>
                     }
                     else
                     {
-                        foreach (var picture in @Model.ContestPictures)
+                        <div class="row contest-info">Invited members only</div>
+                    }
+                    <hr />
+                    <div class="row item-title">
+                        <strong>Reward Strategy</strong>
+                    </div>
+                    @if (@Model.RewardStrategy == RewardStrategy.SingleWinner.ToString())
+                    {
+                        <div class="row contest-info">Single Winner</div>
+                    }
+                    else
+                    {
+                        <div class="row contest-info">Multiple winners</div>
+                    }
+                    <hr />
+                    <div class="row item-title">
+                        <strong>Type of participation</strong>
+                    </div>
+                    @if (@Model.ParticipationStrategy == ParticipationStrategy.Open.ToString())
+                    {
+                        <div class="row contest-info">Free access</div>
+                    }
+                    else
+                    {
+                        <div class="row contest-info">Invited members only</div>
+                    }
+                    <hr />
+                    <div class="row item-title">
+                        <strong>Deadline strategy</strong>
+                    </div>
+                    @if (@Model.DeadlineStrategy == DeadlineStrategy.ByTime.ToString())
+                    {
+                        <div class="row contest-info">By deadline</div>
+                    }
+                    else
+                    {
+                        <div class="row contest-info">By number of participants</div>
+                    }
+                    <hr />
+                    <div class="row item-title">
+                        <strong>Created on</strong>
+                    </div>
+                    <div class="row contest-info create-on">@Html.DisplayFor(model => Model.CreatedOn)</div>
+                    <hr />
+                    @if (Model.DeadlineStrategy == "ByTime")
+                    {
+                        <div class="row item-title">
+                            <strong>Open until</strong>
+                        </div>
+                        <div class="row contest-info create-on">@Html.DisplayFor(model => Model.Deadline)</div>
+                        <hr />
+                    }
+                    else
+                    {
+                        <div class="row item-title">
+                            <strong>Max Number of Participants</strong>
+                        </div>
+                        <div class="row contest-info">@Model.NumberOfParticipants</div>
+                        <hr />
+                    }
+
+
+                    <div class="row item-title">
+                        <strong>Coints</strong>
+                    </div>
+                    <div class="row contest-info">@Model.PrizeValues</div>
+                    <hr />
+                    @if (Model.RewardStrategy == "SingleWinner")
+                    {
+                    }
+                    else
+                    {
+                        <div class="row item-title">
+                            <strong>Number of prizes</strong>
+                        </div>
+                        <div class="row contest-info">@Model.PrizeCount</div>
+                        <hr />
+                    }
+
+                    <div class="row item-title">
+                        <strong>Active</strong>
+                    </div>
+                    @if (@Model.IsClosed == IsClosed.No.ToString())
+                    {
+                        <div class="row contest-info">Yes</div>
+                    }
+                    else
+                    {
+                        <div class="row contest-info">No</div>
+                    }
+
+                    @if (@Model.ParticipationStrategy == ParticipationStrategy.Closed.ToString())
+                    {
+                        <div class="row contest-info invite-button">
+                            <input type="button" id="invite" class="btn btn-primary" value="Invite Participants" />
+                        </div>
+                        @*<div class="row" id="searchBox" style="display: none">
+                            <br />
+                            Username:<input type="text" name="text" id="text" /> <input type="button" class="btn btn-primary" id="addButton" value="Add" />
+                            <div id="autocomplete"></div>
+                        </div>*@
+
+                        <div class="ui-widget" id="searchBox" style="display: none">
+                            <br />
+                            <label for="username">Username: </label>
+                            <input id="username">
+                            <input type="button" class="btn btn-primary" id="addButton" value="Add" />
+                            <div id="autocomplete"></div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Gallery</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @if (!@Model.ContestPictures.Any())
                         {
-                            <div class="col-md-6 image-container">
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <div class="row image-title">
-                                            <strong>@picture.Title</strong>
-                                        </div>
-                                        <div class="row image">
-                                            @if (@picture.Base64Data == null)
-                                            {
-                                                <img class="fancybox contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" title="@picture.Title"/>
-                                            }
-                                            else
-                                            {
-                                                <img class="fancybox contest-image" src="@picture.Base64Data" alt="contest-picture" title="@picture.Title"/>
-                                            }
-                                        </div>
-                                        <div class="row">
-                                            @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
-                                                new {id = @picture.OwnerId}, null)
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        @if (Request.IsAuthenticated && @Model.IsClosed == IsClosed.No.ToString())
-                                        {
-                                            <div class="row vote-button-container">
-                                                @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post,
-                                                    null))
-                                                {
-                                                    @Html.ValidationSummary(true)
-                                                    <fieldset>
-                                                        <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id"/>
-                                                    </fieldset>
-                                                }
-                                                @*@Html.ActionLink("Vote +", "Vote", "Pictures",
-                                                    new {id = @picture.Id}, new {@class = "btn btn-primary vote-button"})*@
+                            <h4>This contest has no photos</h4>
+                        }
+                        else
+                        {
+                            foreach (var picture in @Model.ContestPictures)
+                            {
+                                <div class="col-md-6 image-container">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row image-title">
+                                                <strong>@picture.Title</strong>
                                             </div>
-                                        }
+                                            <div class="row image">
+                                                @if (@picture.Base64Data == null)
+                                                {
+                                                    <img class="fancybox contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" title="@picture.Title" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="fancybox contest-image" src="@picture.Base64Data" alt="contest-picture" title="@picture.Title" />
+                                                }
+                                            </div>
+                                            <div class="row">
+                                                @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
+                                                new { id = @picture.OwnerId }, null)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @if (Request.IsAuthenticated && @Model.IsClosed == IsClosed.No.ToString())
+                                            {
+                                                <div class="row vote-button-container">
+                                                    @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post,
+                        null))
+                                                    {
+                                                        @Html.ValidationSummary(true)
+                                                        <fieldset>
+                                                            <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id" />
+                                                        </fieldset>
+                                                    }
+                                                    @*@Html.ActionLink("Vote +", "Vote", "Pictures",
+                                                        new {id = @picture.Id}, new {@class = "btn btn-primary vote-button"})*@
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
-                    }
-                </div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
-
-@if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName())
-{
-    <div id="participate-button-container">
-        <a href="" id="participate-button" class="btn btn-primary">Participate</a>
+    <div class="row back-button">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
     </div>
-    <div id="upload-form-container">
-        @using (@Html.BeginForm("UploadImage", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
-        {
-            @Html.AntiForgeryToken()
-            <h4>Upload image to contest "@Model.Title":</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
-                <label for="title" class="col-md-2 control-label">Title</label>
-                <div class="col-md-10">
-                    @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
-                    <input type="text" name="title" id="title" class="form-control"/>
+
+
+    @if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName())
+    {
+        <div id="participate-button-container">
+            <a href="" id="participate-button" class="btn btn-primary">Participate</a>
+        </div>
+        <div id="upload-form-container">
+            @using (@Html.BeginForm("UploadImage", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Upload image to contest "@Model.Title":</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
+                    <label for="title" class="col-md-2 control-label">Title</label>
+                    <div class="col-md-10">
+                        @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
+                        <input type="text" name="title" id="title" class="form-control" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="url" class="col-md-2 control-label">Url</label>
-                <div class="col-md-10">
-                    <input type="url" @*id="Photo"*@ name="url" id="url" class="form-control"/>
+                <div class="form-group">
+                    <label for="url" class="col-md-2 control-label">Url</label>
+                    <div class="col-md-10">
+                        <input type="url" @*id="Photo"*@ name="url" id="url" class="form-control" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Upload" id="upload"/>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Upload" id="upload" />
+                    </div>
                 </div>
-            </div>
-        }
+            }
+
+        </div>
+    }
 
 
-    </div>
-}
-
-
-
-
-@*@Html.Partial("Vote")*@
-
-@*@Html.ActionLink("Vote", "IncreaseVote", "Votes", new { id = Model.Id})*@
-
-@*@using (Html.BeginForm("Vote", "Votes", new {contestId = Model.Id}))
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+    @section scripts
 {
-    <input type="submit" class="btn btn-primary" value="Vote +"/>
-}*@
+        <script>
+            $(document).ready(function() {
 
+                // Voting
+                $(".vote-button").click(function() {
+                    var targetPictureId = parseInt($(this).attr("id"));
 
-@section scripts
-{
-    <script>
-        $(document).ready(function() {
-            $(".vote-button").click(function() {
-                var targetPictureId = parseInt($(this).attr("id"));
-
-                $.getJSON("/Pictures/Vote", {
+                    $.getJSON("/Pictures/Vote", {
                         id: targetPictureId
                     },
-                    function(result) {
-                        if (result === "") {
-                            $("#vote-success").html("You successfully give your vote!");
-                        } else {
-                            $("#vote-error").html(result);
-                        }
-                    });
-                setTimeout(function() {
-                    $("#vote-error").fadeOut('slow');
-                }, 3000);
-
-                setTimeout(function() {
-                    $("#vote-success").fadeOut('slow');
-                }, 3000);
-
-            });
-
-            // Show participate form
-            $("#invite").click(function() {
-                //alert(5);
-                $('#searchBox').css({ "display": "block" });
-            });
-
-            $('#text').keyup(function () {
-                var searchValue = $(this).val();
-                //alert(searchValue);
-
-                if (searchValue.trim() === "") {
-                    $("#autocomplete").empty();
-                } else {
-                    searchValue = searchValue.trim();
-                    var data = { search: searchValue };
-                    $.getJSON("/Users/GetUsers", data, function (results) {
-                        //alert(5);
-                        results.forEach(function (result) {
-                            $("#autocomplete").append("<div>" + result + "</div>");
+                        function(result) {
+                            if (result === "") {
+                                $("#vote-success").html("You successfully give your vote!");
+                            } else {
+                                $("#vote-error").html(result);
+                            }
                         });
+                    setTimeout(function() {
+                        $("#vote-error").fadeOut('slow');
+                    }, 3000);
+
+                    setTimeout(function() {
+                        $("#vote-success").fadeOut('slow');
+                    }, 3000);
+
+                });
+
+
+                // Show participate form
+                $("#invite").click(function() {
+                    $('#searchBox').css({ "display": "block" });
+                });
+
+                $("#username").keyup(function() {
+                    var data = $("#username").val();
+                    var usernames = $.getJSON("/Users/GetUsers", data, function(result) {
+                        return result;
                     });
-                }
-                $("#autocomplete").empty();
+                    $("#username").autocomplete({
+                        source: usernames
+                    }); 
+                });
+                
+
+                
+                //$('#text').keyup(function() {
+                //    var searchValue = $(this).val();
+                //    if (searchValue.trim() === "") {
+                //        $("#autocomplete").empty();
+                //    } else {
+                //        searchValue = searchValue.trim();
+                //        var data = { search: searchValue };
+                //        $.getJSON("/Users/GetUsers", data, function(results) {
+                //            results.forEach(function(result) {
+                //                $("#autocomplete").append("<div>" + result + "</div>");
+
+                //                // Invite user to contest
+
+                //            });
+                //        });
+                //    }
+                //    $("#autocomplete").empty();
+                //});
+
+                //$("#autocomplete").css({
+                //    'padding-left': '50px'
+                //});
+
+
+                //$("#upload-form-container").css({"visibility":"hidden"});
+
+                //$("#participate-button").click(function() {
+                //    //alert(5);
+                //    $("#upload-form-container").css({ "display": "block" });
+                //});
+
+                $("#upload").click(function() {
+                    var title = $("#title").val();
+                    var url = $("#url").val();
+                    var contestId = @Model.Id;
+                    //alert(title);
+                    //alert(url);
+
+                    $.getJSON(
+                        "/Pictures/UploadImage",
+                        {
+                            title: title,
+                            base64Data: url,
+                            contestId: contestId
+
+                        },
+                        function(result) {
+                            if (result === "") {
+                                $("#vote-success").html("You successfully give your vote!");
+                                //$("#vote-success").html(result);
+                            } else {
+                                //$("#vote-error").html("You cannot vote in that contest!");
+                                $("#vote-error").html(result);
+                            }
+                        });
+                });
+
+
+                //$(function () {
+
+                //    $('#upload').click(function (e) {
+                //        e.preventDefault();
+
+
+                //        $.ajax({
+                //            type: "POST",
+                //            url: "Pictures/UploadImage", //Your Action name in the ropDownListConstroller.cs
+                //            data: "{'title':'" + $('#title').val() + "','base64Data':'" + $('#url').val() + "','contestId':'" +  + "'}",  //Parameter in this function, Is case sensitive and also type must be string
+                //            contentType: "application/json; charset=utf-8",
+                //            dataType: "json"
+
+                //        }).done(function (data) {
+                //            //Successfully pass to server and get response
+                //            if (data.result="OK") {
+                //                alert("submit successfully.");
+                //            }
+                //        }).fail(function (response) {
+                //            if (response.status != 0) {
+                //                alert(response.status + " " + response.statusText);
+                //            }
+                //        });
+                //    });
+
+                //});
+
             });
-
-            $("#autocomplete").css({
-                'padding-left': '50px'
-            });
-
-
-            //$("#upload-form-container").css({"visibility":"hidden"});
-
-            //$("#participate-button").click(function() {
-            //    //alert(5);
-            //    $("#upload-form-container").css({ "display": "block" });
+            //$.ajax({
+            //    url: "/Pictures/Vote",
+            //    method: "POST",
+            //    data: { id: targetPictureId },
+            //    contentType: 'application/json; charset=utf-8',
+            //    //cache: false,
+            //    success: function (data) {
+            //        $("#vote-success").html("You successfully give your vote!");
+            //        //alert(data);
+            //        //$("#result" + targetId).append(data);
+            //        //alert(data);
+            //    },
+            //    error: function (error) {
+            //        $("#vote-error").html("You cannot vote in that contest!");
+            //    }
             //});
 
-            $("#upload").click(function() {
-                var title = $("#title").val();
-                var url = $("#url").val();
-                var contestId = @Model.Id;
-                //alert(title);
-                //alert(url);
+        </script>
 
-                $.getJSON(
-                    "/Pictures/UploadImage",
-                    {
-                        title: title,
-                        base64Data:url,
-                        contestId:contestId
-                        
-                    },
-                    function(result) {
-                        if (result === "") {
-                            $("#vote-success").html("You successfully give your vote!");
-                            //$("#vote-success").html(result);
-                        } else {
-                            //$("#vote-error").html("You cannot vote in that contest!");
-                            $("#vote-error").html(result);
-                        }
-                    });
+        <script>
+            $(function() {
+                var availableTags = [
+                    "ActionScript",
+                    "AppleScript",
+                    "Asp",
+                    "BASIC",
+                    "C",
+                    "C++",
+                    "Clojure",
+                    "COBOL",
+                    "ColdFusion",
+                    "Erlang",
+                    "Fortran",
+                    "Groovy",
+                    "Haskell",
+                    "Java",
+                    "JavaScript",
+                    "Lisp",
+                    "Perl",
+                    "PHP",
+                    "Python",
+                    "Ruby",
+                    "Scala",
+                    "Scheme"
+                ];
+                $("#tags").autocomplete({
+                    source: availableTags
+                });
             });
-
-        
-            //$(function () {
-               
-            //    $('#upload').click(function (e) {
-            //        e.preventDefault();
- 
-                    
-
-            //        $.ajax({
-            //            type: "POST",   
-            //            url: "Pictures/UploadImage", //Your Action name in the ropDownListConstroller.cs
-            //            data: "{'title':'" + $('#title').val() + "','base64Data':'" + $('#url').val() + "','contestId':'" +  + "'}",  //Parameter in this function, Is case sensitive and also type must be string
-            //            contentType: "application/json; charset=utf-8",
-            //            dataType: "json"
- 
-            //        }).done(function (data) {
-            //            //Successfully pass to server and get response
-            //            if (data.result="OK") { 
-            //                alert("submit successfully."); 
-            //            }
-            //        }).fail(function (response) {
-            //            if (response.status != 0) {
-            //                alert(response.status + " " + response.statusText);
-            //            }
-            //        });
-            //    });
- 
-            //});
- 
-        });
-        //$.ajax({
-        //    url: "/Pictures/Vote",
-        //    method: "POST",
-        //    data: { id: targetPictureId },
-        //    contentType: 'application/json; charset=utf-8',
-        //    //cache: false,
-        //    success: function (data) {
-        //        $("#vote-success").html("You successfully give your vote!");
-        //        //alert(data);
-        //        //$("#result" + targetId).append(data);
-        //        //alert(data);
-        //    },
-        //    error: function (error) {
-        //        $("#vote-error").html("You cannot vote in that contest!");
-        //    }
-        //});
-
-    </script>
-}
+        </script>
+    }
