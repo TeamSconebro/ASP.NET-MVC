@@ -44,12 +44,16 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="row">
-                        @Html.LabelFor(m => m.ParticipationStrategy, "Closed", new {@class = "col-md-5"})
-                        @Html.RadioButtonFor(m => m.ParticipationStrategy, 0, new {@checked = "checked", @id = "participation-strategy-closed"})
+                        @Html.LabelFor(m => m.ParticipationStrategy, "Closed", new { @class = "col-md-5",  })
+                        @Html.RadioButtonFor(m => m.ParticipationStrategy, 0, new {@onclick = "show('searchBox')", @id = "participation-strategy-closed"})
+                    </div>
+                    <div class="row" id="searchBox" style="display: none">
+                        Country:<input type="text" name="text" id="text" />
+                        <div id="autocomplete"></div>
                     </div>
                     <div class="row">
                         @Html.LabelFor(m => m.ParticipationStrategy, "Open", new {@class = "col-md-5 "})
-                        @Html.RadioButtonFor(m => m.ParticipationStrategy, 1, new {@checked = "checked", @id = "participation-strategy-open"})
+                        @Html.RadioButtonFor(m => m.ParticipationStrategy, 1, new { @checked = "checked", @onclick = "hide('searchBox')", @id = "participation-strategy-open" })
                     </div>
                 </div>
             </div>
@@ -155,6 +159,28 @@
                 var el = document.getElementById(obj);
                 el.style.display = '';
             }
+
+
+
+            $('#text').keyup(function () {
+                var searchValue = $(this).val();
+                if (searchValue.trim() === "") {
+                    $("#autocomplete").empty();
+                } else {
+                    searchValue = searchValue.trim();
+                    var data = { search: searchValue };
+                    $.getJSON("/Users/GetUsers", data, function (results) {
+                        results.forEach(function (result) {
+                            $("#autocomplete").append("<div>" + result + "</div>");
+                        });
+                    });
+                }
+                $("#autocomplete").empty();
+            });
+
+            $("#autocomplete").css({
+                'padding-left': '50px'
+            });
         </script>
     }
 </div>

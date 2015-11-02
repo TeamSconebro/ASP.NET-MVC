@@ -19,10 +19,15 @@ namespace PhotoContest.Web.Controllers
 
         }
 
-        public ActionResult Index()
+        public ActionResult GetUsers(string input)
         {
-            // TODO: Return empty view, which body contains partial views for listing active and inctive contests
-            return this.View();
+                var users = this.Data.Users.All()
+                    .Where(c => c.UserName.StartsWith(input))
+                    .OrderBy(u => u.UserName)
+                    .Select(u => u.UserName)
+                    .Take(5)
+                    .ToList();
+                return this.Json(users, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Users
