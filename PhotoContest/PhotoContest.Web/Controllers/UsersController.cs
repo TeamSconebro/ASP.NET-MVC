@@ -19,10 +19,10 @@ namespace PhotoContest.Web.Controllers
 
         }
 
-        public ActionResult GetUsers(string input)
+        public ActionResult GetUsers(string search)
         {
                 var users = this.Data.Users.All()
-                    .Where(c => c.UserName.StartsWith(input))
+                    .Where(c => c.UserName.StartsWith(search))
                     .OrderBy(u => u.UserName)
                     .Select(u => u.UserName)
                     .Take(5)

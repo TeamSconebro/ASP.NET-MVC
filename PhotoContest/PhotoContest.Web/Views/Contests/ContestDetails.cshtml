@@ -140,6 +140,19 @@
                 {
                     <div class="row contest-info">No</div>
                 }
+
+                @if (@Model.ParticipationStrategy == ParticipationStrategy.Closed.ToString())
+                {
+                    <div class="row contest-info invite-button">
+                        <input type="button" id="invite" class="btn btn-primary" value="Invite Participants"/>
+                    </div>
+                    <div class="row" id="searchBox" style="display: none">
+                        <br />
+                        Username:<input type="text" name="text" id="text"/><input type="button" class="btn btn-primary" id="addButton" value="Add to contest"/>
+                        <div id="autocomplete"></div>
+                    </div>
+                }
+                
             </div>
         </div>
     </div>
@@ -283,6 +296,35 @@
                     $("#vote-success").fadeOut('slow');
                 }, 3000);
 
+            });
+
+            // Show participate form
+            $("#invite").click(function() {
+                //alert(5);
+                $('#searchBox').css({ "display": "block" });
+            });
+
+            $('#text').keyup(function () {
+                var searchValue = $(this).val();
+                //alert(searchValue);
+
+                if (searchValue.trim() === "") {
+                    $("#autocomplete").empty();
+                } else {
+                    searchValue = searchValue.trim();
+                    var data = { search: searchValue };
+                    $.getJSON("/Users/GetUsers", data, function (results) {
+                        //alert(5);
+                        results.forEach(function (result) {
+                            $("#autocomplete").append("<div>" + result + "</div>");
+                        });
+                    });
+                }
+                $("#autocomplete").empty();
+            });
+
+            $("#autocomplete").css({
+                'padding-left': '50px'
             });
 
 

@@ -180,3 +180,7 @@ div#fancybox-title.fancybox-title-inside {
 #upload-form-container {
     /*display: none;*/
 }
+
+.row.contest-info.invite-button {
+    text-align: center;
+}
