@@ -283,7 +283,7 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>
     @section scripts
-{
+    {
         <script>
             $(document).ready(function() {
 
@@ -292,8 +292,8 @@
                     var targetPictureId = parseInt($(this).attr("id"));
 
                     $.getJSON("/Pictures/Vote", {
-                        id: targetPictureId
-                    },
+                            id: targetPictureId
+                        },
                         function(result) {
                             if (result === "") {
                                 $("#vote-success").html("You successfully give your vote!");
@@ -316,20 +316,24 @@
                 $("#invite").click(function() {
                     $('#searchBox').css({ "display": "block" });
                 });
-
-                $("#username").keyup(function() {
-                    var data = $("#username").val();
-                    var usernames = $.getJSON("/Users/GetUsers", data, function(result) {
-                        return result;
-                    });
-                    $("#username").autocomplete({
-                        source: usernames
-                    }); 
+                
+                $("#username").autocomplete({
+                    source: function(request, response) {
+                        $.ajax({
+                            url: "/Users/GetUsers",
+                            dataType: "json",
+                            data: {
+                                search: $("#username").val()
+                            },
+                            success: function(data) {
+                                response(data);
+                            }
+                        });
+                    }
                 });
-                
 
-                
-                //$('#text').keyup(function() {
+
+//$('#text').keyup(function() {
                 //    var searchValue = $(this).val();
                 //    if (searchValue.trim() === "") {
                 //        $("#autocomplete").empty();
@@ -364,8 +368,6 @@
                     var title = $("#title").val();
                     var url = $("#url").val();
                     var contestId = @Model.Id;
-                    //alert(title);
-                    //alert(url);
 
                     $.getJSON(
                         "/Pictures/UploadImage",
@@ -432,37 +434,5 @@
             //    }
             //});
 
-        </script>
-
-        <script>
-            $(function() {
-                var availableTags = [
-                    "ActionScript",
-                    "AppleScript",
-                    "Asp",
-                    "BASIC",
-                    "C",
-                    "C++",
-                    "Clojure",
-                    "COBOL",
-                    "ColdFusion",
-                    "Erlang",
-                    "Fortran",
-                    "Groovy",
-                    "Haskell",
-                    "Java",
-                    "JavaScript",
-                    "Lisp",
-                    "Perl",
-                    "PHP",
-                    "Python",
-                    "Ruby",
-                    "Scala",
-                    "Scheme"
-                ];
-                $("#tags").autocomplete({
-                    source: availableTags
-                });
-            });
         </script>
     }
