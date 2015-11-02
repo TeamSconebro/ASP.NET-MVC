@@ -320,6 +320,7 @@
     <Content Include="Views\Contests\CreateContest.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Pictures\Vote.cshtml" />
+    <Content Include="Views\Pictures\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Notifications\" />
