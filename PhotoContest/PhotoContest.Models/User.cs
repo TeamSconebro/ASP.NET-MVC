@@ -16,6 +16,10 @@ namespace PhotoContest.Models
         private ICollection<Contest> contests;
         private ICollection<Notification> notifications;
         private ICollection<ContestPicture> contestPictures;
+        private ICollection<Contest> invitedToContests;
+        private ICollection<Contest> invitedToCommittees;
+        private ICollection<Contest> contestsWon;
+
 
         public User()
         {
@@ -24,6 +28,9 @@ namespace PhotoContest.Models
             this.notifications=new HashSet<Notification>();
             this.contestPictures=new HashSet<ContestPicture>();
             this.Coints = 1000;
+            this.invitedToContests = new HashSet<Contest>();
+            this.invitedToCommittees = new HashSet<Contest>();
+            this.contestsWon = new HashSet<Contest>();
         }
 
         //[Required]
@@ -66,6 +73,24 @@ namespace PhotoContest.Models
         {
             get { return this.contestPictures; }
             set { this.contestPictures = value; }
+        }
+
+        public virtual ICollection<Contest> InvitedToContests
+        {
+            get { return this.invitedToContests; }
+            set { this.invitedToContests = value; }
+        }
+  
+        public virtual ICollection<Contest> InvitedToCommittees
+        {
+            get { return this.invitedToCommittees; }
+            set { this.invitedToCommittees = value; }
+        }
+
+        public virtual ICollection<Contest> ContestsWon
+        {
+            get { return this.contestsWon; }
+            set { this.contestsWon = value; }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

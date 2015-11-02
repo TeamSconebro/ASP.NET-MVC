@@ -42,6 +42,36 @@ namespace PhotoContest.Data
                 .WithMany()
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.InvitedToContests)
+                .WithMany(c => c.InvitedUsers)
+                .Map(m =>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("ContestId");
+                    m.ToTable("UserContestsInvitedTo");
+                });
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.InvitedToCommittees)
+                .WithMany(c => c.Committee)
+                .Map(m =>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("ContestId");
+                    m.ToTable("UserCommitteeInvitedTo");
+                });
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.ContestsWon)
+                .WithMany(c => c.Winners)
+                .Map(m =>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("ContestId");
+                    m.ToTable("UserContestsWon");
+                });
+
 
             base.OnModelCreating(modelBuilder);
         }

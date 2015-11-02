@@ -8,7 +8,10 @@ namespace PhotoContest.Models
    public class Contest
    {
         private ICollection<ContestPicture> contestPictures;
-       private ICollection<User> contestors; 
+       private ICollection<User> contestors;
+       private ICollection<User> invitedUsers;
+       private ICollection<User> committee;
+       private ICollection<User> winners; 
 
        public Contest()
        {
@@ -17,6 +20,9 @@ namespace PhotoContest.Models
            this.CreatedOn = DateTime.Now;
            this.PrizeCount = 1;
            this.NumberOfParticipants = 0;
+            this.invitedUsers = new HashSet<User>();
+            this.committee = new HashSet<User>();
+            this.winners = new HashSet<User>();
        }
             
        [Key]
@@ -54,14 +60,8 @@ namespace PhotoContest.Models
        [Required]
        public int PrizeCount { get; set; }
 
-       //public string ContestorsId { get; set; }
-
-       //public virtual User Contestor { get; set; }
-
        public IsClosed IsClosed { get; set; }
        
-
-
         public virtual ICollection<ContestPicture> ContestPictures
         {
             get { return this.contestPictures; }
@@ -72,6 +72,24 @@ namespace PhotoContest.Models
        {
            get { return this.contestors; }
             set { this.contestors = value; }
+       }
+
+       public virtual ICollection<User> InvitedUsers
+       {
+           get { return this.invitedUsers; }
+            set { this.invitedUsers = value; }
+       }
+
+       public virtual ICollection<User> Committee
+       {
+           get { return this.committee; }
+            set { this.committee = value; }
+       }
+
+       public virtual ICollection<User> Winners
+       {
+           get { return this.winners; }
+            set { this.winners = value; }
        } 
     }
 }
