@@ -17,6 +17,8 @@ namespace PhotoContest.Web.App_Start
             Mapper.CreateMap<Contest, ContestViewModelActiveInactivePage>()
                 .ForMember(model => model.OwnerUsername, config => config.MapFrom(contest => contest.Owner.UserName));
 
+            Mapper.CreateMap<Contest, ContestUserProfileViewModel>();
+
             Mapper.CreateMap<Contest, ContestViewModel>();
             Mapper.CreateMap<Contest, ContestViewModel>().
                 ForMember(model => model.OwnerName, config => config.MapFrom(contest => contest.Owner.UserName)).
@@ -32,6 +34,9 @@ namespace PhotoContest.Web.App_Start
                 ForMember(model => model.RewardStrategy, config => config.MapFrom(contest => contest.RewardStrategy)).
                 ForMember(model => model.VotingStrategy, config => config.MapFrom(contest => contest.VotingStrategy))
                 .ForMember(model => model.ContestPictures, config => config.MapFrom(contest => contest.ContestPictures));
+
+            Mapper.CreateMap<ContestPicture, ContestPictureUserProfileViewModel>()
+                .ForMember(model => model.ConstestTitle, config => config.MapFrom(contestPicture => contestPicture.Contest.Title));
 
             Mapper.CreateMap<ContestPicture, ListPictureViewModel>()
                 .ForMember(model => model.OwnerUserName, config => config.MapFrom(a => a.Owner.UserName));

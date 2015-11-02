@@ -1,5 +1,8 @@
 ﻿
 
+using System.Collections.Generic;
+using AutoMapper;
+
 namespace PhotoContest.Web.Controllers
 {
     using System.Linq;
@@ -36,13 +39,18 @@ namespace PhotoContest.Web.Controllers
                 return this.RedirectToAction("Index");
 
             }
+            user.Email = currentUser.Email;
             user.Coints = currentUser.Coints;
             user.FirstName = currentUser.FirstName;
             user.LastName = currentUser.LastName;
             user.UserName = currentUser.UserName;
             user.PhoneNumber = currentUser.PhoneNumber;
-            user.ContestViewModels = this.Data.Contests.All().Where(c => c.OwnerId == currentUserId).OrderByDescending(c => c.CreatedOn);
-            user.ContestPictureViewModels = this.Data.ContestPictures.All().Where(c => c.OwnerId == currentUserId);
+            var contestCollection = this.Data.Contests.All().Where(c => c.OwnerId == currentUserId).OrderByDescending(c => c.CreatedOn);
+            user.ContestViewModels = Mapper.Map<IEnumerable<ContestUserProfileViewModel>>(contestCollection);
+
+            var contestPictures = this.Data.ContestPictures.All().Where(c => c.OwnerId == currentUserId);
+
+            user.ContestPictureViewModels = Mapper.Map<IEnumerable<ContestPictureUserProfileViewModel>>(contestPictures);
             
 
             return View(user);

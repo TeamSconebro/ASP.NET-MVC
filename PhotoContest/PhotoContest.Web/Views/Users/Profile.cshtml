@@ -34,7 +34,14 @@
                     <strong>First Name:</strong>
                 </div>
                 <div class="col-md-5">
+                   @if (@Model.FirstName == null)
+                   {
+                    <span>Not entered</span>
+                   }
+                   else
+                   {
                     @Model.FirstName
+                   }
                 </div>
             </div>
         </div>
@@ -45,7 +52,14 @@
                     <strong>Last Name:</strong>
                 </div>
                 <div class="col-md-5">
-                    @Model.LastName
+                    @if (@Model.LastName == null)
+                    {
+                        <span>Not entered</span>
+                    }
+                    else
+                    {
+                        @Model.LastName
+                    }
                 </div>
             </div>
         </div>
@@ -57,6 +71,7 @@
                     <strong>Email:</strong>
                 </div>
                 <div class="col-md-5">
+                    
                     @Model.Email
                 </div>
             </div>
@@ -67,7 +82,15 @@
                     <strong>PhoneNumber:</strong>
                 </div>
                 <div class="col-md-5">
-                    @Model.PhoneNumber
+                    @if (@Model.PhoneNumber == null)
+                    {
+                        <span>Not entered</span>
+                    }
+                    else
+                    {
+                        @Model.PhoneNumber
+                    }
+
                 </div>
             </div>
         </div>
@@ -109,13 +132,13 @@
                         <div class="col-md-4">
                             <strong>Active:</strong>@item.IsClosed
                         </div>
-                        @if (item.DeadlineStrategy == DeadlineStrategy.ByTime)
+                        @if (item.DeadlineStrategy == DeadlineStrategy.ByTime.ToString())
                         {
                             <div class="col-md-4">
                                 <strong>Deadline :</strong>@item.Deadline
                             </div>
                         }
-                        @if(item.DeadlineStrategy==DeadlineStrategy.ByNumberOfParticipants)
+                        @if(item.DeadlineStrategy==DeadlineStrategy.ByNumberOfParticipants.ToString())
                         {
                         <div class="col-md-4">
                             <strong>Max participants :</strong>@item.NumberOfParticipants
@@ -169,8 +192,8 @@
             {<div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-md-4">
-                        <strong>Contest Title:</strong>@Html.ActionLink(@picture.Contest.Title, "ContestDetails", "Contests",
-                                                        new { id = @picture.Contest.Id },
+                        <strong>Contest Title:</strong>@Html.ActionLink(@picture.ConstestTitle, "ContestDetails", "Contests",
+                                                        new { id = @picture.ContestId },
                                                         new { style = "color:#000", data_id = picture.Id, id = picture.Id })
                     </div>
                     <div class="col-md-4">
