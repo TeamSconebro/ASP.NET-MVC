@@ -212,10 +212,34 @@ namespace PhotoContest.Web.Controllers
             user.Contests.Remove(contest);
             this.Data.SaveChanges();
 
-            this.TempData["message-delete-contest-success"] = $"You successfully deleted \"{contestTitle}\" contest!";
+            this.TempData["message-delete-contest-success"] = @"You successfully deleted ""{contestTitle}"" contest!";
             return RedirectToAction("Profile", "Users");
         }
 
+        public ActionResult AddToCommittee(string username, int contestId)
+        {
+            var resultMessage = "";
+
+            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
+            if (user == null)
+            {
+                resultMessage = "No such user!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            var contest = this.Data.Contests.Find(contestId);
+            if (contest == null)
+            {
+                resultMessage = "No such contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            contest.Committee.Add(user);
+            user.InvitedToCommittees.Add(contest);
+            this.Data.SaveChanges();
+
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult AddToContest(string username, int contestId)
         {
