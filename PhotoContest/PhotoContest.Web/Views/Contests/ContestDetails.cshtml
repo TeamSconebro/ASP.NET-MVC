@@ -262,41 +262,14 @@
     </div>
 
 
+    @*Participate in contest button*@
     @if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName())
-    {
-        <div id="participate-button-container">
-            <a href="" id="participate-button" class="btn btn-primary">Participate</a>
-        </div>
-        <div id="upload-form-container">
-            @using (@Html.BeginForm("UploadImage", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Upload image to contest "@Model.Title":</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
-                    <label for="title" class="col-md-2 control-label">Title</label>
-                    <div class="col-md-10">
-                        @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
-                        <input type="text" name="title" id="title" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="url" class="col-md-2 control-label">Url</label>
-                    <div class="col-md-10">
-                        <input type="url" @*id="Photo"*@ name="url" id="url" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Upload" id="upload" />
-                    </div>
-                </div>
-            }
-
-        </div>
-    }
+        {
+            <div id="participate-button-container">
+                @*<a href="" id="participate-button" class="btn btn-primary">Participate</a>*@
+                @Html.ActionLink("Participate", "Upload", "Pictures", new {id = @Model.Id, title = @Model.Title}, new {@class = "btn btn-primary", id = "participate-button"})
+            </div>
+        }
 
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>

@@ -26,14 +26,21 @@ namespace PhotoContest.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult UploadForm()
+        [ActionName("Upload")]
+        public ActionResult UploadImage(int id, string title)
         {
-            return this.PartialView("UploadForm");
+            var neededContestDetails = new ContestDetailsForUploadImage()
+            {
+                ContestId = id,
+                ContestTitle = title
+            };
+            return this.View(neededContestDetails);
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ActionName("Upload")]
         public ActionResult UploadImage(ImageBindingModel model)
         {
             var ownerId = this.User.Identity.GetUserId();
