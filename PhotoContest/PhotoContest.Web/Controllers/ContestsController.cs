@@ -99,6 +99,7 @@ namespace PhotoContest.Web.Controllers
             if (ModelState.IsValid)
             {
                 var currentUserId = User.Identity.GetUserId();
+                var currentUser = this.Data.Users.Find(currentUserId);
                 var contest = new Contest()
                 {
                     Title = newContest.Title,
@@ -116,6 +117,7 @@ namespace PhotoContest.Web.Controllers
                 };
 
                 this.Data.Contests.Add(contest);
+                currentUser.Contests.Add(contest);
                 this.Data.Contests.SaveChanges();
 
                 this.TempData["message-create-contest-success"] = "You successfully created new contest!";
@@ -139,6 +141,31 @@ namespace PhotoContest.Web.Controllers
             // TODO: Delete contest by id.
 
             return this.View();
+        }
+
+        public ActionResult AddToContest(string username, int contestId)
+        {
+            var resultMessage = "";
+
+            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
+            if (user == null)
+            {
+                resultMessage = "No such user!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            var contest = this.Data.Contests.Find(contestId);
+            if (contest == null)
+            {
+                resultMessage = "No such contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            contest.InvitedUsers.Add(user);
+            user.InvitedToContests.Add(contest);
+            this.Data.SaveChanges();
+
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 
         /**********************************************/

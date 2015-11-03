@@ -7,8 +7,6 @@
         <h3>Create new contest:</h3>
         <hr/>
     
-
-
     @using (Html.BeginForm("CreateContest", "Contests", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
     {
         @Html.AntiForgeryToken()
@@ -18,25 +16,23 @@
                 <div class="col-lg-3">
                     <strong>Title:</strong>
                 </div>
-                    <div class="col-md-5">
-                        @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
-                    </div>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
                 </div>
             </div>
-
-
+        </div>
+        
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-lg-3">
                     <strong>Description:</strong>
                 </div>
-                        <div class="col-md-5">
-                            @Html.TextBoxFor(m => m.Description, new {@class = "form-control"})
-                        </div>
-                    </div>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.Description, new {@class = "form-control"})
                 </div>
-
-
+            </div>
+        </div>
+        
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-lg-3">
@@ -55,8 +51,7 @@
                 </div>
             </div>
         </div>
-
-
+        
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-lg-3">
@@ -77,8 +72,7 @@
                 </div>
             </div>
         </div>
-
-
+        
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-lg-3">
@@ -96,8 +90,6 @@
                 </div>
             </div>
         </div>
-
-
 
     <div class="panel panel-default">
         <div class="panel-body">
@@ -135,7 +127,6 @@
             </div>
         </div>
         
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" class="btn btn-default" value="Create new Contest"/>

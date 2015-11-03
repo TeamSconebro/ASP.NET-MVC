@@ -152,16 +152,12 @@
                         <div class="row contest-info">No</div>
                     }
 
-                    @if (@Model.ParticipationStrategy == ParticipationStrategy.Closed.ToString())
+                    @if (@Model.ParticipationStrategy == ParticipationStrategy.Closed.ToString() &&
+                            Request.IsAuthenticated)
                     {
                         <div class="row contest-info invite-button">
                             <input type="button" id="invite" class="btn btn-primary" value="Invite Participants" />
                         </div>
-                        @*<div class="row" id="searchBox" style="display: none">
-                            <br />
-                            Username:<input type="text" name="text" id="text" /> <input type="button" class="btn btn-primary" id="addButton" value="Add" />
-                            <div id="autocomplete"></div>
-                        </div>*@
 
                         <div class="ui-widget" id="searchBox" style="display: none">
                             <br />
@@ -169,6 +165,8 @@
                             <input id="username">
                             <input type="button" class="btn btn-primary" id="addButton" value="Add" />
                             <div id="autocomplete"></div>
+                            <div id="invite-success"></div>
+                            <div id="invite-error"></div>
                         </div>
                     }
 
@@ -208,7 +206,7 @@
                                             </div>
                                             <div class="row">
                                                 @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
-                                                new { id = @picture.OwnerId }, null)
+                                            new { id = @picture.OwnerId }, null)
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -216,7 +214,7 @@
                                             {
                                                 <div class="row vote-button-container">
                                                     @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post,
-                        null))
+null))
                                                     {
                                                         @Html.ValidationSummary(true)
                                                         <fieldset>
@@ -279,11 +277,10 @@
         </div>
     }
 
-
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>
     @section scripts
-    {
+{
         <script>
             $(document).ready(function() {
 
@@ -291,9 +288,7 @@
                 $(".vote-button").click(function() {
                     var targetPictureId = parseInt($(this).attr("id"));
 
-                    $.getJSON("/Pictures/Vote", {
-                            id: targetPictureId
-                        },
+                    $.getJSON("/Pictures/Vote", {id: targetPictureId},
                         function(result) {
                             if (result === "") {
                                 $("#vote-success").html("You successfully give your vote!");
@@ -312,11 +307,11 @@
                 });
 
 
-                // Show participate form
+                // Show participate form and autocomplete search for usernames
                 $("#invite").click(function() {
                     $('#searchBox').css({ "display": "block" });
                 });
-                
+
                 $("#username").autocomplete({
                     source: function(request, response) {
                         $.ajax({
@@ -332,30 +327,29 @@
                     }
                 });
 
+                $("#addButton").click(function() {
+                    var inputUsername = $("#username").val();
+                    var currentContestId = @Model.Id;
+                    //alert(inputUsername);
+                    $.getJSON("/Contests/AddToContest", 
+                        {username: inputUsername, contestId: currentContestId},
+                        function(result) {
+                            if (result === "") {
+                                $("#invite-success").html(inputUsername + " has been invited!");
+                            } else {
+                                $("#invite-error").html(result);
+                            }
+                        });
+                    setTimeout(function() {
+                        $("#invite-error").fadeOut('slow');
+                    }, 2000);
 
-//$('#text').keyup(function() {
-                //    var searchValue = $(this).val();
-                //    if (searchValue.trim() === "") {
-                //        $("#autocomplete").empty();
-                //    } else {
-                //        searchValue = searchValue.trim();
-                //        var data = { search: searchValue };
-                //        $.getJSON("/Users/GetUsers", data, function(results) {
-                //            results.forEach(function(result) {
-                //                $("#autocomplete").append("<div>" + result + "</div>");
+                    setTimeout(function() {
+                        $("#invite-success").fadeOut('slow');
+                    }, 2000);
+                });
 
-                //                // Invite user to contest
-
-                //            });
-                //        });
-                //    }
-                //    $("#autocomplete").empty();
-                //});
-
-                //$("#autocomplete").css({
-                //    'padding-left': '50px'
-                //});
-
+                // Upload image to current contest
 
                 //$("#upload-form-container").css({"visibility":"hidden"});
 
@@ -388,13 +382,6 @@
                         });
                 });
 
-
-                //$(function () {
-
-                //    $('#upload').click(function (e) {
-                //        e.preventDefault();
-
-
                 //        $.ajax({
                 //            type: "POST",
                 //            url: "Pictures/UploadImage", //Your Action name in the ropDownListConstroller.cs
@@ -412,9 +399,6 @@
                 //                alert(response.status + " " + response.statusText);
                 //            }
                 //        });
-                //    });
-
-                //});
 
             });
             //$.ajax({
