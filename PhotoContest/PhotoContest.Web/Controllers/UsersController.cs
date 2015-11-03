@@ -19,6 +19,16 @@ namespace PhotoContest.Web.Controllers
 
         }
 
+        public ActionResult GetUsersFromContest(string search,int contestId)
+        {
+            var contest = this.Data.Contests.Find(contestId);
+            var users = contest.Contestors.Where(c => c.UserName.StartsWith(search))
+                    .OrderBy(u => u.UserName)
+                    .Select(u => u.UserName)
+                    .Take(5)
+                    .ToList();
+            return this.Json(users, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetUsers(string search)
         {
                 var users = this.Data.Users.All()

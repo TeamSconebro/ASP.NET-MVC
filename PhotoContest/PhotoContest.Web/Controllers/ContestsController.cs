@@ -285,10 +285,27 @@ namespace PhotoContest.Web.Controllers
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult ChooseWinner(string username, int contestId)
-        //{
-            
-        //}
+        public ActionResult ChooseWinner(string username, int contestId)
+        {
+            var resultMessage = "";
+            var currentContest = this.Data.Contests.Find(contestId);
+            var user = currentContest.Contestors.FirstOrDefault(u => u.UserName == username);
+
+            var contest = this.Data.Contests.Find(contestId);
+            if (contest == null)
+            {
+                resultMessage = "No such contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            contest.Winners.Add(user);
+            if (user != null) user.ContestsWon.Add(contest);
+            if (user != null) user.Coints = user.Coints + contest.PrizeValues;
+            contest.IsClosed=IsClosed.Yes;
+            this.Data.SaveChanges();
+
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult AddToCommittee(string username, int contestId)
         {
             var resultMessage = "";
