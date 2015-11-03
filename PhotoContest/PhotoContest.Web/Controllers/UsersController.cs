@@ -22,7 +22,8 @@ namespace PhotoContest.Web.Controllers
         public ActionResult GetUsersFromContest(string search,int contestId)
         {
             var contest = this.Data.Contests.Find(contestId);
-            var users = contest.Contestors.Where(c => c.UserName.StartsWith(search))
+            var users = contest.Contestors.
+                Where(c => c.UserName.StartsWith(search))
                     .OrderBy(u => u.UserName)
                     .Select(u => u.UserName)
                     .Take(5)

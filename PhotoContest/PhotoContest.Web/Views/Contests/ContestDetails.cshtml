@@ -272,8 +272,6 @@
                                                             <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id" />
                                                         </fieldset>
                                                     }
-                                                    @Html.ActionLink("Vote +", "Vote", "Pictures",
-                                                    new { id = @picture.Id }, new { @class = "btn btn-primary vote-button" })
                                                 </div>
                                             }
                                         </div>
@@ -306,149 +304,149 @@
     @section scripts
 {
         <script>
-            $(document).ready(function() {
+    $(document).ready(function() {
 
-                // Voting
-                $(".vote-button").click(function() {
-                    var targetPictureId = parseInt($(this).attr("id"));
+        // Voting
+        $(".vote-button").click(function() {
 
-                    $.getJSON("/Pictures/Vote", { id: targetPictureId },
-                        function(result) {
-                            if (result === "") {
-                                $("#vote-success").html("You successfully give your vote!");
-                            } else {
-                                $("#vote-error").html(result);
-                            }
-                        });
-                    setTimeout(function() {
-                        $("#vote-error").fadeOut('slow');
-                    }, 3000);
+            var targetPictureId = parseInt($(this).attr("id"));
 
-                    setTimeout(function() {
-                        $("#vote-success").fadeOut('slow');
-                    }, 3000);
-
-                });
-
-
-                // Show participate form and autocomplete search for usernames
-                $("#invite").click(function() {
-                    $('#searchBox').css({ "display": "block" });
-                });
-
-                $("#username").autocomplete({
-                    source: function(request, response) {
-                        $.ajax({
-                            url: "/Users/GetUsers",
-                            dataType: "json",
-                            data: {
-                                search: $("#username").val()
-                            },
-                            success: function(data) {
-                                response(data);
-                            }
-                        });
+            $.getJSON("/Pictures/Vote", { id: targetPictureId },
+                function(result) {
+                    if (result === "") {
+                        alert(123);
+                        $("#vote-success").html("You successfully has given your vote!").css("display", "block");
+                    } else {
+                        $("#vote-error").html(result).css("display", "block");
                     }
                 });
+            setTimeout(function() {
+                $("#vote-error").fadeOut('slow');
+            }, 3000);
 
-                $("#addButton").click(function() {
-                    var inputUsername = $("#username").val();
-                    var currentContestId = @Model.Id;
-                    //alert(inputUsername);
-                    $.getJSON("/Contests/AddToContest",
-                        { username: inputUsername, contestId: currentContestId },
-                        function(result) {
-                            if (result === "") {
-                                $("#invite-success").html(inputUsername + " has been invited to the contest!");
-                            } else {
-                                $("#invite-error").html(result);
-                            }
-                        });
-                    setTimeout(function() {
-                        $("#invite-error").fadeOut('slow');
-                    }, 2000);
+            setTimeout(function() {
+                $("#vote-success").fadeOut('slow');
+            }, 3000);
 
-                    setTimeout(function() {
-                        $("#invite-success").fadeOut('slow');
-                    }, 2000);
-                });
-                //button
-                $("#inviteOne").click(function() {
-                    $('#searchBoxOne').css({ "display": "block" });
-                });
+        });
 
-                $("#usernameOne").autocomplete({
-                    source: function(request, response) {
-                        $.ajax({
-                            url: "/Users/GetUsers",
-                            dataType: "json",
-                            data: {
-                                search: $("#usernameOne").val()
-                            },
-                            success: function(data) {
-                                response(data);
-                            }
-                        });
+
+        // Show participate form and autocomplete search for usernames
+        $("#invite").click(function() {
+            $('#searchBox').css({ "display": "block" });
+        });
+
+        $("#username").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "/Users/GetUsers",
+                    dataType: "json",
+                    data: {
+                        search: $("#username").val()
+                    },
+                    success: function(data) {
+                        response(data);
                     }
                 });
-                //Invite to  Committee
+            }
+        });
 
-                $("#addButtonToCommittee").click(function() {
-                    var inputUsername = $("#usernameOne").val();
-                    var currentContestId = @Model.Id;
-                    //alert(inputUsername);
-                    $.getJSON("/Contests/AddToCommittee",
-                        { username: inputUsername, contestId: currentContestId },
-                        function(result) {
-                            if (result === "") {
-                                $("#invite-successOne").html(inputUsername + " has been invited to the committee!");
-                            } else {
-                                $("#invite-errorOne").html(result);
-                            }
-                        });
-                    setTimeout(function() {
-                        $("#invite-errorOne").fadeOut('slow');
-                    }, 2000);
-
-                    setTimeout(function() {
-                        $("#invite-successOne").fadeOut('slow');
-                    }, 2000);
+        $("#addButton").click(function() {
+            var inputUsername = $("#username").val();
+            var currentContestId = @Model.Id;
+            //alert(inputUsername);
+            $.getJSON("/Contests/AddToContest",
+                { username: inputUsername, contestId: currentContestId },
+                function(result) {
+                    if (result === "") {
+                        $("#invite-success").html(inputUsername + " has been invited to the contest!").css("display", "block");
+                    } else {
+                        $("#invite-error").html(result).css("display", "block");
+                    }
                 });
+            setTimeout(function() {
+                $("#invite-error").fadeOut('slow');
+            }, 2000);
 
-                //EndContest
-                $("#endContest").click(function() {
-                    $('#buttonsEnd').css({ "display": "block" });
-                });
-                $("#winnerByVote").click(function() {
-                    var inputUsername = $("#username").val();
-                    var currentContestId = @Model.Id;
-                    $.getJSON("/Contests/WinnerByVotes",
-                        { username: inputUsername, contestId: currentContestId },
-                        function(result) {
-                            if (result === "") {
-                                $("#invite-success").html(" has been invited to the contest!");
-                            } else {
-                                $("#invite-error").html(result);
-                            }
-                        });
-                    setTimeout(function() {
-                        $("#invite-error").fadeOut('slow');
-                    }, 2000);
+            setTimeout(function() {
+                $("#invite-success").fadeOut('slow');
+            }, 2000);
+        });
+        //button
+        $("#inviteOne").click(function() {
+            $('#searchBoxOne').css({ "display": "block" });
+        });
 
-                    setTimeout(function() {
-                        $("#invite-success").fadeOut('slow');
-                    }, 2000);
+        $("#usernameOne").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "/Users/GetUsers",
+                    dataType: "json",
+                    data: {
+                        search: $("#usernameOne").val()
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
                 });
-                $("#noWinners").click(function() {
-                    var inputUsername = $("#username").val();
-                    var currentContestId = @Model.Id;
+            }
+        });
+        //Invite to  Committee
+
+        $("#addButtonToCommittee").click(function() {
+            var inputUsername = $("#usernameOne").val();
+            var currentContestId = @Model.Id;
+            $.getJSON("/Contests/AddToCommittee",
+                { username: inputUsername, contestId: currentContestId },
+                function(result) {
+                    if (result === "") {
+                        $("#invite-successOne").html(inputUsername + " has been invited to the committee!").css("display", "block");
+                    } else {
+                        $("#invite-errorOne").html(result).css("display", "block");
+                    }
+                });
+            setTimeout(function() {
+                $("#invite-errorOne").fadeOut('slow');
+            }, 2000);
+
+            setTimeout(function() {
+                $("#invite-successOne").fadeOut('slow');
+            }, 2000);
+        });
+        //EndContest
+        $("#endContest").click(function() {
+            $('#buttonsEnd').css({ "display": "block" });
+        });
+        $("#winnerByVote").click(function() {
+            var inputUsername = $("#username").val();
+            var currentContestId = @Model.Id;
+            $.getJSON("/Contests/WinnerByVotes",
+                { username: inputUsername, contestId: currentContestId },
+                function(result) {
+                    if (result === "") {
+                        $("#invite-success").html(" has been invited to the contest!").css("display", "block");
+                    } else {
+                        $("#invite-error").html(result).css("display", "block");
+                    }
+                });
+            setTimeout(function() {
+                $("#invite-error").fadeOut('slow');
+            }, 2000);
+
+            setTimeout(function() {
+                $("#invite-success").fadeOut('slow');
+            }, 2000);
+        });
+        $("#noWinners").click(function() {
+            var inputUsername = $("#username").val();
+            var currentContestId = @Model.Id;
                     $.getJSON("/Contests/NoWinner",
                         { username: inputUsername, contestId: currentContestId },
                         function(result) {
                             if (result === "") {
-                                $("#invite-success").html(" has been invited to the contest!");
+                                $("#invite-success").html(" has been invited to the contest!").css("display", "block");
                             } else {
-                                $("#invite-error").html(result);
+                                $("#invite-error").html(result).css("display", "block");
                             }
                         });
                     setTimeout(function() {
@@ -460,17 +458,18 @@
                     }, 2000);
                 });
                 //select winners
-                @*$("#selectWinner").click(function() {
+                $("#selectWinner").click(function() {
                     $('#searchBoxSelectWinner').css({ "display": "block" });
                 });
 
                 $("#usernameSelectWinner").autocomplete({
                     source: function(request, response) {
+                        var currentContestId = @Model.Id;
                         $.ajax({
                             url: "/Users/GetUsersFromContest",
                             dataType: "json",
                             data: {
-                                search: $("#usernameSelectWinner") /*,contestId:currentContestId*/},
+                                search: $("#usernameSelectWinner") ,contestId:currentContestId},
                             success: function(data) {
                                 response(data);
                             }
@@ -481,94 +480,93 @@
                 $("#addButtonSelectWinner").click(function() {
                     var inputUsername = $("#usernameSelectWinner").val();
                     var currentContestId = @Model.Id;
-                    //alert(inputUsername);
-                    $.getJSON("/Contests/ChooseWinner",
-                        { username: inputUsername, contestId: currentContestId },
-                        function(result) {
-                            if (result === "") {
-                                $("#invite-success").html(inputUsername + " has been selected as a winner!");
-                            } else {
-                                $("#invite-error").html(result);
-                            }
-                        });
-                    setTimeout(function() {
-                        $("#invite-error").fadeOut('slow');
-                    }, 2000);
-
-                    setTimeout(function() {
-                        $("#invite-success").fadeOut('slow');
-                    }, 2000);
-                });*@
-                //select winners
-
-                // Upload image to current contest
-
-                //$("#upload-form-container").css({"visibility":"hidden"});
-
-                //$("#participate-button").click(function() {
-                //    //alert(5);
-                //    $("#upload-form-container").css({ "display": "block" });
-                //});
-
-                $("#upload").click(function() {
-                    var title = $("#title").val();
-                    var url = $("#url").val();
-                    var contestId = @Model.Id;
-
-                    $.getJSON(
-                        "/Pictures/UploadImage",
-                        {
-                            title: title,
-                            base64Data: url,
-                            contestId: contestId
-
-                        },
-                        function(result) {
-                            if (result === "") {
-                                $("#vote-success").html("You successfully give your vote!");
-                                //$("#vote-success").html(result);
-                            } else {
-                                //$("#vote-error").html("You cannot vote in that contest!");
-                                $("#vote-error").html(result);
-                            }
-                        });
+            $.getJSON("/Contests/ChooseWinner",
+                { username: inputUsername, contestId: currentContestId },
+                function(result) {
+                    if (result === "") {
+                        $("#invite-success").html(inputUsername + " has been selected as a winner!").css("display", "block");
+                    } else {
+                        $("#invite-error").html(result).css("display", "block");
+                    }
                 });
+            setTimeout(function() {
+                $("#invite-error").fadeOut('slow');
+            }, 2000);
 
-                //        $.ajax({
-                //            type: "POST",
-                //            url: "Pictures/UploadImage", //Your Action name in the ropDownListConstroller.cs
-                //            data: "{'title':'" + $('#title').val() + "','base64Data':'" + $('#url').val() + "','contestId':'" +  + "'}",  //Parameter in this function, Is case sensitive and also type must be string
-                //            contentType: "application/json; charset=utf-8",
-                //            dataType: "json"
+            setTimeout(function() {
+                $("#invite-success").fadeOut('slow');
+            }, 2000);
+        });
+        //select winners
 
-                //        }).done(function (data) {
-                //            //Successfully pass to server and get response
-                //            if (data.result="OK") {
-                //                alert("submit successfully.");
-                //            }
-                //        }).fail(function (response) {
-                //            if (response.status != 0) {
-                //                alert(response.status + " " + response.statusText);
-                //            }
-                //        });
+        // Upload image to current contest
 
-            });
-            //$.ajax({
-            //    url: "/Pictures/Vote",
-            //    method: "POST",
-            //    data: { id: targetPictureId },
-            //    contentType: 'application/json; charset=utf-8',
-            //    //cache: false,
-            //    success: function (data) {
-            //        $("#vote-success").html("You successfully give your vote!");
-            //        //alert(data);
-            //        //$("#result" + targetId).append(data);
-            //        //alert(data);
-            //    },
-            //    error: function (error) {
-            //        $("#vote-error").html("You cannot vote in that contest!");
-            //    }
-            //});
+        //$("#upload-form-container").css({"visibility":"hidden"});
+
+        //$("#participate-button").click(function() {
+        //    //alert(5);
+        //    $("#upload-form-container").css({ "display": "block" });
+        //});
+
+        $("#upload").click(function() {
+            var title = $("#title").val();
+            var url = $("#url").val();
+            var contestId = @Model.Id;
+
+            $.getJSON(
+                "/Pictures/UploadImage",
+                {
+                    title: title,
+                    base64Data: url,
+                    contestId: contestId
+
+                },
+                function(result) {
+                    if (result === "") {
+                        $("#vote-success").html("You successfully give your vote!");
+                        //$("#vote-success").html(result);
+                    } else {
+                        //$("#vote-error").html("You cannot vote in that contest!");
+                        $("#vote-error").html(result);
+                    }
+                });
+        });
+
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "Pictures/UploadImage", //Your Action name in the ropDownListConstroller.cs
+        //            data: "{'title':'" + $('#title').val() + "','base64Data':'" + $('#url').val() + "','contestId':'" +  + "'}",  //Parameter in this function, Is case sensitive and also type must be string
+        //            contentType: "application/json; charset=utf-8",
+        //            dataType: "json"
+
+        //        }).done(function (data) {
+        //            //Successfully pass to server and get response
+        //            if (data.result="OK") {
+        //                alert("submit successfully.");
+        //            }
+        //        }).fail(function (response) {
+        //            if (response.status != 0) {
+        //                alert(response.status + " " + response.statusText);
+        //            }
+        //        });
+
+    });
+    //$.ajax({
+    //    url: "/Pictures/Vote",
+    //    method: "POST",
+    //    data: { id: targetPictureId },
+    //    contentType: 'application/json; charset=utf-8',
+    //    //cache: false,
+    //    success: function (data) {
+    //        $("#vote-success").html("You successfully give your vote!");
+    //        //alert(data);
+    //        //$("#result" + targetId).append(data);
+    //        //alert(data);
+    //    },
+    //    error: function (error) {
+    //        $("#vote-error").html("You cannot vote in that contest!");
+    //    }
+    //});
 
         </script>
     }

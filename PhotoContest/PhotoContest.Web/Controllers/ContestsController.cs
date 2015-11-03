@@ -285,22 +285,16 @@ namespace PhotoContest.Web.Controllers
         public ActionResult ChooseWinner(string username, int contestId)
         {
             var resultMessage = "";
-            var currentContest = this.Data.Contests.Find(contestId);
-            var user = currentContest.Contestors.FirstOrDefault(u => u.UserName == username);
-
             var contest = this.Data.Contests.Find(contestId);
-            if (contest == null)
-            {
-                resultMessage = "No such contest!";
-                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
-            }
-
-            contest.Winners.Add(user);
-            if (user != null) user.ContestsWon.Add(contest);
-            if (user != null) user.Coints = user.Coints + contest.PrizeValues;
-            contest.IsClosed=IsClosed.Yes;
-            this.Data.SaveChanges();
-
+            var userId = this.Data.Users.All().FirstOrDefault(u => u.UserName == username).Id;
+            var users = this.Data.Users.Find(userId);
+               
+                contest.Winners.Add(users);
+                if (users != null) users.ContestsWon.Add(contest);
+                if (users != null) users.Coints = users.Coints + contest.PrizeValues;
+                contest.IsClosed = IsClosed.Yes;
+                this.Data.SaveChanges();
+            
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AddToCommittee(string username, int contestId)
