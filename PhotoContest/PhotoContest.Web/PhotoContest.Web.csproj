@@ -234,6 +234,7 @@
     <Compile Include="Models\ViewModels\ContestViewModelHomePage.cs" />
     <Compile Include="Models\ViewModels\NotificationViewModel.cs" />
     <Compile Include="Models\ViewModels\ListPictureViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserFullViewModel.cs" />
     <Compile Include="Models\ViewModels\UserProfileEditViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

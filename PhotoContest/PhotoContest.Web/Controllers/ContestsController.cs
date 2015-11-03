@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.ComponentModel.Design.Serialization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -237,15 +239,49 @@ namespace PhotoContest.Web.Controllers
         {
             var resultMessage = "";
             var contest = this.Data.Contests.Find(contestId);
-            var pictureWinner = contest.ContestPictures.OrderBy(cp => cp.Votes).FirstOrDefault();
-            if (pictureWinner != null)
+            var numberOfWinners = contest.PrizeCount;
+            contest.IsClosed = IsClosed.Yes;
+            var pictureWinner = contest.ContestPictures.OrderBy(cp => cp.Votes).Take(numberOfWinners);
+            if (contest.RewardStrategy == RewardStrategy.SingleWinner)
             {
-                var winner=this.Data.Users.Find(pictureWinner.OwnerId);
-                contest.Winners.Add(winner);
-                winner.ContestsWon.Add(contest);
-                this.Data.SaveChanges();
-                resultMessage = winner.UserName + " is the winner of " + contest.Title + "!";
+                if (contest.ContestPictures.Any())
+                {
+                    var pictures = contest.ContestPictures.OrderBy(cp => cp.Votes.Count).FirstOrDefault();
+                    if (pictures != null)
+                    {
+                        var firstWinnerId = pictures.OwnerId;
+                        if (firstWinnerId != null)
+                        {
+
+                            var firstWinnerUser = this.Data.Users.Find(firstWinnerId);
+                            firstWinnerUser.Coints = firstWinnerUser.Coints + contest.PrizeValues;
+                            resultMessage = firstWinnerUser.UserName + " is the winner of " + contest.Title + "!";
+                            contest.Winners.Add(firstWinnerUser);
+                            firstWinnerUser.ContestsWon.Add(contest);
+                        }
+                    }
+                } 
             }
+            else
+            {
+                var firstOrDefault = contest.ContestPictures.OrderBy(cp => cp.Votes).FirstOrDefault();
+                if (firstOrDefault != null)
+                {
+                    var firstWinnerId = firstOrDefault.OwnerId;
+                    var firstWinnerUser = this.Data.Users.Find(firstWinnerId);
+                    firstWinnerUser.Coints = firstWinnerUser.Coints + contest.PrizeValues;
+                    resultMessage = firstWinnerUser.UserName + " is the winner of " + contest.Title + "!";
+                }
+                
+                foreach (var people in pictureWinner)
+                {
+                    var winner = this.Data.Users.Find(people.OwnerId);
+                    contest.Winners.Add(winner);
+                    winner.ContestsWon.Add(contest);
+
+                }
+            }
+            this.Data.SaveChanges();
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 

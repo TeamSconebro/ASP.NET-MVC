@@ -13,6 +13,9 @@ namespace PhotoContest.Web.App_Start
     {
         public static void ConfigureMappings()
         {
+            Mapper.CreateMap<User, UserFullViewModel>();
+            Mapper.CreateMap<Vote,VoteBindingModel>();
+            Mapper.CreateMap<ContestPicture,ContestPictureViewModel>();
             Mapper.CreateMap<Contest, ContestViewModelHomePage>();
 
             Mapper.CreateMap<Contest, ContestViewModelActiveInactivePage>()
@@ -34,7 +37,8 @@ namespace PhotoContest.Web.App_Start
                 ForMember(model => model.ParticipationStrategy, config => config.MapFrom(contest => contest.ParticipationStrategy)).
                 ForMember(model => model.RewardStrategy, config => config.MapFrom(contest => contest.RewardStrategy)).
                 ForMember(model => model.VotingStrategy, config => config.MapFrom(contest => contest.VotingStrategy))
-                .ForMember(model => model.ContestPictures, config => config.MapFrom(contest => contest.ContestPictures));
+                .ForMember(model => model.ContestPictures, config => config.MapFrom(contest => contest.ContestPictures))
+                .ForMember(model=>model.Winners,config=> config.MapFrom(contest => contest.Winners));
 
             Mapper.CreateMap<Contest, EditContestBindingModel>().ReverseMap();
 
