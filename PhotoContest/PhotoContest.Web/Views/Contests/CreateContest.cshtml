@@ -14,7 +14,7 @@
          @Html.ValidationSummary("", new { @class = "text-danger" })
     if (TempData["message-create-contest-coints"] != null)
     {
-        <h3 class="create-contest-success">@TempData["message-create-contest-coints"]</h3>
+        <div class="alert alert-success">@TempData["message-create-contest-coints"]</div>
     }
         <div class="panel panel-default">
            

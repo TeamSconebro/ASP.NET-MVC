@@ -51,7 +51,6 @@
                         <div class="inactive contest-title">
                             @Html.ActionLink(@inactiveContest.Title, "ContestDetails", "Contests",
                                 new {id = @inactiveContest.Id}, null)
-                            @*<a href="@Url.Action("ContestDetails", "Contests", )">@inactiveContest.Title</a>*@
                         </div>
                         <div>
                             <span class="contest-create-on">@Html.DisplayFor(model => inactiveContest.CreatedOn)</span>
