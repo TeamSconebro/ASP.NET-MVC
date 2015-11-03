@@ -27,14 +27,14 @@ namespace PhotoContest.Web.Controllers
 
         [HttpGet]
         [ActionName("Upload")]
-        public ActionResult UploadImage(int id, string title)
+        public ActionResult UploadImage(int id/*, string title*/)
         {
-            var neededContestDetails = new ContestDetailsForUploadImage()
-            {
-                ContestId = id,
-                ContestTitle = title
-            };
-            return this.View(neededContestDetails);
+            //var neededContestDetails = new ImageBindingModel()
+            //{
+            //    ContestId = id
+            //};
+            this.ViewBag.ContestId = id;
+            return this.View();
         }
 
         [Authorize]
@@ -47,10 +47,26 @@ namespace PhotoContest.Web.Controllers
             var owner = this.Data.Users.Find(ownerId);
             if (owner == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            
-            return this.View();
+
+            var contest = this.Data.Contests.Find(model.ContestId);
+            if (contest == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            var picture = new ContestPicture()
+            {
+                Title = model.Title,
+                Base64Data = model.Base64Data,
+                ContestId = contest.Id,
+                OwnerId = ownerId
+            };
+            this.Data.ContestPictures.Add(picture);
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("ContestDetails", "Contests", new {id = picture.ContestId});
         }
 
         [Authorize]
