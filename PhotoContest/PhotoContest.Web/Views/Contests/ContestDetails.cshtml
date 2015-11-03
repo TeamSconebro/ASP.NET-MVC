@@ -291,7 +291,7 @@
 
 
     @*Participate in contest button*@
-    @if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName())
+    @if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName()&&@Model.IsClosed.Equals("No"))
     {
         <div id="participate-button-container">
             @*<a href="" id="participate-button" class="btn btn-primary">Participate</a>*@
