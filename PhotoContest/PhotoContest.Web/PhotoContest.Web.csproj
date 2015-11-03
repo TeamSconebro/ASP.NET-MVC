@@ -329,6 +329,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Pictures\Vote.cshtml" />
     <Content Include="Views\Pictures\UploadImage.cshtml" />
+    <Content Include="Views\Contests\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Notifications\" />

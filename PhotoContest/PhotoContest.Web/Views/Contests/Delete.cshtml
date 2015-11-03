@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Delete Contest";
+}
+
+<h2>Are you sure about deleting this contest?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+        @Html.ActionLink("Back", "Profile", "Users", null, new { @class = "btn btn-default" })
+    </div>
+}

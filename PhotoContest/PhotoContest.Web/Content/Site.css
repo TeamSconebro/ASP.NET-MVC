@@ -122,13 +122,13 @@ h3.panel-title {
     margin-top: 100px;
 }
 
-#vote-error {
+#vote-error, .message-delete-contest-error {
     font-size: 22px;
     text-align: center;
     color: red;
 }
 
-#vote-success {
+#vote-success, .message-delete-contest-success {
     font-size: 22px;
     text-align: center;
     color: green;
@@ -187,4 +187,8 @@ div#fancybox-title.fancybox-title-inside {
 
 .back-button {
     text-align: center;
+}
+
+.delete-contest-button {
+    margin: 0 0 10px 30px;
 }

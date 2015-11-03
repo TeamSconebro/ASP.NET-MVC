@@ -136,12 +136,37 @@ namespace PhotoContest.Web.Controllers
             return this.View();
         }
 
+        // GET: Delete contest
+        [Authorize]
+        [HttpGet]
+        [ActionName("Delete")]
         public ActionResult DeleteContest()
         {
-            // TODO: Delete contest by id.
-
-            return this.View();
+            return View();
         }
+
+        // POST: Delete contest
+        [Authorize]
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteContest(int id = 0)
+        {
+            var contest = this.Data.Contests.Find(id);
+            if (contest == null)
+            {
+                this.TempData["message-delete-contest-error"] = "Non existing contest!";
+                return RedirectToAction("Profile", "Users");
+            }
+
+            var contestTitle = contest.Title;
+            this.Data.Contests.Remove(contest);
+            this.Data.SaveChanges();
+
+            this.TempData["message-delete-contest-success"] = $"You successfully deleted \"{contestTitle}\" contest!";
+            return RedirectToAction("Profile", "Users");
+        }
+
 
         public ActionResult AddToContest(string username, int contestId)
         {
