@@ -134,6 +134,9 @@ namespace PhotoContest.Web.Controllers
             return this.View(newContest);
         }
 
+        
+        
+
         // GET: Edit contest
         [Authorize]
         [HttpGet]
@@ -221,7 +224,35 @@ namespace PhotoContest.Web.Controllers
             this.TempData["message-delete-contest-success"] = @"You successfully deleted ""{contestTitle}"" contest!";
             return RedirectToAction("Profile", "Users");
         }
+        public ActionResult NoWinner(int contestId)
+        {
+            var contest = this.Data.Contests.Find(contestId);
+            contest.IsClosed=IsClosed.Yes;
+            this.Data.SaveChanges();
+            const string resultMessage = "No winner was selected";
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult WinnerByVotes(string username, int contestId)
+        {
+            var resultMessage = "";
+            var contest = this.Data.Contests.Find(contestId);
+            var pictureWinner = contest.ContestPictures.OrderBy(cp => cp.Votes).FirstOrDefault();
+            if (pictureWinner != null)
+            {
+                var winner=this.Data.Users.Find(pictureWinner.OwnerId);
+                contest.Winners.Add(winner);
+                winner.ContestsWon.Add(contest);
+                this.Data.SaveChanges();
+                resultMessage = winner.UserName + " is the winner of " + contest.Title + "!";
+            }
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        //public ActionResult ChooseWinner(string username, int contestId)
+        //{
+            
+        //}
         public ActionResult AddToCommittee(string username, int contestId)
         {
             var resultMessage = "";

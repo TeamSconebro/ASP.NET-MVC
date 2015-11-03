@@ -191,6 +191,18 @@
                             <div id="invite-errorOne"></div>
                         </div>
                     }
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="row contest-info invite-button">
+                            <input type="button" id="endContest" class="btn btn-primary" value="End Contest"/>
+                        </div>
+                        <div class="ui-widget" id="buttonsEnd" style="display: none">
+                            <br/>
+                            <input type="button" class="btn btn-primary" id="noWinners" value="No Winners"/>
+                            <input type="button" class="btn btn-primary" id="winnerByVote" value="No Winners" />
+                            <input type="button" class="btn btn-primary" id="selectWinner" value="No Winners" />
+                        </div>
+                    }
 
                 </div>
             </div>
@@ -382,6 +394,32 @@
 
                     setTimeout(function() {
                         $("#invite-successOne").fadeOut('slow');
+                    }, 2000);
+                });
+
+                //EndContest
+                $("#endContest").click(function() {
+                    $('#buttonsEnd').css({ "display": "block" });
+                });
+                $("#noWinners").click(function() {
+                    var inputUsername = $("#username").val();
+                    var currentContestId = @Model.Id;
+                    //alert(inputUsername);
+                    $.getJSON("/Contests/AddToContest", 
+                        {username: inputUsername, contestId: currentContestId},
+                        function(result) {
+                            if (result === "") {
+                                $("#invite-success").html(inputUsername + " has been invited to the contest!");
+                            } else {
+                                $("#invite-error").html(result);
+                            }
+                        });
+                    setTimeout(function() {
+                        $("#invite-error").fadeOut('slow');
+                    }, 2000);
+
+                    setTimeout(function() {
+                        $("#invite-success").fadeOut('slow');
                     }, 2000);
                 });
 
