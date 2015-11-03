@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Create contest";
 }
+
 <div class="panel panel-default">
     <div class="panel-body">
         <h3>Create new contest:</h3>
@@ -11,8 +12,14 @@
     {
         @Html.AntiForgeryToken()
          @Html.ValidationSummary("", new { @class = "text-danger" })
+    if (TempData["message-create-contest-coints"] != null)
+    {
+        <h3 class="create-contest-success">@TempData["message-create-contest-coints"]</h3>
+    }
         <div class="panel panel-default">
+           
             <div class="panel-body">
+
                 <div class="col-lg-3">
                     <strong>Title:</strong>
                 </div>

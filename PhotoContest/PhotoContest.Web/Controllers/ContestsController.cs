@@ -114,14 +114,20 @@ namespace PhotoContest.Web.Controllers
                     RewardStrategy = newContest.RewardStrategy,
                     VotingStrategy = newContest.VotingStrategy
                 };
+                currentUser.Coints = currentUser.Coints - contest.PrizeValues/2;
+                if (currentUser.Coints < 0)
+                {
+                    this.TempData["message-create-contest-coints"] = "You do NOT have enough Coints!";
+                }
+                else
+                {
+                    this.Data.Contests.Add(contest);
+                    currentUser.Contests.Add(contest);
+                    this.Data.Contests.SaveChanges();
+                    this.TempData["message-create-contest-success"] = "You successfully created new contest!";
+                    return RedirectToAction("ContestDetails", "Contests", new { id = contest.Id });
+                }  
 
-                this.Data.Contests.Add(contest);
-                currentUser.Contests.Add(contest);
-                this.Data.Contests.SaveChanges();
-
-                this.TempData["message-create-contest-success"] = "You successfully created new contest!";
-
-                return RedirectToAction("ContestDetails", "Contests", new {id = contest.Id});
             }
             
 
