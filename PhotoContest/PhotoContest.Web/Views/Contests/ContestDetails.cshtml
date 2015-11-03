@@ -267,7 +267,7 @@
         {
             <div id="participate-button-container">
                 @*<a href="" id="participate-button" class="btn btn-primary">Participate</a>*@
-                @Html.ActionLink("Participate", "Upload", "Pictures", new {id = @Model.Id, title = @Model.Title}, new {@class = "btn btn-primary", id = "participate-button"})
+                @Html.ActionLink("Participate", "Upload", "Pictures", new {id = @Model.Id}, new {@class = "btn btn-primary", id = "participate-button"})
             </div>
         }
 
