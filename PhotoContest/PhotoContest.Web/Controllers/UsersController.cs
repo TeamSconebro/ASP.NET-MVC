@@ -34,7 +34,6 @@ namespace PhotoContest.Web.Controllers
         [ActionName("Profile")]
         public ActionResult AccountProfile(UserViewModel user)
         {
-            // TODO: Return account profile view, which keep all profile details
             var currentUserId = this.User.Identity.GetUserId();
 
             var currentUser = this.Data.Users.Find(currentUserId);

@@ -15,6 +15,11 @@
     <h3 class="create-contest-success">@TempData["message-create-contest-success"]</h3>
 }
 
+@if (TempData["message-edit-contest-success"] != null)
+{
+    <h3 class="message-edit-contest-success">@TempData["message-edit-contest-success"]</h3>
+}
+
     @*<form method="POST" action="~/Pictures" enctype="multipart/form-data">
             <input type="text" name="title"/>
             <input type="file" name="image"/>

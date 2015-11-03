@@ -130,9 +130,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-lg-4">
-                            <strong>Title:</strong>@Html.ActionLink(@item.Title, "ContestDetails", "Contests",
-                                                       new {id = @item.Id},
-                                                       new {style = "color:#000", data_id = item.Id, id = item.Id})
+                            <strong>Title:</strong>@Html.ActionLink(@item.Title, "ContestDetails", "Contests", new {id = @item.Id}, new {style = "color:#000", data_id = item.Id, id = item.Id})
                         </div>
                         <div class="col-md-4">
                             <strong>Description:</strong>@item.Description
@@ -167,7 +165,7 @@
                         </div>
                     </div>
                     <div class="delete-contest-button">
-                        <a href="" class="btn btn-primary">Edit contest</a>
+                        @Html.ActionLink("Edit contest", "Edit", "Contests", new {id = item.Id}, new {@class = "btn btn-primary" })
                         @Html.ActionLink("Delete contest", "Delete", "Contests", new {id = item.Id}, new {@class = "btn btn-warning"})
                     </div>
                 </div>

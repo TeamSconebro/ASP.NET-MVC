@@ -78,7 +78,6 @@ namespace PhotoContest.Web.Controllers
             }
             var contestDetails = this.Data.Contests.Find(id);
             var contestModel = Mapper.Map<Contest,ContestFullViewModel>(contestDetails);
-            //TODO: Return view model with all detals for one particular contest. That view is rendered on Contest Details page in Visitors, Logged users and Administrators accounts.
 
             return this.View(contestModel);
         }
@@ -129,11 +128,58 @@ namespace PhotoContest.Web.Controllers
             return this.View(newContest);
         }
 
-        public ActionResult EditContest()
+        // GET: Edit contest
+        [Authorize]
+        [HttpGet]
+        [ActionName("Edit")]
+        public ActionResult EditContest(int id)
         {
-            // TODO: Recieve binding model and modify existing contest.
+            var contest = this.Data.Contests.Find(id);
+            if (contest == null)
+            {
+                return RedirectToAction("Profile", "Users");
+            }
 
-            return this.View();
+            var contestBindingModel = Mapper.Map<Contest, EditContestBindingModel>(contest);
+
+            return View(contestBindingModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditContest(EditContestBindingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUserId = User.Identity.GetUserId();
+                var currentUser = this.Data.Users.Find(currentUserId);
+                var contest = this.Data.Contests.Find(model.Id);
+                if (contest == null)
+                {
+                    return this.RedirectToAction("Profile", "Users");
+                }
+
+                contest.Title = model.Title;
+                contest.Description = model.Description;
+                contest.ParticipationStrategy = model.ParticipationStrategy;
+                contest.NumberOfParticipants = model.NumberOfParticipants;
+                contest.DeadlineStrategy = model.DeadlineStrategy;
+                contest.Deadline = model.Deadline;
+                contest.PrizeCount = model.PrizeCount;
+                contest.PrizeValues = model.PrizeValues*2;
+                contest.RewardStrategy = model.RewardStrategy;
+                contest.VotingStrategy = model.VotingStrategy;
+
+                this.Data.SaveChanges();
+
+                this.TempData["message-edit-contest-success"] = "You successfully edited contest!";
+
+                return RedirectToAction("ContestDetails", "Contests", new { id = contest.Id });
+            }
+            
+            return RedirectToAction("Profile", "Users");
         }
 
         // GET: Delete contest
@@ -150,9 +196,11 @@ namespace PhotoContest.Web.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteContest(int id = 0)
+        public ActionResult DeleteContest(int id)
         {
             var contest = this.Data.Contests.Find(id);
+            var userId = this.User.Identity.GetUserId();
+            var user = this.Data.Users.Find(userId);
             if (contest == null)
             {
                 this.TempData["message-delete-contest-error"] = "Non existing contest!";
@@ -161,6 +209,7 @@ namespace PhotoContest.Web.Controllers
 
             var contestTitle = contest.Title;
             this.Data.Contests.Remove(contest);
+            user.Contests.Remove(contest);
             this.Data.SaveChanges();
 
             this.TempData["message-delete-contest-success"] = $"You successfully deleted \"{contestTitle}\" contest!";

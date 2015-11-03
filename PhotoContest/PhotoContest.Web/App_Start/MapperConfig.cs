@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using PhotoContest.Models;
+using PhotoContest.Web.Models.BindingModel;
 using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.App_Start
@@ -34,6 +35,8 @@ namespace PhotoContest.Web.App_Start
                 ForMember(model => model.RewardStrategy, config => config.MapFrom(contest => contest.RewardStrategy)).
                 ForMember(model => model.VotingStrategy, config => config.MapFrom(contest => contest.VotingStrategy))
                 .ForMember(model => model.ContestPictures, config => config.MapFrom(contest => contest.ContestPictures));
+
+            Mapper.CreateMap<Contest, EditContestBindingModel>().ReverseMap();
 
             Mapper.CreateMap<ContestPicture, ContestPictureUserProfileViewModel>()
                 .ForMember(model => model.ConstestTitle, config => config.MapFrom(contestPicture => contestPicture.Contest.Title));

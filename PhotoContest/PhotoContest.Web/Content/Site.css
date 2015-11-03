@@ -128,7 +128,7 @@ h3.panel-title {
     color: red;
 }
 
-#vote-success, .message-delete-contest-success {
+#vote-success, .message-delete-contest-success, .message-edit-contest-success {
     font-size: 22px;
     text-align: center;
     color: green;
