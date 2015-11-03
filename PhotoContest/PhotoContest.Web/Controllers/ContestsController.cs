@@ -136,9 +136,6 @@ namespace PhotoContest.Web.Controllers
             return this.View(newContest);
         }
 
-        
-        
-
         // GET: Edit contest
         [Authorize]
         [HttpGet]
@@ -223,7 +220,7 @@ namespace PhotoContest.Web.Controllers
             user.Contests.Remove(contest);
             this.Data.SaveChanges();
 
-            this.TempData["message-delete-contest-success"] = @"You successfully deleted ""{contestTitle}"" contest!";
+            this.TempData["message-delete-contest-success"] = "You successfully deleted \"" + contestTitle + "\" contest!";
             return RedirectToAction("Profile", "Users");
         }
         public ActionResult NoWinner(int contestId)
