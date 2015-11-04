@@ -18,9 +18,10 @@ namespace PhotoContest.Web.Hubs
         //    hubContext.Clients.Client(notification.UserId).recieveNotification(notification);
         //}
 
-        public void SendNotifications(string message)
+        public void SendNotifications(string username)
         {
-            Clients.All.receiveNotification(message);
+            Clients.Others.receiveNotification(username);
+            //Clients.All.receiveNotification(message);
         }
     }
 }
