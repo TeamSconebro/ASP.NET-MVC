@@ -279,6 +279,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContestsController.cs" />
@@ -350,6 +352,7 @@
     <Content Include="Content\fonts\Charcoal.otf" />
     <Content Include="Content\fonts\Twisted Stallions - Personal use Only -.ttf" />
     <Content Include="Content\fonts\Tarantino- PERSONAL USE ONLY.ttf" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -423,6 +426,9 @@
     <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\HomeAdmin\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>
