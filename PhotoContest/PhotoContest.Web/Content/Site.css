@@ -192,3 +192,8 @@ div#fancybox-title.fancybox-title-inside {
 .delete-contest-button {
     margin: 0 0 10px 30px;
 }
+
+#notification-titles-container {
+    background-color: greenyellow;
+    font-size: 1.4em;
+}

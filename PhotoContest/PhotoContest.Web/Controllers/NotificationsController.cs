@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using Microsoft.AspNet.Identity;
+using PagedList;
 using PhotoContest.Data.UnitsOfWork;
+using PhotoContest.Models;
+using PhotoContest.Web.Helpers;
 using PhotoContest.Web.Models.BindingModel;
 using PhotoContest.Web.Models.ViewModels;
 
@@ -16,12 +21,21 @@ namespace PhotoContest.Web.Controllers
         }
 
         // GET: Notifications
+        [Authorize]
         public ActionResult Index(int? page)
         {
-            // TODO: Return view model with all user notifications. Details to show: notification content, type and date.
-            // TODO: Add "DateRecieved" property in Notification entity class.
+            var currentUserId = this.User.Identity.GetUserId();
+            var currentUser = this.Data.Users.Find(currentUserId);
+            if (currentUser == null)
+            {
+                return this.HttpNotFound();
+            }
 
-            return View(new List<NotificationViewModel>());
+            var userNotifications = currentUser.Notifications.OrderByDescending(n => n.CreatedOn);
+            var usernotificationModel = Mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationViewModel>>(userNotifications);
+
+            var pageNumber = page ?? 1;
+            return this.View(usernotificationModel.ToPagedList(pageNumber, Paging.ItemsPerPage));
         }
 
         public ActionResult CreateNotification(NotificationBindingModel model)

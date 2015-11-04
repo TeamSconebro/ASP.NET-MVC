@@ -1,0 +1,37 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<PhotoContest.Web.Models.ViewModels.NotificationViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <div id="notification-titles-container" class="panel-body">
+                <div class="col-md-4">Message</div>
+                <div class="col-md-4">Type</div>
+                <div class="col-md-4">Date</div>
+            </div>
+        </div>
+        @foreach (var notification in @Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-4">
+                        @notification.NotificationContent
+                    </div>
+                    <div class="col-md-4">
+                        @notification.NotificationType
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DisplayFor(model => notification.CreatedOn)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

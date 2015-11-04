@@ -420,9 +420,9 @@
     <Content Include="Views\Contests\Delete.cshtml" />
     <Content Include="Views\Contests\Edit.cshtml" />
     <Content Include="Views\Pictures\Upload.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Notifications\" />
     <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>

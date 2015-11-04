@@ -48,6 +48,8 @@ namespace PhotoContest.Web.App_Start
             Mapper.CreateMap<ContestPicture, ListPictureViewModel>()
                 .ForMember(model => model.OwnerUserName, config => config.MapFrom(a => a.Owner.UserName));
 
+            Mapper.CreateMap<Notification, NotificationViewModel>()
+                .ForMember(model => model.NotificationType, config => config.MapFrom(not => not.Type.ToString()));
         }
     }
 }
