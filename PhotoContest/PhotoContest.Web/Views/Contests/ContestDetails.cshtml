@@ -135,7 +135,6 @@
                     <hr/>
                 }
 
-
                 <div class="row item-title">
                     <strong>Coints</strong>
                 </div>
@@ -164,6 +163,7 @@
                 {
                     <div class="row contest-info">No</div>
                 }
+                <hr />
 
                 @if (@Model.ParticipationStrategy == ParticipationStrategy.Closed.ToString() &&
                         Request.IsAuthenticated)
@@ -185,6 +185,7 @@
                 @if (@Model.VotingStrategy == VotingStrategy.Closed.ToString() &&
                         Request.IsAuthenticated)
                 {
+                    <br/>
                     <div class="row contest-info invite-button">
                         <input type="button" id="inviteOne" class="btn btn-primary" value="Invite Committee"/>
                     </div>
@@ -201,6 +202,7 @@
                 }
                 @if (Request.IsAuthenticated && Model.IsClosed.Equals("No"))
                 {
+                    <br/>
                     <div class="row contest-info invite-button">
                         <input type="button" id="endContest" class="btn btn-primary" value="End Contest"/>
                     </div>
@@ -225,85 +227,85 @@
         </div>
     </div>
 </div>
-        <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Gallery</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        @if (!@Model.ContestPictures.Any())
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Gallery</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @if (!@Model.ContestPictures.Any())
+                    {
+                        <h4>This contest has no photos</h4>
+                    }
+                    else
+                    {
+                        foreach (var picture in @Model.ContestPictures)
                         {
-                            <h4>This contest has no photos</h4>
-                        }
-                        else
-                        {
-                            foreach (var picture in @Model.ContestPictures)
-                            {
-                                <div class="col-md-6 image-container">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="row image-title">
-                                                <strong>@picture.Title</strong>
-                                            </div>
-                                            <div class="row image">
-                                                @if (@picture.Base64Data == null)
-                                                {
-                                                    <img class="fancybox contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" title="@picture.Title" />
-                                                }
-                                                else
-                                                {
-                                                    <img class="fancybox contest-image" src="@picture.Base64Data" alt="contest-picture" title="@picture.Title" />
-                                                }
-                                            </div>
-                                            <div class="row">
-                                                @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
-                                        new { id = @picture.OwnerId }, null)
-                                            </div>
+                            <div class="col-md-6 image-container">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="row image-title">
+                                            <strong>@picture.Title</strong>
                                         </div>
-                                        <div class="col-md-2">
-                                            @if (Request.IsAuthenticated && @Model.IsClosed == IsClosed.No.ToString())
+                                        <div class="row image">
+                                            @if (@picture.Base64Data == null)
                                             {
-                                                <div class="row vote-button-container">
-                                                    @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post, null))
-                                                    {
-                                                        @Html.ValidationSummary(true)
-                                                        <fieldset>
-                                                            <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id" />
-                                                        </fieldset>
-                                                    }
-                                                </div>
+                                                <img class="fancybox contest-image" src="http://www.iconeasy.com/icon/png/Photographic/Front%20Row%201.3%20Realistic%20Skin/Original%20PhotosIcon.png" alt="contest-picture" title="@picture.Title" />
+                                            }
+                                            else
+                                            {
+                                                <img class="fancybox contest-image" src="@picture.Base64Data" alt="contest-picture" title="@picture.Title" />
                                             }
                                         </div>
+                                        <div class="row">
+                                            @Html.ActionLink(@picture.OwnerUserName, "Profile", "Users",
+                                    new { id = @picture.OwnerId }, null)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        @if (Request.IsAuthenticated && @Model.IsClosed == IsClosed.No.ToString())
+                                        {
+                                            <div class="row vote-button-container">
+                                                @using (Html.BeginForm("Vote", "Pictures", FormMethod.Post, null))
+                                                {
+                                                    @Html.ValidationSummary(true)
+                                                    <fieldset>
+                                                        <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id" />
+                                                    </fieldset>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            }
+                            </div>
                         }
-                    </div>
-
+                    }
                 </div>
+
             </div>
         </div>
     </div>
-    <div class="row back-button">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
-    </div>
+</div>
+<div class="row back-button">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
+</div>
 
 
-    @*Participate in contest button*@
-    @if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName()&&@Model.IsClosed.Equals("No"))
-    {
-        <div id="participate-button-container">
-            @*<a href="" id="participate-button" class="btn btn-primary">Participate</a>*@
-            @Html.ActionLink("Participate", "Upload", "Pictures", new { id = @Model.Id }, new { @class = "btn btn-primary", id = "participate-button" })
-        </div>
-    }
-
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/jquery-ui.js"></script>
-    @section scripts
+@*Participate in contest button*@
+@if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName()&&@Model.IsClosed.Equals("No"))
 {
-        <script>
+    <div id="participate-button-container">
+        @*<a href="" id="participate-button" class="btn btn-primary">Participate</a>*@
+        @Html.ActionLink("Participate", "Upload", "Pictures", new { id = @Model.Id }, new { @class = "btn btn-primary", id = "participate-button" })
+    </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+@section scripts
+{
+<script>
     $(document).ready(function() {
 
         // Voting
@@ -524,51 +526,14 @@
                 function(result) {
                     if (result === "") {
                         $("#vote-success").html("You successfully give your vote!");
-                        //$("#vote-success").html(result);
                     } else {
-                        //$("#vote-error").html("You cannot vote in that contest!");
                         $("#vote-error").html(result);
                     }
                 });
         });
 
-        //        $.ajax({
-        //            type: "POST",
-        //            url: "Pictures/UploadImage", //Your Action name in the ropDownListConstroller.cs
-        //            data: "{'title':'" + $('#title').val() + "','base64Data':'" + $('#url').val() + "','contestId':'" +  + "'}",  //Parameter in this function, Is case sensitive and also type must be string
-        //            contentType: "application/json; charset=utf-8",
-        //            dataType: "json"
-
-        //        }).done(function (data) {
-        //            //Successfully pass to server and get response
-        //            if (data.result="OK") {
-        //                alert("submit successfully.");
-        //            }
-        //        }).fail(function (response) {
-        //            if (response.status != 0) {
-        //                alert(response.status + " " + response.statusText);
-        //            }
-        //        });
-
     });
-    //$.ajax({
-    //    url: "/Pictures/Vote",
-    //    method: "POST",
-    //    data: { id: targetPictureId },
-    //    contentType: 'application/json; charset=utf-8',
-    //    //cache: false,
-    //    success: function (data) {
-    //        $("#vote-success").html("You successfully give your vote!");
-    //        //alert(data);
-    //        //$("#result" + targetId).append(data);
-    //        //alert(data);
-    //    },
-    //    error: function (error) {
-    //        $("#vote-error").html("You cannot vote in that contest!");
-    //    }
-    //});
-
-        </script>
-    }
+</script>
+}
 
 

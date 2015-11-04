@@ -20,8 +20,7 @@ namespace PhotoContest.Web.Controllers
         public ContestsController(IPhotoContestData data) : base(data)
         {
         }
-
-
+        
         public ActionResult GetContest(int id)
         {
             var currentContest = this.Data.Contests.Find(id);
@@ -96,7 +95,6 @@ namespace PhotoContest.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateContest(CreateContestBindingModel newContest)
         {
-           
             if (ModelState.IsValid)
             {
                 var currentUserId = User.Identity.GetUserId();
@@ -129,10 +127,8 @@ namespace PhotoContest.Web.Controllers
                     this.TempData["message-create-contest-success"] = "You successfully created new contest!";
                     return RedirectToAction("ContestDetails", "Contests", new { id = contest.Id });
                 }  
-
             }
             
-
             return this.View(newContest);
         }
 
@@ -223,6 +219,7 @@ namespace PhotoContest.Web.Controllers
             this.TempData["message-delete-contest-success"] = "You successfully deleted \"" + contestTitle + "\" contest!";
             return RedirectToAction("Profile", "Users");
         }
+
         public ActionResult NoWinner(int contestId)
         {
             var contest = this.Data.Contests.Find(contestId);
@@ -297,6 +294,7 @@ namespace PhotoContest.Web.Controllers
             
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult AddToCommittee(string username, int contestId)
         {
             var resultMessage = "";
@@ -326,13 +324,24 @@ namespace PhotoContest.Web.Controllers
         {
             var resultMessage = "";
 
-            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
-            if (user == null)
+            // Check whether invited user exist
+            var invitedUser = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
+            if (invitedUser == null)
             {
                 resultMessage = "No such user!";
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
+            // Check whether author an invited user are same person
+            var currentUserId = this.User.Identity.GetUserId();
+            var currentUser = this.Data.Users.Find(currentUserId);
+            if (currentUser.UserName == invitedUser.UserName)
+            {
+                resultMessage = "You cannot invite youself!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check whether contest exist
             var contest = this.Data.Contests.Find(contestId);
             if (contest == null)
             {
@@ -340,25 +349,19 @@ namespace PhotoContest.Web.Controllers
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
-            contest.InvitedUsers.Add(user);
-            user.InvitedToContests.Add(contest);
+            // Check whether ivited user is already in the contest
+            var invitedUsersNames = contest.InvitedUsers.Select(iu => iu.UserName).ToList();
+            if (invitedUsersNames.Contains(invitedUser.UserName))
+            {
+                resultMessage = "User is already in the contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            contest.InvitedUsers.Add(invitedUser);
+            invitedUser.InvitedToContests.Add(contest);
             this.Data.SaveChanges();
 
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
-        }
-
-        /**********************************************/
-
-        public ActionResult CreateImageBindingModel(ImageBindingModelUserInput partialModel, int id)
-        {
-            //int contestId = RouteData.Values["id"];
-
-            var imageBindingModel = new ImageBindingModel()
-            {
-                
-            };
-
-            return RedirectToAction("UploadImage", "Pictures", imageBindingModel);
         }
     }
 }
