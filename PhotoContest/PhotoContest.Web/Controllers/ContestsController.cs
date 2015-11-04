@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.Design.Serialization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PagedList;
 using PhotoContest.Web.Helpers;
 
 namespace PhotoContest.Web.Controllers
@@ -36,7 +37,7 @@ namespace PhotoContest.Web.Controllers
         }
         
         [ActionName("Active")]
-        public ActionResult AllActiveContests()
+        public ActionResult AllActiveContests(int? page)
         {
             var activeContests = this.Data.Contests.All()
                 .Where(c=>c.IsClosed == IsClosed.No)
@@ -44,12 +45,13 @@ namespace PhotoContest.Web.Controllers
 
             var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModelActiveInactivePage>>(activeContests);
 
-            return this.View(contestModels);
+            var pageNumber = page ?? 1;
+            return this.View(contestModels.ToPagedList(pageNumber, Paging.ItemsPerPage));
         }
 
 
         [ActionName("Inactive")]
-        public ActionResult AllInactiveContests()
+        public ActionResult AllInactiveContests(int? page)
         {
             var inactiveContests = this.Data.Contests.All()
                .Where(c => c.IsClosed == IsClosed.Yes)
@@ -57,8 +59,8 @@ namespace PhotoContest.Web.Controllers
 
             var contestModels = Mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModelActiveInactivePage>>(inactiveContests);
 
-            return this.View(contestModels);
-            
+            var pageNumber = page ?? 1;
+            return this.View(contestModels.ToPagedList(pageNumber, Paging.ItemsPerPage));
         }
 
         // List all active/inactive contests with more details (after pressing "See more" button)

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PhotoContest.Web.Models.ViewModels.ContestViewModelActiveInactivePage>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<PhotoContest.Web.Models.ViewModels.ContestViewModelActiveInactivePage>
 
 @{
     ViewBag.Title = "Closed contests";
@@ -23,7 +24,7 @@
     @foreach (var item in Model)
     {
         <div class="row">
-            <div class="col-md-3 active contest-title">
+            <div class="col-md-3 inactive contest-title">
                 @Html.ActionLink(@item.Title, "ContestDetails", "Contests",
                     new { id = @item.Id }, null)
             </div>
@@ -42,3 +43,7 @@
     }
     <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to home</a>
 </div>
+
+<br />
+
+@Html.PagedListPager(Model, page => Url.Action("Inactive", new { page }))
