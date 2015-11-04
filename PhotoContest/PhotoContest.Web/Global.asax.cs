@@ -17,6 +17,7 @@ namespace PhotoContest.Web
         protected void Application_Start()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoContestContext, Data.Migrations.Configuration>());
+            
             MapperConfig.ConfigureMappings();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

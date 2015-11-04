@@ -9,13 +9,18 @@ using PhotoContest.Web.Models.ViewModels;
 
 namespace PhotoContest.Web.Hubs
 {
-    [HubName("notifications")]
+    //[HubName("notifications")]
     public class NotificationsHub : Hub
     {
-        public void SendNotification(Notification notification)
+        //public void SendNotification(Notification notification)
+        //{
+        //    var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
+        //    hubContext.Clients.Client(notification.UserId).recieveNotification(notification);
+        //}
+
+        public void SendNotifications(string message)
         {
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-            hubContext.Clients.Client(notification.UserId).recieveNotification(notification);
+            Clients.All.receiveNotification(message);
         }
     }
 }

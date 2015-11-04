@@ -294,6 +294,7 @@
     </Compile>
     <Compile Include="Helpers\Authentication.cs" />
     <Compile Include="Helpers\ImageToBase64.cs" />
+    <Compile Include="Helpers\NotificationContent.cs" />
     <Compile Include="Helpers\Paging.cs" />
     <Compile Include="Helpers\UserMessage.cs" />
     <Compile Include="Hubs\NotificationsHub.cs" />

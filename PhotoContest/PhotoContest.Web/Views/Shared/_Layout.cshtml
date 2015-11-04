@@ -57,11 +57,29 @@
     </footer>
 </div>
 
+
+@*<div class="notificationBalloon" id="container"></div>
+        <br />
+        <br />
+        <br />
+        <input id="text1" type="text" />
+        <input id="button1" type="button" value="Send" />
+    <br />
+    <br />
+    <br />*@
+
+
+   
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/signalr")
 <script src="/signalr/hubs"></script>
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
+
+
+
+
 
 <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
@@ -91,53 +109,22 @@
     $.noConflict();
 
 
-    // SignalR
-    $(document).ready(function () {
-        $.connection.hub.start().done(function () {
-            console.log("Hub component initiated ...");
-        });
+    //// SignalR
+    //$(document).ready(function () {
+    //    $.connection.hub.start().done(function () {
+    //        console.log("Hub component initiated ...");
+    //    });
 
-        var notificationHub = $.connection.notifications;
-        var notificationsCount = $(".badge").val();
-        notificationHub.client.recieveNotification = function (recentNotification) {
+    //    var notificationHub = $.connection.notifications;
+    //    var notificationsCount = $(".badge").val();
+    //    notificationHub.client.recieveNotification = function (recentNotification) {
 
-            notificationsCount++;
-            $(".badge").html(notificationsCount);
+    //        notificationsCount++;
+    //        $(".badge").html(notificationsCount);
+    //    };
 
-
-            //var tweetContainer = $("<div>").addClass("row home-tweet-list");
-            //var profileImageContainer = $("<div>").addClass("col-md-2");
-            //var profileImage = $("<img>").addClass("profile-tweet-user-image");
-            //if (recentTweet.ProfileImageUrl != "") {
-            //    profileImage.attr("src", recentTweet.ProfileImageUrl);
-            //} else {
-            //    profileImage.attr("src", "http://roboticslab.uc3m.es/roboticslab/sites/default/files/default-medium.png");
-            //}
-            //profileImage.attr("alt", "profile-tweet-user-image");
-
-            //var tweetBodyContainer = $("<div>").addClass("col-md-10");
-            //var tweetUserInfo = $("<div>").addClass("row").html(recentTweet.UserFirstName + " " + recentTweet.UserLastName + "  " + recentTweet.Username + "  " + recentTweet.PublishDate);
-            //var tweetContent = $("<div>").addClass("row").html(recentTweet.TweetContent);
-            //var tweetLinks = $("<div>").addClass("row").append("<a href=\"\" title=\"Add to favourites\"><span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span></a>").append("<a href=\"\" title=\"Retweet\"><span class=\"glyphicon glyphicon-retweet\" aria-hidden=\"true\"></span></a>").append("<a href=\"\" title=\"Replay\"><span class=\"glyphicon glyphicon-envelope\" aria-hidden=\"true\"></span></a>").append("<a href=\"\" title=\"Share\"><span class=\"glyphicon glyphicon-share\" aria-hidden=\"true\"></span></a>");
-
-            //profileImageContainer.append(profileImage);
-            //tweetContainer.append(profileImageContainer);
-
-            //tweetBodyContainer.append(tweetUserInfo);
-            //tweetBodyContainer.append(tweetContent);
-            //tweetBodyContainer.append(tweetLinks);
-            //tweetContainer.append(tweetBodyContainer);
-
-            //tweetContainer.css({
-            //    "background-color": "lightgreen"
-            //});
-
-            //$("#recent-tweets").append(tweetContainer);
-
-        };
-
-        $.connection.hub.start();
-    });
+    //    $.connection.hub.start();
+    //});
 </script>
 </body>
 </html>

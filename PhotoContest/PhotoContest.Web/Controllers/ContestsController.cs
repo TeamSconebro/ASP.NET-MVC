@@ -289,12 +289,19 @@ namespace PhotoContest.Web.Controllers
                         var firstWinnerId = pictures.OwnerId;
                         if (firstWinnerId != null)
                         {
-
                             var firstWinnerUser = this.Data.Users.Find(firstWinnerId);
                             firstWinnerUser.Coints = firstWinnerUser.Coints + contest.PrizeValues;
                             resultMessage = firstWinnerUser.UserName + " is the winner of " + contest.Title + "!";
                             contest.Winners.Add(firstWinnerUser);
                             firstWinnerUser.ContestsWon.Add(contest);
+
+                            var notification = new Notification()
+                            {
+                                NotificationContent = NotificationContent.Winning,
+                                Type = NotificationType.Winning,
+                                UserId = firstWinnerId
+                            };
+                            this.Data.Notifications.Add(notification);
                         }
                     }
                 } 
@@ -316,6 +323,13 @@ namespace PhotoContest.Web.Controllers
                     contest.Winners.Add(winner);
                     winner.ContestsWon.Add(contest);
 
+                    var notification = new Notification()
+                    {
+                        NotificationContent = NotificationContent.Winning,
+                        Type = NotificationType.Winning,
+                        UserId = winner.Id
+                    };
+                    this.Data.Notifications.Add(notification);
                 }
             }
             this.Data.SaveChanges();
@@ -326,14 +340,26 @@ namespace PhotoContest.Web.Controllers
         {
             var resultMessage = "";
             var contest = this.Data.Contests.Find(contestId);
-            var userId = this.Data.Users.All().FirstOrDefault(u => u.UserName == username).Id;
-            var users = this.Data.Users.Find(userId);
+            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
+            if (user == null)
+            {
+                resultMessage = UserMessage.NoUser;
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
                
-                contest.Winners.Add(users);
-                if (users != null) users.ContestsWon.Add(contest);
-                if (users != null) users.Coints = users.Coints + contest.PrizeValues;
-                contest.IsClosed = IsClosed.Yes;
-                this.Data.SaveChanges();
+            contest.Winners.Add(user);
+            contest.IsClosed = IsClosed.Yes;
+            user.ContestsWon.Add(contest);
+            user.Coints = user.Coints + contest.PrizeValues;
+
+            var notification = new Notification()
+            {
+                NotificationContent = NotificationContent.Winning,
+                Type = NotificationType.Winning,
+                UserId = user.Id
+            };
+
+            this.Data.SaveChanges();
             
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
@@ -377,6 +403,15 @@ namespace PhotoContest.Web.Controllers
 
             contest.Committee.Add(invitedToCommitteeUser);
             invitedToCommitteeUser.InvitedToCommittees.Add(contest);
+
+            var notification = new Notification()
+            {
+                NotificationContent = NotificationContent.InvitedToCommittee + contest.Title,
+                Type = NotificationType.InvitedToCommittee,
+                UserId = invitedToCommitteeUser.Id
+            };
+            this.Data.Notifications.Add(notification);
+
             this.Data.SaveChanges();
 
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
@@ -421,6 +456,15 @@ namespace PhotoContest.Web.Controllers
 
             contest.InvitedUsers.Add(invitedUser);
             invitedUser.InvitedToContests.Add(contest);
+
+            var notification = new Notification()
+            {
+                NotificationContent = NotificationContent.InvitedToContest + contest.Title,
+                Type = NotificationType.InvitedToContest,
+                UserId = invitedUser.Id
+            };
+            this.Data.Notifications.Add(notification);
+
             this.Data.SaveChanges();
 
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);

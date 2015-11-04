@@ -65,3 +65,41 @@
         </div>
     </div>
 </div>
+
+@*<div class="notificationBalloon" id="container"></div>
+<br />
+<br />
+<br />
+<input id="text1" type="text" />
+<input id="button1" type="button" value="Send" />
+<br />
+<br />
+<br/>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/signalr")
+<script src="/signalr/hubs"></script>*@
+@*/***************************** TEST ********************************/
+<script>
+    //Server side
+    $(function () {
+        var proxy = $.connection.notificationHub;
+        $("#button1").click(function () {
+            proxy.server.sendNotifications($("#text1").val());
+        });
+        $.connection.hub.start();
+    });
+
+    // Client side
+    $(function () {
+        var proxy = $.connection.notificationHub;
+        proxy.client.receiveNotification = function (message) {
+            $("#container").html(message);
+            $("#container").slideDown(2000);
+            setTimeout('$("#container").slideUp(2000);', 5000);
+        };
+        $.connection.hub.start();
+    });
+</script>
+
+/***************************** TEST ********************************/*@
