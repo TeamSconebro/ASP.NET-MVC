@@ -45,7 +45,7 @@
                 }
                 else
                 {
-                        <div class="row contest-info">No winner/s selected!</div>
+                        <div id="winnerContainer" class="row contest-info">No winner selected!</div>
                 }
                     <hr />
                     <div class="row item-title">
@@ -419,7 +419,7 @@
                                         $("#invite-successOne").fadeOut('slow');
                                     }, 2000);
                                 });
-                                //EndContest
+                                //EndContest by vote
                                 $("#endContest").click(function() {
                                     $('#buttonsEnd').css({ "display": "block" });
                                 });
@@ -429,6 +429,7 @@
                                     $.getJSON("/Contests/WinnerByVotes",
                                         { username: inputUsername, contestId: currentContestId },
                                         function(result) {
+                                            location.reload();
                                             if (result === "") {
                                                 $("#invite-success").html(" has been invited to the contest!").css("display", "block");
                                             } else {
@@ -448,9 +449,10 @@
                                     var currentContestId = @Model.Id;
                                     $.getJSON("/Contests/NoWinner",
                                         { username: inputUsername, contestId: currentContestId },
-                                        function(result) {
-                                            if (result === "") {
-                                                $("#invite-success").html(" has been invited to the contest!").css("display", "block");
+                                        function(result) {location.reload();
+                                        if (result === "") {
+                                            location.reload();
+                                                $("#invite-success").html(" ").css("display", "block");
                                             } else {
                                                 $("#invite-error").html(result).css("display", "block");
                                             }
@@ -490,6 +492,7 @@
                                         { username: inputUsername, contestId: currentContestId },
                                         function(result) {
                                             if (result === "") {
+                                                location.reload();
                                                 $("#invite-success").html(inputUsername + " has been selected as a winner!").css("display", "block");
                                             } else {
                                                 $("#invite-error").html(result).css("display", "block");
