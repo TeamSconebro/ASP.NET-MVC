@@ -2,8 +2,9 @@
 {
     public enum NotificationType
     {
-        Winning=1,
-        InvitedToContest=2,
+        Winning=0,
+        InvitedToContest=1,
+        InvitedToCommittee=2,
         Other=3
     }
 }
