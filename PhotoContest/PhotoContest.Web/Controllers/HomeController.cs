@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using PhotoContest.Models.Enumerations;
@@ -19,11 +20,29 @@ namespace PhotoContest.Web.Controllers
 
         public ActionResult Index()
         {
+            var contestDeadlineCheck = this.Data.Contests.All();
+            foreach (var contest in contestDeadlineCheck)
+            {
+                if (contest.Deadline <= DateTime.Now)
+                {
+                    contest.IsClosed = IsClosed.Yes;
+                    
+                }
+                if (contest.DeadlineStrategy==DeadlineStrategy.ByNumberOfParticipants)
+                {
+                    if (contest.NumberOfParticipants<=contest.Contestors.Count())
+                    {
+                        contest.IsClosed = IsClosed.Yes;
+                    }
+                }
+            }
+
+            this.Data.SaveChanges();
             var activeContests = this.Data.Contests.All()
                 .Where(c => c.IsClosed == IsClosed.No)
                 .OrderByDescending(c => c.CreatedOn)
                 .Take(5);
-
+           
             var activeContestsModel = Mapper.Map<IEnumerable<ContestViewModelHomePage>>(activeContests);
 
             var inactiveContests = this.Data.Contests.All()

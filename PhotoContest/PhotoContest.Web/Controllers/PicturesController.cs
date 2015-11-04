@@ -63,6 +63,7 @@ namespace PhotoContest.Web.Controllers
                 ContestId = contest.Id,
                 OwnerId = ownerId
             };
+            contest.Contestors.Add(owner);
             this.Data.ContestPictures.Add(picture);
             this.Data.SaveChanges();
 

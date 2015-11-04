@@ -93,46 +93,82 @@ namespace PhotoContest.Web.Controllers
             
             return this.View();
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateContest(CreateContestBindingModel newContest)
         {
-            if (newContest.Deadline > DateTime.Now)
+            if (newContest.DeadlineStrategy == DeadlineStrategy.ByTime)
             {
-                if (ModelState.IsValid)
+                if (newContest.Deadline > DateTime.Now)
                 {
+                    if (ModelState.IsValid)
+                    {
 
-                    var currentUserId = User.Identity.GetUserId();
-                    var currentUser = this.Data.Users.Find(currentUserId);
-                    var contest = new Contest()
-                    {
-                        Title = newContest.Title,
-                        Description = newContest.Description,
-                        CreatedOn = newContest.CreatedOn,
-                        OwnerId = currentUserId,
-                        ParticipationStrategy = newContest.ParticipationStrategy,
-                        NumberOfParticipants = newContest.NumberOfParticipants,
-                        DeadlineStrategy = newContest.DeadlineStrategy,
-                        Deadline = newContest.Deadline,
-                        PrizeCount = newContest.PrizeCount,
-                        PrizeValues = newContest.PrizeValues*2,
-                        RewardStrategy = newContest.RewardStrategy,
-                        VotingStrategy = newContest.VotingStrategy
-                    };
-                    currentUser.Coints = currentUser.Coints - contest.PrizeValues/2;
-                    if (currentUser.Coints < 0)
-                    {
-                        this.TempData["message-create-contest-coints"] = "You do NOT have enough Coints!";
+                        var currentUserId = User.Identity.GetUserId();
+                        var currentUser = this.Data.Users.Find(currentUserId);
+                        var contest = new Contest()
+                        {
+                            Title = newContest.Title,
+                            Description = newContest.Description,
+                            CreatedOn = newContest.CreatedOn,
+                            OwnerId = currentUserId,
+                            ParticipationStrategy = newContest.ParticipationStrategy,
+                            NumberOfParticipants = newContest.NumberOfParticipants,
+                            DeadlineStrategy = newContest.DeadlineStrategy,
+                            Deadline = newContest.Deadline,
+                            PrizeCount = newContest.PrizeCount,
+                            PrizeValues = newContest.PrizeValues*2,
+                            RewardStrategy = newContest.RewardStrategy,
+                            VotingStrategy = newContest.VotingStrategy
+                        };
+                        currentUser.Coints = currentUser.Coints - contest.PrizeValues/2;
+                        if (currentUser.Coints < 0)
+                        {
+                            this.TempData["message-create-contest-coints"] = "You do NOT have enough Coints!";
+                        }
+                        else
+                        {
+                            this.Data.Contests.Add(contest);
+                            currentUser.Contests.Add(contest);
+                            this.Data.Contests.SaveChanges();
+                            this.TempData["message-create-contest-success"] = "You successfully created new contest!";
+                            return RedirectToAction("ContestDetails", "Contests", new {id = contest.Id});
+                        }
                     }
-                    else
-                    {
-                        this.Data.Contests.Add(contest);
-                        currentUser.Contests.Add(contest);
-                        this.Data.Contests.SaveChanges();
-                        this.TempData["message-create-contest-success"] = "You successfully created new contest!";
-                        return RedirectToAction("ContestDetails", "Contests", new {id = contest.Id});
-                    }
+                }
+            }
+            else if(newContest.NumberOfParticipants>0)
+            {
+                 var currentUserId = User.Identity.GetUserId();
+                        var currentUser = this.Data.Users.Find(currentUserId);
+                        var contest = new Contest()
+                        {
+                            Title = newContest.Title,
+                            Description = newContest.Description,
+                            CreatedOn = newContest.CreatedOn,
+                            OwnerId = currentUserId,
+                            ParticipationStrategy = newContest.ParticipationStrategy,
+                            NumberOfParticipants = newContest.NumberOfParticipants,
+                            DeadlineStrategy = newContest.DeadlineStrategy,
+                            Deadline = newContest.Deadline,
+                            PrizeCount = newContest.PrizeCount,
+                            PrizeValues = newContest.PrizeValues*2,
+                            RewardStrategy = newContest.RewardStrategy,
+                            VotingStrategy = newContest.VotingStrategy
+                        };
+                        currentUser.Coints = currentUser.Coints - contest.PrizeValues/2;
+                if (currentUser.Coints < 0)
+                {
+                    this.TempData["message-create-contest-coints"] = "You do NOT have enough Coints!";
+                }
+                else
+                {
+                    this.Data.Contests.Add(contest);
+                    currentUser.Contests.Add(contest);
+                    this.Data.Contests.SaveChanges();
+                    this.TempData["message-create-contest-success"] = "You successfully created new contest!";
+                    return RedirectToAction("ContestDetails", "Contests", new {id = contest.Id});
                 }
             }
 

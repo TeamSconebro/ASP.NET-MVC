@@ -35,6 +35,7 @@
 
         public IEnumerable<ListPictureViewModel> ContestPictures { get; set; }
 
-        public IEnumerable<UserFullViewModel> Winners { get; set; } 
+        public IEnumerable<UserFullViewModel> Winners { get; set; }
+        public IEnumerable<UserFullViewModel> Contestors { get; set; }
     }
 }
