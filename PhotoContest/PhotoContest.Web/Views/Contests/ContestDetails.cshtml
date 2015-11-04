@@ -200,10 +200,13 @@
                         </div>
                 }
                     @if (Request.IsAuthenticated && Model.IsClosed.Equals("No")
-                    &&(@User.Identity.GetUserName()==@Model.OwnerName||@User.IsInRole("Administrator")))
-                       
-                {
-                    <br/>
+                    && (@User.Identity.GetUserName() == @Model.OwnerName || @User.IsInRole("Administrator")))
+                    {
+                        <br />
+                         <div class="row contest-info invite-button">
+                            @Html.ActionLink("Edit contest", "Edit", "Contests", new { id = @Model.Id }, new { @class = "btn btn-primary" })
+                        </div><br />
+
                     <div class="row contest-info invite-button">
                         <input type="button" id="endContest" class="btn btn-primary" value="End Contest"/>
                     </div>
@@ -213,17 +216,18 @@
                         <input type="button" class="btn btn-primary" id="winnerByVote" value="Winner/s by Vote"/>
                         <input type="button" class="btn btn-primary" id="selectWinner" value="Select Winner/s"/>
                         <div class="ui-widget" id="searchBoxSelectWinner" style="display: none">
-                            <br />
+                            <br/>
                             <label for="username">Username: </label>
                             <input id="usernameSelectWinner">
-                            <input type="button" class="btn btn-primary" id="addButtonSelectWinner" value="Add" />
+                            <input type="button" class="btn btn-primary" id="addButtonSelectWinner" value="Add"/>
                             <div id="autocompleteSelectWinner"></div>
                             <div id="invite-successSelectWinner"></div>
                             <div id="invite-errorSelectWinner"></div>
                         </div>
+                       
                     </div>
                 }
-
+                    
             </div>
         </div>
     </div>
@@ -317,7 +321,6 @@
                                     $.getJSON("/Pictures/Vote", { id: targetPictureId },
                                         function(result) {
                                             if (result === "") {
-                                                alert(123);
                                                 $("#vote-success").html("You successfully has given your vote!").css("display", "block");
                                             } else {
                                                 $("#vote-error").html(result).css("display", "block");
@@ -500,16 +503,6 @@
                                         $("#invite-success").fadeOut('slow');
                                     }, 2000);
                                 });
-                                //select winners
-
-                                // Upload image to current contest
-
-                                //$("#upload-form-container").css({"visibility":"hidden"});
-
-                                //$("#participate-button").click(function() {
-                                //    //alert(5);
-                                //    $("#upload-form-container").css({ "display": "block" });
-                                //});
 
                                 $("#upload").click(function() {
                                     var title = $("#title").val();
