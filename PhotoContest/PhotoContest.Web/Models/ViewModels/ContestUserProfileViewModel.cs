@@ -1,6 +1,7 @@
 ﻿namespace PhotoContest.Web.Models.ViewModels
 {
     using System;
+
     public class ContestUserProfileViewModel
     {
         public int Id { get; set; }

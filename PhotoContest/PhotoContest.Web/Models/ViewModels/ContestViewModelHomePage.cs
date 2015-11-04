@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace PhotoContest.Web.Models.ViewModels
+﻿namespace PhotoContest.Web.Models.ViewModels
 {
+    using System;
+
     public class ContestViewModelHomePage
     {
         public int Id { get; set; }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using PhotoContest.Models;
-
-namespace PhotoContest.Web.Models.ViewModels
+﻿namespace PhotoContest.Web.Models.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ContestFullViewModel
     {
         public int Id { get; set; }
@@ -37,6 +34,7 @@ namespace PhotoContest.Web.Models.ViewModels
         public string IsClosed { get; set; }
 
         public IEnumerable<ListPictureViewModel> ContestPictures { get; set; }
+
         public IEnumerable<UserFullViewModel> Winners { get; set; } 
     }
 }

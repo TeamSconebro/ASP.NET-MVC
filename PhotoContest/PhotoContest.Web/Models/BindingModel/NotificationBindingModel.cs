@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using PhotoContest.Models.Enumerations;
-
-namespace PhotoContest.Web.Models.BindingModel
+﻿namespace PhotoContest.Web.Models.BindingModel
 {
+    using System.ComponentModel.DataAnnotations;
+    using PhotoContest.Models.Enumerations;
+
     public class NotificationBindingModel
     {
         [Required]

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations.Model;
-using System.Linq;
-using System.Web;
-using PhotoContest.Models;
-using PhotoContest.Models.Enumerations;
-
-namespace PhotoContest.Web.Models.ViewModels
+﻿namespace PhotoContest.Web.Models.ViewModels
 {
+    using System;
+
     public class ContestViewModel
     {
         public int Id { get; set; }

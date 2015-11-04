@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace PhotoContest.Web.Models.ViewModels
+﻿namespace PhotoContest.Web.Models.ViewModels
 {
+    using System;
+
     public class ContestViewModelActiveInactivePage
     {
         public int Id { get; set; }

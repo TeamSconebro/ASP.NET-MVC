@@ -1,16 +1,9 @@
-﻿
-
-using System.ComponentModel;
-using System.Linq.Expressions;
-using Microsoft.Ajax.Utilities;
-
-namespace PhotoContest.Web.Models.BindingModel
+﻿namespace PhotoContest.Web.Models.BindingModel
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using PhotoContest.Models;
     using PhotoContest.Models.Enumerations;
+
     public class CreateContestBindingModel
     {
 
