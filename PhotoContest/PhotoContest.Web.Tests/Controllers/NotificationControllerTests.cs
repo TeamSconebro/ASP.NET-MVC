@@ -59,7 +59,8 @@ namespace PhotoContest.Web.Tests.Controllers
             //photoContestMock.Setup(x => x.Notifications.All()).Returns(notifications.AsQueryable());
 
             //Act
-            var result = (notificationController.Index() as ViewResult);
+            var page = 1;
+            var result = (notificationController.Index(page) as ViewResult);
 
 
             //Assert
@@ -74,7 +75,8 @@ namespace PhotoContest.Web.Tests.Controllers
             photoContestMock.Setup(x => x.Notifications.All()).Returns(notifications.AsQueryable());
 
             //Act
-            var result = (notificationController.Index() as ViewResult);
+            var page = 1;
+            var result = (notificationController.Index(page) as ViewResult);
             var viewResult = (result.Model) as List<NotificationViewModel>;
 
 

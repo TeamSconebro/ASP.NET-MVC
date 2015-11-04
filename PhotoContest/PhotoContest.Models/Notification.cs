@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Migrations.Model;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,11 @@ namespace PhotoContest.Models
 {
    public  class Notification
     {
+       public Notification()
+       {
+           this.CreatedOn = DateTime.Now;
+       }
+
        [Key]
        public int Id { get; set; }
 
@@ -19,6 +25,9 @@ namespace PhotoContest.Models
 
        [Required]
        public NotificationType Type { get; set; }
+
+       [Required]
+       public DateTime CreatedOn { get; set; }
 
        [Required]
        public string UserId { get; set; }

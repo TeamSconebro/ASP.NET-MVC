@@ -16,7 +16,7 @@ namespace PhotoContest.Web.Controllers
         }
 
         // GET: Notifications
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             // TODO: Return view model with all user notifications. Details to show: notification content, type and date.
             // TODO: Add "DateRecieved" property in Notification entity class.
