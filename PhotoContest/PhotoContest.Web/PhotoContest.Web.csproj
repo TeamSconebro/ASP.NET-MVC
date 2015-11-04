@@ -278,6 +278,7 @@
     </Compile>
     <Compile Include="Helpers\Authentication.cs" />
     <Compile Include="Helpers\ImageToBase64.cs" />
+    <Compile Include="Helpers\UserMessage.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BindingModel\ContestDetailsForUploadImage.cs" />
     <Compile Include="Models\BindingModel\CreateContestBindingModel.cs" />

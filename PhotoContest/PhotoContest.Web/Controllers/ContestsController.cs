@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.Design.Serialization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PhotoContest.Web.Helpers;
 
 namespace PhotoContest.Web.Controllers
 {
@@ -299,22 +300,41 @@ namespace PhotoContest.Web.Controllers
         {
             var resultMessage = "";
 
-            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
-            if (user == null)
+            // Check whether invited user exist
+            var invitedToCommitteeUser = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
+            if (invitedToCommitteeUser == null)
             {
-                resultMessage = "No such user!";
+                resultMessage = UserMessage.NoUser;
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
+            // Check whether author and invited to committee user are same person
+            var currentUserId = this.User.Identity.GetUserId();
+            var currentUser = this.Data.Users.Find(currentUserId);
+            if (currentUser.UserName == invitedToCommitteeUser.UserName)
+            {
+                resultMessage = UserMessage.CannotInviteYourself;
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check whether contest exist
             var contest = this.Data.Contests.Find(contestId);
             if (contest == null)
             {
-                resultMessage = "No such contest!";
+                resultMessage = UserMessage.NoContest;
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
-            contest.Committee.Add(user);
-            user.InvitedToCommittees.Add(contest);
+            // Check whether ivited to committee user is already in the committee
+            var invitedUsersNames = contest.InvitedUsers.Select(iu => iu.UserName).ToList();
+            if (invitedUsersNames.Contains(invitedToCommitteeUser.UserName))
+            {
+                resultMessage = UserMessage.UserIsInTheCommittee;
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            contest.Committee.Add(invitedToCommitteeUser);
+            invitedToCommitteeUser.InvitedToCommittees.Add(contest);
             this.Data.SaveChanges();
 
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
@@ -328,16 +348,16 @@ namespace PhotoContest.Web.Controllers
             var invitedUser = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
             if (invitedUser == null)
             {
-                resultMessage = "No such user!";
+                resultMessage = UserMessage.NoUser;
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
-            // Check whether author an invited user are same person
+            // Check whether author and invited user are same person
             var currentUserId = this.User.Identity.GetUserId();
             var currentUser = this.Data.Users.Find(currentUserId);
             if (currentUser.UserName == invitedUser.UserName)
             {
-                resultMessage = "You cannot invite youself!";
+                resultMessage = UserMessage.CannotInviteYourself;
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
@@ -345,7 +365,7 @@ namespace PhotoContest.Web.Controllers
             var contest = this.Data.Contests.Find(contestId);
             if (contest == null)
             {
-                resultMessage = "No such contest!";
+                resultMessage = UserMessage.NoContest;
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
@@ -353,7 +373,7 @@ namespace PhotoContest.Web.Controllers
             var invitedUsersNames = contest.InvitedUsers.Select(iu => iu.UserName).ToList();
             if (invitedUsersNames.Contains(invitedUser.UserName))
             {
-                resultMessage = "User is already in the contest!";
+                resultMessage = UserMessage.UserIsInTheContest;
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
 
