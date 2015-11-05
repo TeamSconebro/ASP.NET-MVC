@@ -292,7 +292,6 @@ namespace PhotoContest.Web.Controllers
                     var firstWinner = picture.Owner;
                     if (firstWinner != null)
                     {
-                        //var firstWinnerUser = this.Data.Users.Find(firstWinnerId);
                         firstWinner.Coints += contest.PrizeValues;
                         resultMessage = firstWinner.UserName + " is the winner of " + contest.Title + "!";
                         contest.Winners.Add(firstWinner);
