@@ -1,0 +1,105 @@
+﻿@model IEnumerable<IEnumerable<PhotoContest.Web.Models.ViewModels.ContestViewModelHomePage>>
+
+@{
+    ViewBag.Title = "Admin Area Home Page";
+}
+
+@if (!Request.IsAuthenticated)
+{
+    <div class="jumbotron">
+        <h1>Team SCONEBRO</h1>
+    </div>
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Active contests</h3>
+            </div>
+            @foreach (var activeContest in Model.First())
+            {
+                <div class="panel-body">
+                    <div>
+                        <div class="active contest-title">
+                            @Html.ActionLink(@activeContest.Title, "ContestDetails", "Contests",
+                                new {id = @activeContest.Id}, null)
+                        </div>
+                        <div>
+                            <span class="contest-create-on">@Html.DisplayFor(model => activeContest.CreatedOn)</span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            }
+            <div class="row see-more-btn">
+                <a href="@Url.Action("Active", "Contests")" class="btn btn-primary">See more</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Closed contests</h3>
+            </div>
+            @foreach (var inactiveContest in Model.Last())
+            {
+                <div class="panel-body">
+                    <div>
+                        <div class="inactive contest-title">
+                            @Html.ActionLink(@inactiveContest.Title, "ContestDetails", "Contests",
+                                new {id = @inactiveContest.Id}, null)
+                        </div>
+                        <div>
+                            <span class="contest-create-on">@Html.DisplayFor(model => inactiveContest.CreatedOn)</span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            }
+            <div class="row see-more-btn">
+                <a href="@Url.Action("Inactive", "Contests")" class="btn btn-primary see-more">See more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="notificationBalloon" id="container"></div>
+<br />
+<br />
+<br />
+<input id="text1" type="text" />
+<input id="button1" type="button" value="Send" />
+<br />
+<br />
+<br/>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/signalr")
+<script src="/signalr/hubs"></script>*@
+@*/***************************** TEST ********************************/
+<script>
+    //Server side
+    $(function () {
+        var proxy = $.connection.notificationHub;
+        $("#button1").click(function () {
+            proxy.server.sendNotifications($("#text1").val());
+        });
+        $.connection.hub.start();
+    });
+
+    // Client side
+    $(function () {
+        var proxy = $.connection.notificationHub;
+        proxy.client.receiveNotification = function (message) {
+            $("#container").html(message);
+            $("#container").slideDown(2000);
+            setTimeout('$("#container").slideUp(2000);', 5000);
+        };
+        $.connection.hub.start();
+    });
+</script>
+
+/***************************** TEST ********************************/*@
