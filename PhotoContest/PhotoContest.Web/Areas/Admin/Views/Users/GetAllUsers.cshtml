@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PhotoContest.Web.Models.ViewModels.UserViewModel>
+@{
+    ViewBag.Title = "GetAllUsers";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-3">
+               Username: @item.UserName
+            </div>
+            <div class="col-md-3">
+             FirstName:   @item.FirstName
+            </div>
+            <div class="col-md-3">
+              LastName:  @item.LastName
+            </div>
+            <div class="col-md-3">
+             Coints:   @item.Coints
+            </div>
+            <div class="col-md-3">
+              Email:  @item.Email
+            </div>
+            <div class="col-md-3">
+                PhoneNumber: @item.PhoneNumber
+            </div>
+            <div class="col-md-3">
+                @Html.ActionLink("Edit User", "EditUser", "Users", new { area = "Admin", username = item.UserName }, new { @class = "btn btn-default btn-block" })
+            </div>
+        </div>
+        
+        <hr />
+    }
+</div>
+

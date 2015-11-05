@@ -13,6 +13,8 @@ namespace PhotoContest.Web.App_Start
     {
         public static void ConfigureMappings()
         {
+            Mapper.CreateMap<User, UserEditProfileViewModel>();
+            Mapper.CreateMap<User,UserViewModel>();
             Mapper.CreateMap<User, UserFullViewModel>();
             Mapper.CreateMap<Vote,VoteBindingModel>();
             Mapper.CreateMap<ContestPicture,ContestPictureViewModel>();
