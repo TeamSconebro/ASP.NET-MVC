@@ -137,5 +137,29 @@ namespace PhotoContest.Web.Controllers
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            var picture = this.Data.ContestPictures.Find(id);
+            var resultMessage = "";
+            if (picture == null)
+            {
+                resultMessage = "No such picture in contest!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check whether user has uploaded picture he wants to delete
+            var userId = this.User.Identity.GetUserId();
+            if (picture.OwnerId != userId)
+            {
+                resultMessage = "You cannot delete picture uploaded by someone else!";
+                return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+            }
+
+            this.Data.ContestPictures.Remove(picture);
+            this.Data.SaveChanges();
+
+            return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -283,10 +283,23 @@
                                                 {
                                                     @Html.ValidationSummary(true)
                                                     <fieldset>
-                                                        <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id" />
+                                                        <input type="button" value="Vote +" class="btn btn-primary vote-button" id="@picture.Id"/>
                                                     </fieldset>
                                                 }
                                             </div>
+                                            if (this.User.Identity.GetUserId() == picture.OwnerId)
+                                            {
+                                                <br/>
+                                                <div class="row delete-vote-button-container">
+                                                    @using (Html.BeginForm("Delete", "Pictures", FormMethod.Post, null))
+                                                    {
+                                                        @Html.ValidationSummary(true)
+                                                        <fieldset>
+                                                            <input type="button" value="Delete" class="btn btn-primary delete-vote-button" id="@picture.Id" />
+                                                        </fieldset>
+                                                    }
+                                                </div>
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -365,6 +378,28 @@
 
             });
 
+            // Deleting picture
+            $(".delete-vote-button").click(function() {
+
+                var targetPictureId = parseInt($(this).attr("id"));
+
+                $.getJSON("/Pictures/Delete", { id: targetPictureId },
+                    function(result) {
+                        if (result === "") {
+                            $("#vote-success").html("You successfully deleted your picture!").css("display", "block");
+                        } else {
+                            $("#vote-error").html(result).css("display", "block");
+                        }
+                    });
+                setTimeout(function() {
+                    $("#vote-error").fadeOut('slow');
+                }, 3000);
+
+                setTimeout(function() {
+                    $("#vote-success").fadeOut('slow');
+                }, 3000);
+
+            });
 
             // Show participate form and autocomplete search for usernames
             $("#invite").click(function() {
