@@ -17,6 +17,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Admin Area", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("All Users", "GetAllUsers", "Users", new { area = "Admin" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

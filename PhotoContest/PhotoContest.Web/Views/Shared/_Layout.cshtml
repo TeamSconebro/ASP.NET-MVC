@@ -40,6 +40,20 @@
                     <li>
 
                     </li>
+                   
+                }
+                @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    <li>
+                        <ul class="nav navbar-nav nav-pills">
+                            <li>
+                                @Html.ActionLink("Admin Area", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+
+                    </li>
                 }
             </ul>
             @Html.Partial("_LoginPartial")

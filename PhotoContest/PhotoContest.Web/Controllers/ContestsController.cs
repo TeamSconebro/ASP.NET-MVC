@@ -84,7 +84,18 @@ namespace PhotoContest.Web.Controllers
                 id = this.Data.Contests.All().OrderByDescending(c => c.CreatedOn).Select(c=>c.Id).FirstOrDefault();
             }
             var contestDetails = this.Data.Contests.Find(id);
-            var contestModel = Mapper.Map<Contest,ContestFullViewModel>(contestDetails);
+
+            foreach (var picture in contestDetails.ContestPictures)
+            {
+                picture.Base64Data = Dropbox.Download(picture.Base64Data);
+            }
+
+            var contestModel = Mapper.Map<Contest, ContestFullViewModel>(contestDetails);
+            
+            //var contestModelForView = new ContestFullViewModel
+            //{
+            //    ContestPictures = contestModel.ContestPictures
+            //};
 
             return this.View(contestModel);
         }

@@ -25,7 +25,7 @@
                     <div>
                         <div class="active contest-title">
                             @Html.ActionLink(@activeContest.Title, "ContestDetails", "Contests",
-                                new {id = @activeContest.Id}, null)
+                                new {id = @activeContest.Id,area=""}, null)
                         </div>
                         <div>
                             <span class="contest-create-on">@Html.DisplayFor(model => activeContest.CreatedOn)</span>
@@ -35,7 +35,7 @@
                 <hr />
             }
             <div class="row see-more-btn">
-                <a href="@Url.Action("Active", "Contests")" class="btn btn-primary">See more</a>
+                <a href="@Url.Action("Active", "Contests",new{area=""})" class="btn btn-primary">See more</a>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
                     <div>
                         <div class="inactive contest-title">
                             @Html.ActionLink(@inactiveContest.Title, "ContestDetails", "Contests",
-                                new {id = @inactiveContest.Id}, null)
+                         new { id = @inactiveContest.Id, area = "" }, null)
                         </div>
                         <div>
                             <span class="contest-create-on">@Html.DisplayFor(model => inactiveContest.CreatedOn)</span>
@@ -60,7 +60,7 @@
                 <hr />
             }
             <div class="row see-more-btn">
-                <a href="@Url.Action("Inactive", "Contests")" class="btn btn-primary see-more">See more</a>
+                <a href="@Url.Action("Inactive", "Contests",new{area=""})" class="btn btn-primary see-more">See more</a>
             </div>
         </div>
     </div>

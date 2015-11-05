@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using AutoMapper;
+using PhotoContest.Web.Helpers;
 
 namespace PhotoContest.Web.Controllers
 {
@@ -51,7 +52,7 @@ namespace PhotoContest.Web.Controllers
             
             if (currentUser == null)
             {
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction("Profile");
 
             }
             user.Email = currentUser.Email;
@@ -64,6 +65,11 @@ namespace PhotoContest.Web.Controllers
             user.ContestViewModels = Mapper.Map<IEnumerable<ContestUserProfileViewModel>>(contestCollection);
 
             var contestPictures = this.Data.ContestPictures.All().Where(c => c.OwnerId == currentUserId);
+
+            foreach (var picture in contestPictures)
+            {
+                picture.Base64Data = Dropbox.Download(picture.Base64Data);
+            }
 
             user.ContestPictureViewModels = Mapper.Map<IEnumerable<ContestPictureUserProfileViewModel>>(contestPictures);
             

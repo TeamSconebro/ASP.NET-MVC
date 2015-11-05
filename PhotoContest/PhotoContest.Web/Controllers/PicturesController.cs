@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using PhotoContest.Data.UnitsOfWork;
 using PhotoContest.Models;
 using PhotoContest.Models.Enumerations;
+using PhotoContest.Web.Helpers;
 using PhotoContest.Web.Models.BindingModel;
 
 namespace PhotoContest.Web.Controllers
@@ -56,10 +57,12 @@ namespace PhotoContest.Web.Controllers
                 return this.HttpNotFound();
             }
 
+            string path = Dropbox.Upload(model.Photo.FileName, this.UserProfile.UserName, model.Photo.InputStream);
+
             var picture = new ContestPicture()
             {
                 Title = model.Title,
-                Base64Data = model.Base64Data,
+                Base64Data = path,
                 ContestId = contest.Id,
                 OwnerId = ownerId
             };
