@@ -1,10 +1,13 @@
 ﻿
 using System;
 using System.ComponentModel.Design.Serialization;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.SignalR;
 using PagedList;
 using PhotoContest.Web.Helpers;
+using PhotoContest.Web.Hubs;
 
 namespace PhotoContest.Web.Controllers
 {
@@ -464,7 +467,6 @@ namespace PhotoContest.Web.Controllers
                 UserId = invitedUser.Id
             };
             this.Data.Notifications.Add(notification);
-
             this.Data.SaveChanges();
 
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);

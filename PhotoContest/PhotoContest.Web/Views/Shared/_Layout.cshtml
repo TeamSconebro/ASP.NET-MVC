@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @*@Html.ActionLink("SconeBro Contest", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             <a href="@Url.Action("Index", "Home")" id="site-name">
                 <img src="~/Content/images/logo/045157-green-grunge-clipart-icon-sports-hobbies-film-roll.png" alt="logo" id="site-logo"/>
                 <span>SCONEBRO</span>
@@ -33,16 +33,13 @@
                 {
                     <li>
                         <ul class="nav navbar-nav nav-pills">
-                            <li><a href="~/Notifications/Index">Notifications <span class="badge">0</span></a></li>
+                            <li>@Html.ActionLink("Notifications", "Index", "Notifications")
+                            </li>
                         </ul>
                     </li>
                     <li>
 
                     </li>
-                        @*if (User.IsInRole("Admin"))
-                        {
-                            @Html.ActionLink("Admin", "AdminController")
-                        }*@
                 }
             </ul>
             @Html.Partial("_LoginPartial")
@@ -57,32 +54,34 @@
     </footer>
 </div>
 
-
-@*<div class="notificationBalloon" id="container"></div>
-        <br />
-        <br />
-        <br />
-        <input id="text1" type="text" />
-        <input id="button1" type="button" value="Send" />
-    <br />
-    <br />
-    <br />*@
-
-
-   
-
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/signalr")
 <script src="/signalr/hubs"></script>
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 
+    <script>
+        $(document).ready(function () {
+            var notificationsHub = $.connection.notificationsHub;
+            var connectionId = $.connection.hub.id;
 
+            var userId = @User.Identity.GetUserId();
 
+            var notificationCount = $(".badge").val();
 
-
+            notificationsHub.client.receiveNotification = function () {
+                
+                notificationCount++;
+                $(".badge").html(notificationCount);
+            };
+            $.connection.hub.start().done(function() {
+                $("#invite").click(function() {
+                    notificationsHub.server.sendNotification(userId);
+                });
+            });
+        });
+    </script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
@@ -107,24 +106,6 @@
         });
     });
     $.noConflict();
-
-
-    //// SignalR
-    //$(document).ready(function () {
-    //    $.connection.hub.start().done(function () {
-    //        console.log("Hub component initiated ...");
-    //    });
-
-    //    var notificationHub = $.connection.notifications;
-    //    var notificationsCount = $(".badge").val();
-    //    notificationHub.client.recieveNotification = function (recentNotification) {
-
-    //        notificationsCount++;
-    //        $(".badge").html(notificationsCount);
-    //    };
-
-    //    $.connection.hub.start();
-    //});
 </script>
 </body>
 </html>
