@@ -14,7 +14,8 @@ namespace PhotoContest.Web.Controllers
 {
     public class PicturesController : BaseController
     {
-        public PicturesController(IPhotoContestData data) : base(data)
+        public PicturesController(IPhotoContestData data)
+            : base(data)
         {
         }
 
@@ -70,7 +71,7 @@ namespace PhotoContest.Web.Controllers
             this.Data.ContestPictures.Add(picture);
             this.Data.SaveChanges();
 
-            return this.RedirectToAction("ContestDetails", "Contests", new {id = picture.ContestId});
+            return this.RedirectToAction("ContestDetails", "Contests", new { id = picture.ContestId });
         }
 
         [Authorize]
@@ -108,7 +109,7 @@ namespace PhotoContest.Web.Controllers
 
             // Check whether user can vote
             var currentContestContestors = currentContest.Contestors.ToList();
-            if (currentContest.VotingStrategy == VotingStrategy.Closed 
+            if (currentContest.VotingStrategy == VotingStrategy.Closed
                 /*&& !currentContestContestors.Contains(user)*/)
             {
                 // TODO: Find way to check when VotingStrategy is "Closed" whether user is invited to participate in contest!!!
@@ -133,7 +134,7 @@ namespace PhotoContest.Web.Controllers
             };
             picture.Votes.Add(newVote);
             this.Data.SaveChanges();
-            
+
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 
@@ -147,7 +148,7 @@ namespace PhotoContest.Web.Controllers
                 resultMessage = "No such picture in contest!";
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
-
+            
             // Check whether user has uploaded picture he wants to delete
             var userId = this.User.Identity.GetUserId();
             if (picture.OwnerId != userId)
@@ -155,7 +156,13 @@ namespace PhotoContest.Web.Controllers
                 resultMessage = "You cannot delete picture uploaded by someone else!";
                 return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
             }
-
+            if (picture.Votes.Count>0)
+            {
+                foreach (var vote in picture.Votes)
+                {
+                    this.Data.Votes.Remove(vote);
+                }
+            }
             this.Data.ContestPictures.Remove(picture);
             this.Data.SaveChanges();
 

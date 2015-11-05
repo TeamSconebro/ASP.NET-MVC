@@ -254,7 +254,7 @@
                     {
                         foreach (var picture in @Model.ContestPictures)
                         {
-                            <div class="col-md-6 image-container">
+                            <div class="col-md-6 image-container" id="picture@(picture.Id)">
                                 <div class="row">
                                     <div class="col-md-9">
                                         <div class="row image-title">
@@ -287,7 +287,7 @@
                                                     </fieldset>
                                                 }
                                             </div>
-                                            if (this.User.Identity.GetUserId() == picture.OwnerId)
+                                            if (this.User.Identity.GetUserId() == picture.OwnerId||User.IsInRole("Administrator"))
                                             {
                                                 <br/>
                                                 <div class="row delete-vote-button-container">
@@ -387,6 +387,8 @@
                     function(result) {
                         if (result === "") {
                             $("#vote-success").html("You successfully deleted your picture!").css("display", "block");
+                            $("#picture" + targetPictureId).hide();
+                            console.log(this);
                         } else {
                             $("#vote-error").html(result).css("display", "block");
                         }
