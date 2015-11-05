@@ -49,9 +49,9 @@ namespace PhotoContest.Web.Controllers
         [ActionName("Profile")]
         public ActionResult AccountProfile(UserViewModel user)
         {
-            var currentUserId = this.User.Identity.GetUserId();
 
-            var currentUser = this.Data.Users.Find(currentUserId);
+            
+            var currentUser = this.Data.Users.Find(user.Id);
 
             if (currentUser == null)
             {
@@ -64,10 +64,10 @@ namespace PhotoContest.Web.Controllers
             user.LastName = currentUser.LastName;
             user.UserName = currentUser.UserName;
             user.PhoneNumber = currentUser.PhoneNumber;
-            var contestCollection = this.Data.Contests.All().Where(c => c.OwnerId == currentUserId).OrderByDescending(c => c.CreatedOn);
+            var contestCollection = this.Data.Contests.All().Where(c => c.OwnerId == user.Id).OrderByDescending(c => c.CreatedOn);
             user.ContestViewModels = Mapper.Map<IEnumerable<ContestUserProfileViewModel>>(contestCollection);
 
-            var contestPictures = this.Data.ContestPictures.All().Where(c => c.OwnerId == currentUserId);
+            var contestPictures = this.Data.ContestPictures.All().Where(c => c.OwnerId == user.Id);
 
             foreach (var picture in contestPictures)
             {
