@@ -17,6 +17,10 @@ namespace PhotoContest.Data.UnitsOfWork
         private IDictionary<Type, object> repositories;
         private IUserStore<User> userStore;
 
+        public PhotoContestData()
+            : this(new PhotoContestContext())
+        {
+        }
         public PhotoContestData(DbContext context)
         {
             this.context = context;
