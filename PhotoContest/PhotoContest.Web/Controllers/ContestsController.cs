@@ -275,43 +275,42 @@ namespace PhotoContest.Web.Controllers
             return this.Json(resultMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult WinnerByVotes(string username, int contestId)
+        public ActionResult WinnerByVotes(int contestId)
         {
             var resultMessage = "";
             var contest = this.Data.Contests.Find(contestId);
             var numberOfWinners = contest.PrizeCount;
             contest.IsClosed = IsClosed.Yes;
-            var pictureWinner = contest.ContestPictures.OrderBy(cp => cp.Votes).Take(numberOfWinners);
+            var pictureWinner = contest.ContestPictures.OrderByDescending(cp => cp.Votes.Count).Take(numberOfWinners).ToList();
             if (contest.RewardStrategy == RewardStrategy.SingleWinner)
             {
                 if (contest.ContestPictures.Any())
                 {
-                    var pictures = contest.ContestPictures.OrderBy(cp => cp.Votes.Count).FirstOrDefault();
-                    if (pictures != null)
+                    var picture = contest.ContestPictures
+                        .OrderByDescending(cp => cp.Votes.Count)
+                        .FirstOrDefault();
+                    var firstWinner = picture.Owner;
+                    if (firstWinner != null)
                     {
-                        var firstWinnerId = pictures.OwnerId;
-                        if (firstWinnerId != null)
-                        {
-                            var firstWinnerUser = this.Data.Users.Find(firstWinnerId);
-                            firstWinnerUser.Coints = firstWinnerUser.Coints + contest.PrizeValues;
-                            resultMessage = firstWinnerUser.UserName + " is the winner of " + contest.Title + "!";
-                            contest.Winners.Add(firstWinnerUser);
-                            firstWinnerUser.ContestsWon.Add(contest);
+                        //var firstWinnerUser = this.Data.Users.Find(firstWinnerId);
+                        firstWinner.Coints += contest.PrizeValues;
+                        resultMessage = firstWinner.UserName + " is the winner of " + contest.Title + "!";
+                        contest.Winners.Add(firstWinner);
+                        firstWinner.ContestsWon.Add(contest);
 
-                            var notification = new Notification()
-                            {
-                                NotificationContent = NotificationContent.Winning,
-                                Type = NotificationType.Winning,
-                                UserId = firstWinnerId
-                            };
-                            this.Data.Notifications.Add(notification);
-                        }
+                        var notification = new Notification()
+                        {
+                            NotificationContent = NotificationContent.Winning,
+                            Type = NotificationType.Winning,
+                            UserId = firstWinner.Id
+                        };
+                        this.Data.Notifications.Add(notification);
                     }
                 } 
             }
             else
             {
-                var firstOrDefault = contest.ContestPictures.OrderBy(cp => cp.Votes).FirstOrDefault();
+                var firstOrDefault = contest.ContestPictures.OrderByDescending(cp => cp.Votes.Count).FirstOrDefault();
                 if (firstOrDefault != null)
                 {
                     var firstWinnerId = firstOrDefault.OwnerId;
@@ -320,9 +319,9 @@ namespace PhotoContest.Web.Controllers
                     resultMessage = firstWinnerUser.UserName + " is the winner of " + contest.Title + "!";
                 }
                 
-                foreach (var people in pictureWinner)
+                foreach (var currentWinner in pictureWinner)
                 {
-                    var winner = this.Data.Users.Find(people.OwnerId);
+                    var winner = this.Data.Users.Find(currentWinner.OwnerId);
                     contest.Winners.Add(winner);
                     winner.ContestsWon.Add(contest);
 
