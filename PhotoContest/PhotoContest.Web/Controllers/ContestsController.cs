@@ -144,7 +144,7 @@ namespace PhotoContest.Web.Controllers
                         else
                         {
                             this.Data.Contests.Add(contest);
-                            currentUser.Contests.Add(contest);
+                            //currentUser.Contests.Add(contest);
                             this.Data.Contests.SaveChanges();
                             this.TempData["message-create-contest-success"] = "You successfully created new contest!";
                             return RedirectToAction("ContestDetails", "Contests", new {id = contest.Id});

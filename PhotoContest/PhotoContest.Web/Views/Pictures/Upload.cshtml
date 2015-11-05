@@ -4,31 +4,6 @@
 }
 
 <div id="upload-form-container">
-    @using (@Html.BeginForm("Upload", "Pictures", FormMethod.Post, new { @*enctype = "multipart/form-data",*@ @class = "form-horizontal", role = "form" }))
-            {
-        @Html.AntiForgeryToken()
-        @*<h4>Upload image to contest "@Model.ContestTitle":</h4>*@
-        <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="form-group">
-            <label for="title" class="col-md-2 control-label">Title</label>
-            <div class="col-md-10">
-                <input type="text" name="title" id="title" class="form-control" />
-            </div>
-        </div>
-            <div class="form-group">
-                <label for="url" class="col-md-2 control-label">Url</label>
-                <div class="col-md-10">
-                    <input type="url" @*id="Photo"*@ name="base64Data" id="url" class="form-control"/>
-                </div>
-            </div>
-            <input type="hidden" name="contestId" value="@ViewBag.ContestId">
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Upload" id="upload" />
-            </div>
-        </div>
-    }
 
     @using (Html.BeginForm("Upload", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -38,7 +13,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
-
+            <input type="hidden" name="contestId" value="@ViewBag.ContestId">
             <div class="form-group">
                 @Html.LabelFor(c => c.Title)
                 @Html.TextBoxFor(c => c.Title, new { @class = "form-control" })

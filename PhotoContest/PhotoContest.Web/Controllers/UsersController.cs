@@ -15,31 +15,34 @@ namespace PhotoContest.Web.Controllers
     [Authorize]
     public class UsersController : BaseController
     {
-        public UsersController(IPhotoContestData data) : base(data)
+        public UsersController(IPhotoContestData data)
+            : base(data)
         {
 
         }
 
-        public ActionResult GetUsersFromContest(string search,int contestId)
+        public JsonResult GetUsersFromContest(string search, int contestId)
         {
             var contest = this.Data.Contests.Find(contestId);
-            var users = contest.Contestors.
-                Where(c => c.UserName.StartsWith(search))
-                    .OrderBy(u => u.UserName)
-                    .Select(u => u.UserName)
-                    .Take(5)
-                    .ToList();
+
+            var users = contest.Contestors
+                .Where(c => c.UserName.StartsWith(search))
+                .OrderBy(u => u.UserName)
+                .Select(u => u.UserName)
+                .Take(5)
+                .ToList();
+
             return this.Json(users, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetUsers(string search)
         {
-                var users = this.Data.Users.All()
-                    .Where(c => c.UserName.StartsWith(search))
-                    .OrderBy(u => u.UserName)
-                    .Select(u => u.UserName)
-                    .Take(5)
-                    .ToList();
-                return this.Json(users, JsonRequestBehavior.AllowGet);
+            var users = this.Data.Users.All()
+                .Where(c => c.UserName.StartsWith(search))
+                .OrderBy(u => u.UserName)
+                .Select(u => u.UserName)
+                .Take(5)
+                .ToList();
+            return this.Json(users, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Users
@@ -49,7 +52,7 @@ namespace PhotoContest.Web.Controllers
             var currentUserId = this.User.Identity.GetUserId();
 
             var currentUser = this.Data.Users.Find(currentUserId);
-            
+
             if (currentUser == null)
             {
                 return this.RedirectToAction("Profile");
@@ -72,7 +75,7 @@ namespace PhotoContest.Web.Controllers
             }
 
             user.ContestPictureViewModels = Mapper.Map<IEnumerable<ContestPictureUserProfileViewModel>>(contestPictures);
-            
+
 
             return View(user);
         }
@@ -120,6 +123,6 @@ namespace PhotoContest.Web.Controllers
             return this.View();
         }
 
-       
+
     }
 }

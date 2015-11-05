@@ -41,7 +41,7 @@
                     @if (@Model.Winners.Any() && @Model.IsClosed.Equals("Yes"))
                     {
                         <div class="row contest-info">
-                            @Model.OwnerName
+                          @Model.Winners.FirstOrDefault().UserName
                         </div>
                     }
                     else
@@ -200,37 +200,39 @@
                             <div id="invite-errorOne"></div>
                         </div>
                     }
-                    @if (Request.IsAuthenticated 
-                    && (@User.Identity.GetUserName() == @Model.OwnerName || @User.IsInRole("Administrator")))
+                    @if (Request.IsAuthenticated
+                         && (@User.Identity.GetUserName() == @Model.OwnerName || @User.IsInRole("Administrator")))
                     {
-                        if (Model.IsClosed.Equals("No"))
+                        if (Model.IsClosed == IsClosed.No.ToString())
                         {
-                            <br />
-                            <div class="row contest-info invite-button">
-                                @Html.ActionLink("Edit contest", "Edit", "Contests", new { id = @Model.Id }, new { @class = "btn btn-primary" })
-                            </div><br />
-                        }
-                        <div class="row contest-info invite-button">
-                            <input type="button" id="endContest" class="btn btn-primary" value="End Contest" />
-                        </div>
-                        <div class="ui-widget" id="buttonsEnd" style="display: none">
-                            <br />
-                            <input type="button" class="btn btn-primary" id="noWinners" value="No Winner/s"/>
                             <br/>
-                            <input type="button" class="btn btn-primary" id="winnerByVote" value="Winner/s by Vote"/>
-                            <br />
-                            <input type="button" class="btn btn-primary" id="selectWinner" value="Select Winner/s" />
-                            <div class="ui-widget" id="searchBoxSelectWinner" style="display: none">
-                                <br />
-                                <label for="username">Username: </label>
-                                <input id="usernameSelectWinner">
-                                <input type="button" class="btn btn-primary" id="addButtonSelectWinner" value="Add" />
-                                <div id="autocompleteSelectWinner"></div>
-                                <div id="invite-successSelectWinner"></div>
-                                <div id="invite-errorSelectWinner"></div>
+                            <div class="row contest-info invite-button">
+                                @Html.ActionLink("Edit contest", "Edit", "Contests", new {id = @Model.Id}, new {@class = "btn btn-primary"})
                             </div>
+                            <br/>
 
-                        </div>
+                            <div class="row contest-info invite-button">
+                                <input type="button" id="endContest" class="btn btn-primary" value="End Contest"/>
+                            </div>
+                            <div class="ui-widget" id="buttonsEnd" style="display: none">
+                                <br/>
+                                <input type="button" class="btn btn-primary" id="noWinners" value="No Winner/s"/>
+                                <br/>
+                                <input type="button" class="btn btn-primary" id="winnerByVote" value="Winner/s by Vote"/>
+                                <br/>
+                                <input type="button" class="btn btn-primary" id="selectWinner" value="Select Winner/s"/>
+                                <div class="ui-widget" id="searchBoxSelectWinner" style="display: none">
+                                    <br/>
+                                    <label for="username">Username: </label>
+                                    <input id="usernameSelectWinner">
+                                    <input type="button" class="btn btn-primary" id="addButtonSelectWinner" value="Add"/>
+                                    <div id="autocompleteSelectWinner"></div>
+                                    <div id="invite-successSelectWinner"></div>
+                                    <div id="invite-errorSelectWinner"></div>
+                                </div>
+
+                            </div>
+                        }
                     }
 
                 </div>
@@ -311,12 +313,22 @@
 @*Participate in contest button*@
 @if (Request.IsAuthenticated && @Model.OwnerName != User.Identity.GetUserName()
     && @Model.IsClosed.Equals("No")
-    && @Model.NumberOfParticipants > @participants)
+    )
 {
-    <div id="participate-button-container">
-        @Html.ActionLink("Participate", "Upload", "Pictures", new { id = @Model.Id },
+    if (@Model.DeadlineStrategy == DeadlineStrategy.ByNumberOfParticipants.ToString() && @Model.NumberOfParticipants > @participants)
+    {
+        <div id="participate-button-container">
+            @Html.ActionLink("Participate", "Upload", "Pictures", new { id = @Model.Id },
                         new { @class = "btn btn-primary", id = "participate-button" })
-    </div>
+        </div>
+    }else if (@Model.DeadlineStrategy==DeadlineStrategy.ByTime.ToString())
+    {
+        <div id="participate-button-container">
+            @Html.ActionLink("Participate", "Upload", "Pictures", new { id = @Model.Id },
+                        new { @class = "btn btn-primary", id = "participate-button" })
+        </div>
+    }
+
 }
 
 <script src="~/Scripts/jquery-1.10.2.js"></script>
@@ -494,7 +506,8 @@
                         url: "/Users/GetUsersFromContest",
                         dataType: "json",
                         data: {
-                            search: $("#usernameSelectWinner") ,contestId:currentContestId},
+                            search: $("#usernameSelectWinner").val(),
+                            contestId: currentContestId },
                         success: function(data) {
                             response(data);
                         }
